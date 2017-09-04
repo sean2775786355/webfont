@@ -1,4 +1,5 @@
 <%@ page language="java" import="java.util.*" contentType="text/html; charset=UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -9,9 +10,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <head>
     <base href="<%=basePath%>">
     
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>炫字網-首頁-勵志打造最好的字體服務平臺</title>
-    
-	<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link href="${pageContext.request.contextPath}/css/style.css" rel="stylesheet" type="text/css" media="all" />
     <link href="${pageContext.request.contextPath}/css/memenu.css" rel="stylesheet" type="text/css" media="all" />
 
@@ -19,7 +20,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
-    <nav class="navbar navbar-default" role="navigation" id="header1">
+    <!--header-->
+<nav class="navbar navbar-default" role="navigation" id="header1">
     <div class="container-fluid">
     <div class="navbar-header">
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#example-navbar-collapse" aria-expanded="false">
@@ -51,7 +53,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <li><a href="#"><span class="glyphicon glyphicon-user"></span> 注册</a></li> 
             <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> 登录</a></li> 
         </ul> 
-        <form class="navbar-form navbar-left navbar-right" role="search" action="search.html">
+        <form class="navbar-form navbar-left navbar-right" role="search">
             <div class="input-group">
                 <input type="text" class="form-control" placeholder="Search">
                 <span class="input-group-btn">
@@ -194,76 +196,255 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         </div>
     </div>
     <hr style="height:10px;border:none;border-top:10px groove skyblue;" />
+
     <!--bottom-header-->
 <!--header--end-->
 <!--page-->
-<div id="myCarousel" class="carousel slide">
-    <!-- 轮播（Carousel）指标 -->
-    <ol class="carousel-indicators">
-        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-        <li data-target="#myCarousel" data-slide-to="1"></li>
-        <li data-target="#myCarousel" data-slide-to="2"></li>
-    </ol>   
-    <!-- 轮播（Carousel）项目 -->
-    <div class="carousel-inner">
-        <div class="item active">
-            <img src="./images/browser.png" alt="First slide">
-        </div>
-        <div class="item">
-            <img src="./images/chinese.png" alt="Second slide">
-        </div>
-        <div class="item">
-            <img src="./images/font.png" alt="Third slide">
-        </div>
+<div class="container">
+<div class="row">
+<div class="col-xs-12">
+    <div class="alert alert-success" role="alert">
+        <strong>hello~ &nbsp;李先生</strong> <span class="pull-right">歡迎來到個人中心~</span>
     </div>
-    <!-- 轮播（Carousel）导航 -->
-    <a class="carousel-control left" href="#myCarousel" 
-       data-slide="prev">&lsaquo;</a>
-    <a class="carousel-control right" href="#myCarousel" 
-       data-slide="next">&rsaquo;</a>
-</div> 
-    
-    
-    <!--about-starts-->
-    <br/><br/>
-    <!-- 最新动态开始 -->
-    <div class="logo">
-        <h1>最新動態</h1>
+</div>
+</div>
+<div class="row">
+    <div class="col-xs-2">
+        <ul class="nav nav-pills nav-stacked" style="height: 400px">
+          <li class="active"><a href="${pageContext.request.contextPath}/user/person">個人資料</a></li>
+          <li><a href="${pageContext.request.contextPath}/user/account">我的帳戶</a></li>
+          <li><a href="${pageContext.request.contextPath}/user/fontManage">字庫管理</a></li>
+          <li><a href="${pageContext.request.contextPath}/user/message">消息中心</a></li>
+        </ul>
     </div>
-    <div class="about"> 
-        <div class="container">
-            <div class="about-top grid-1">
-                <div class="col-md-4 about-left">
-                    <figure class="effect-bubba">
-                        <img class="img-responsive" src="images/SDK.png" alt=""/>
-                        <figcaption>
-                            <h2>SDK</h2>
-                            <p>新增炫字網SDK</p> 
-                        </figcaption>           
-                    </figure>
+    <div class="col-xs-10">
+        <ul class="nav nav-tabs">
+            <li class="active"><a data-toggle="tab" href="#personInfo">瀏覽個人信息</a></li>
+            <li><a data-toggle="tab" href="#improve">完善個人信息</a></li>
+            <li><a data-toggle="tab" href="#phoneBand">綁定手機</a></li>
+            <li><a data-toggle="tab" href="#passwordChange">修改密碼</a></li>
+        </ul>
+
+        <div class="tab-content">
+            <div id="personInfo" class="tab-pane fade in active">
+            <ol class="breadcrumb" style="margin-top: 20px;">
+                <li><a href="#">個人資料</a></li>
+                <li class="active">瀏覽個人信息</li>
+            </ol>
+            <div class="row well">
+                <div class="col-xs-5">
+                    <div class="input-group">
+                    <span class="input-group-addon" style=""><span class="glyphicon glyphicon-pencil"></span>&nbsp;暱稱：</span><input class="form-control" disabled="disabled" value=""></input>
+                    </div>
+                    <br/>
+                    <div class="input-group">
+                    <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-pencil"></span>性別：</span><input class="form-control" disabled="disabled" value=""></input>
+                    </div>
+                    <br/>
+                    <div class="input-group">
+                    <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-pencil"></span>個性簽名：</span><input class="form-control" disabled="disabled" value=""></input>
+                    </div>
+                    <br/>
+                    <div class="input-group">
+                    <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-pencil"></span>手機：</span><input class="form-control" disabled="disabled" value=""></input>
+                    </div>
+                    <br/>
+                    <div class="input-group">
+                    <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-pencil"></span>電話：</span><input class="form-control" disabled="disabled" value=""></input>
+                    </div>
+                    <br/>
+                    <div class="input-group">
+                    <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-pencil"></span>所在地：</span><input class="form-control" disabled="disabled" value=""></input></div><br/>
                 </div>
-                <div class="col-md-4 about-left">
-                    <figure class="effect-bubba">
-                        <img class="img-responsive" src="images/wordpress.png" alt=""/>
-                        <figcaption>
-                            <h4>WordPress</h4>
-                            <p>新增的WordPress插件</p>   
-                        </figcaption>           
-                    </figure>
+                <div class="col-xs-2"></div>
+                <div class="col-xs-5">
+                    <div class="input-group">
+                    <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-pencil"></span>郵箱：</span><input class="form-control" disabled="disabled" value=""></input>
+                    </div>
+                    <br/>
+                    <div class="input-group">
+                    <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-pencil"></span>QQ：</span><input class="form-control" disabled="disabled" value=""></input>
+                    </div>
+                    <br/>
+                    <div class="input-group">
+                    <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-pencil"></span>微信：</span><input class="form-control" disabled="disabled" value=""></input>
+                    </div>
+                    <br/>
+                    <div class="input-group">
+                    <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-pencil"></span>公司行業：</span><input class="form-control" disabled="disabled" value=""></input>
+                    </div>
+                    <br/>
+                    <div class="input-group">
+                    <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-pencil"></span>公司名字：</span><input class="form-control" disabled="disabled" value=""></input>
+                    </div>
+                    <br/>
                 </div>
-                <div class="col-md-4 about-left">
-                    <figure class="effect-bubba">
-                        <img class="img-responsive" src="images/OSS.png" alt=""/>
-                        <figcaption>
-                            <h4>OSS</h4>
-                            <p>新增自定義阿里雲OSS配置支持</p>  
-                        </figcaption>           
-                    </figure>
                 </div>
-                <div class="clearfix"></div>
+            </div>
+            <div id="improve" class="tab-pane fade">
+            <ol class="breadcrumb" style="margin-top: 20px;">
+                <li><a href="#">個人資料</a></li>
+                <li class="active">完善個人信息</li>
+            </ol>
+            <div class="row well">
+            <form action="#" method="post">
+                <div class="col-xs-5">
+                    <div class="input-group">
+                    <span class="input-group-addon" style=""><span class="glyphicon glyphicon-pencil"></span>&nbsp;暱稱：</span><input name="name" type="text" class="form-control"  value=""></input>
+                    </div>
+                    <br/>
+                    <div class="input-group">
+                    <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-pencil"></span>性別：</span>
+                    <input class="form-control" name="sex" type="text" disabled="disabled" value="男" id="sex"></input> 
+                    <div class="input-group-btn">
+                        <button type="button" class="btn btn-default 
+                        dropdown-toggle" data-toggle="dropdown">選擇
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu pull-right">
+                            <li>
+                                <a href="#" onclick='$("#sex").val("男")'>男</a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="#" onclick='$("#sex").val("女")'>女</a>
+                            </li>
+                        </ul>
+                    </div>
+                    </div>
+                    <br/>
+                    <div class="input-group">
+                    <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-pencil"></span>所在地：</span>
+                    <select name="cmbProvince" class="form-control" id="cmbProvince" style="width: 33%;">
+                    </select>
+                    <select name="cmbCity" class="form-control" id="cmbCity" style="width: 33%;">
+                    </select>
+                    <select name="cmbArea" class="form-control" id="cmbArea" style="width: 34%;">
+                    </select>
+                    </div>
+                    <br/>
+                    <div class="input-group">
+                    <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-pencil"></span>公司名字：</span><input class="form-control" value=""></input>
+                    </div>
+                    <br/>
+                    <div class="input-group">
+                    <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-pencil"></span>公司行業：</span><input class="form-control" value=""></input>
+                    </div>
+                    <br/>
+                    
+                </div>
+                <div class="col-xs-2"></div>
+                <div class="col-xs-5">
+                    <div class="input-group">
+                    <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-pencil"></span>電話：</span><input class="form-control" value=""></input></div><br/>
+                    <div class="input-group">
+                    <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-pencil"></span>郵箱：</span><input type="email" class="form-control" value=""></input>
+                    </div>
+                    <br/>
+                    <div class="input-group">
+                    <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-pencil"></span>QQ：</span><input class="form-control" value=""></input>
+                    </div>
+                    <br/>
+                    <div class="input-group">
+                    <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-pencil"></span>微信：</span><input class="form-control" value=""></input>
+                    </div>
+                    <br/>
+                    <button class="btn btn-primary" type="reset">重置</button>
+                    <button class="btn btn-success pull-right" type="submit">提交</button>
+                    
+                </div>
+                </form>
+                </div>
+              
+            </div>
+            <div id="phoneBand" class="tab-pane fade">
+            <ol class="breadcrumb" style="margin-top: 20px;">
+                <li><a href="#">個人資料</a></li>
+                <li class="active">綁定手機</li>
+            </ol>
+            <div class="row well">
+                <div class="col-xs-5">
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-pencil"></span>原手機號碼：</span><input class="form-control" value="" disabled="disabled"></input>
+                    </div>
+                </div>
+                <div class="col-xs-2"></div>
+                <div class="col-xs-5">
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-pencil"></span>新手機號碼：</span>
+                        <input class="form-control" value=""></input>
+                        <span class="input-group-btn">
+                            <button class="btn btn-success" type="button">發送驗證碼</button>
+                        </span>
+                    </div>
+                    <br/>
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-pencil"></span>驗證碼：</span>
+                        <input class="form-control" value=""></input>
+                        <span class="input-group-btn">
+                            <button class="btn btn-success" type="button">確定</button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            </div>
+            <div id="passwordChange" class="tab-pane fade">
+              <ol class="breadcrumb" style="margin-top: 20px;">
+                <li><a href="#">個人資料</a></li>
+                <li class="active">修改密碼</li>
+            </ol>
+            <div class="row well">
+                <div class="col-xs-5">
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-pencil"></span>原密碼：</span><input class="form-control" value=""></input>
+                    </div>
+                    <br/>
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-pencil"></span>新密碼：</span><input class="form-control" value=""></input>
+                    </div>
+                    <br/>
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-pencil"></span>確認密碼：</span><input class="form-control" value=""></input>
+                    </div>
+                    <br/>
+                    <button class="btn btn-success pull-right" type="submit">提交</button>
+                </div>
+                <div class="col-xs-2"></div>
+                <div class="col-xs-5">
+                    
+                    
+                </div>
+            </div>
             </div>
         </div>
     </div>
+    
+</div>
+</div>
 <!--page--end-->
 
 <!--footer-->
@@ -337,7 +518,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script>$(document).ready(function(){$(".memenu").memenu();});</script> 
 <!--dropdown-->
 <script src="${pageContext.request.contextPath}/js/jquery.easydropdown.js"></script>           
-
+<script src="${pageContext.request.contextPath}/js/jsAddress.js"></script>
 <script type="application/x-javascript"> 
     addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } 
     $(function(){ 
@@ -350,7 +531,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             }
         });
 
-    });
+        addressInit('cmbProvince', 'cmbCity', 'cmbArea');
+
+    }); 
 </script>
 
   </body>
