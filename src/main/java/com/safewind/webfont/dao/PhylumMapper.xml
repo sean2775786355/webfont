@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.safewind.webfont.dao.PhylumDao">
+    <resultMap id="phylum" type="com.safewind.webfont.bean.Phylum">
+        <id column="id" property="id" />
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <select id="findPhylumById" resultType="java.lang.String">
+        SELECT name
+        FROM  t_phylum
+        WHERE id= #{id}
+    </select>
+    
+    <select id="getAllPhylums" resultMap="phylum">
+    	select * from t_phylum where 1=1;
+    </select>
+</mapper>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.safewind.webfont.dao.ConsumerDao">
+    <resultMap id="consumer" type="com.safewind.webfont.bean.Consumer">
+        <id column="id" property="id" ></id>
+        <result column="username" property="username" jdbcType="VARCHAR"/>
+        <result column="personalized_signature" property="personalizedSignature" jdbcType="VARCHAR"/>
+        <result column="phone" property="phone" jdbcType="VARCHAR"/>
+        <result column="tel" property="tel" jdbcType="VARCHAR"/>
+        <result column="nickname" property="nickname" jdbcType="VARCHAR"/>
+        <result column="sex" property="sex" jdbcType="VARCHAR"/>
+        <result column="work_place" property="workPlace" jdbcType="VARCHAR"/>
+        <result column="email" property="email" jdbcType="VARCHAR"/>
+        <result column="qq_num" property="qqName" jdbcType="VARCHAR"/>
+        <result column="wechat_num" property="wechatNum" jdbcType="VARCHAR"/>
+        <result column="company_name" property="companyName" jdbcType="VARCHAR"/>
+        <result column="company_industry" property="companyIndustry" jdbcType="VARCHAR"/>
+    </resultMap>
+
+
+    <!--查询用户的  有可能有用 目前没用-->
+    <select id="findConsumerById" parameterType="java.lang.Integer" resultMap="consumer">
+        SELECT  id, username , personalized_signature , phone , tel , nickname , sex ,
+                work_place , email , qq_num , wechat_num , company_name , company_industry
+        FROM t_consumer
+    </select>
+
+    <!--用户注册时添加id 添加用户名 添加电话号码-->
+
+    <!--用户登录后 完善自己的个人资料-->
+
+</mapper>

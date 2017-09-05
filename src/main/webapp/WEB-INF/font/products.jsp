@@ -216,18 +216,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <div class="prdt-top">
                 <div class="col-md-9 prdt-left">
                     <div class="product-one">
-
+						<c:forEach items="${fontBriefList}" var="fontBrief">
+						
+						
                         <div class="col-md-12 product-left p-left">
                             <div class="product-main simpleCart_shelfItem">
-                                <a href="#" class="mask" style="font-size: 25px">思源黑體Light龍飛鳳舞中國文字之美</a>
+                                <a href="#" class="mask" style="font-size: 25px">${fontBrief.name}</a>
                                 <div class="product-bottom">
-                                    <h3>思源|黑體|簡體中文（GB2312）|中文|正規字體</h3><br/>
+                                    <h3>${fontBrief.manufacture}|${fontBrief.type}|${fontBrief.encoding}（${fontBrief.eEncoding}）|${fontBrief.phylum}|${fontBrief.style}</h3><br/>
                                     <div class="btn-group pull-right" style="margin:10px">
                                         <button class="btn btn-primary">使用</button>
                                         <button class="btn btn-success">收藏</button>
                                     </div>
                                     <br/>
-                                    <h3 class="">12188收藏/ 130推薦/ 764412使用/ 55評論</h3>
+                                    <h3 class="">${fontBrief.collectedTime}收藏/ ${fontBrief.recommondedTime}推薦/ ${fontBrief.usedTime}使用/ ${fontBrief.recommondedTime}評論</h3>
                                 </div>
                                 <div class="srch srch1">
                                     <span>-20%</span>
@@ -236,81 +238,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             </div>
                         </div>
                         
-                        <div class="col-md-12 product-left p-left">
-                            <div class="product-main simpleCart_shelfItem">
-                                <a href="#" class="mask" style="font-size: 25px">思源黑體Light龍飛鳳舞中國文字之美</a>
-                                <div class="product-bottom">
-                                    <h3>思源|黑體|簡體中文（GB2312）|中文|正規字體</h3><br/>
-                                    <div class="btn-group pull-right" style="margin:10px">
-                                        <button class="btn btn-primary">使用</button>
-                                        <button class="btn btn-success">收藏</button>
-                                    </div>
-                                    <br/>
-                                    <h3 class="">12188收藏/ 130推薦/ 764412使用/ 55評論</h3>
-                                </div>
-                                <div class="srch srch1">
-                                    <span>-20%</span>
-
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-12 product-left p-left">
-                            <div class="product-main simpleCart_shelfItem">
-                                <a href="#" class="mask" style="font-size: 25px">思源黑體Light龍飛鳳舞中國文字之美</a>
-                                <div class="product-bottom">
-                                    <h3>思源|黑體|簡體中文（GB2312）|中文|正規字體</h3><br/>
-                                    <div class="btn-group pull-right" style="margin:10px">
-                                        <button class="btn btn-primary">使用</button>
-                                        <button class="btn btn-success">收藏</button>
-                                    </div>
-                                    <br/>
-                                    <h3 class="">12188收藏/ 130推薦/ 764412使用/ 55評論</h3>
-                                </div>
-                                <div class="srch srch1">
-                                    <span>-20%</span>
-
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-12 product-left p-left">
-                            <div class="product-main simpleCart_shelfItem">
-                                <a href="#" class="mask" style="font-size: 25px">思源黑體Light龍飛鳳舞中國文字之美</a>
-                                <div class="product-bottom">
-                                    <h3>思源|黑體|簡體中文（GB2312）|中文|正規字體</h3><br/>
-                                    <div class="btn-group pull-right" style="margin:10px">
-                                        <button class="btn btn-primary">使用</button>
-                                        <button class="btn btn-success">收藏</button>
-                                    </div>
-                                    <br/>
-                                    <h3 class="">12188收藏/ 130推薦/ 764412使用/ 55評論</h3>
-                                </div>
-                                <div class="srch srch1">
-                                    <span>-20%</span>
-
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-12 product-left p-left">
-                            <div class="product-main simpleCart_shelfItem">
-                                <a href="#" class="mask" style="font-size: 25px">思源黑體Light龍飛鳳舞中國文字之美</a>
-                                <div class="product-bottom">
-                                    <h3>思源|黑體|簡體中文（GB2312）|中文|正規字體</h3><br/>
-                                    <div class="btn-group pull-right" style="margin:10px">
-                                        <button class="btn btn-primary">使用</button>
-                                        <button class="btn btn-success">收藏</button>
-                                    </div>
-                                    <br/>
-                                    <h3 class="">12188收藏/ 130推薦/ 764412使用/ 55評論</h3>
-                                </div>
-                                <div class="srch srch1">
-                                    <span>-20%</span>
-
-                                </div>
-                            </div>
-                        </div>
-
-                        
-
+     					</c:forEach>
                         
                         <ul class="pagination pull-right">
                             <li><a href="#">&laquo;</a></li>
@@ -333,21 +261,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                 <div class="row1 row2 scroll-pane">
                                     <div class="col col-4">
                                         <label class="radio"><input type="radio" name="factory" checked=""><i></i>所有廠商</label>
-                                        <label class="radio"><input type="radio" name="factory" ><i></i>信黑</label>
-                                        <label class="radio"><input type="radio" name="factory"><i></i>書法家</label>
-                                        <label class="radio"><input type="radio" name="factory"><i></i>陳繼世</label>
-                                        <label class="radio"><input type="radio" name="factory"><i></i>字體中國</label>
-                                        <label class="radio"><input type="radio" name="factory"><i></i>蘋果</label>
-                                        <label class="radio"><input type="radio" name="factory"><i></i>字體管家</label>
-                                        <label class="radio"><input type="radio" name="factory"><i></i>本墨</label>
-                                        <label class="radio"><input type="radio" name="factory"><i></i>義啟</label>
-                                        <label class="radio"><input type="radio" name="factory"><i></i>站酷</label>
-                                        <label class="radio"><input type="radio" name="factory"><i></i>龐門正道</label>
-                                        <label class="radio"><input type="radio" name="factory"><i></i>逐浪</label>
-                                        <label class="radio"><input type="radio" name="factory"><i></i>Adobe</label>
-                                        <label class="radio"><input type="radio" name="factory"><i></i>思源</label>
-                                        
-
+                                 		<c:forEach items="${manufacturerList}" var="manufacturer">
+                                        	<label class="radio"><input id="${manufacturer.id}" type="radio"><i></i>${manufacturer.name}</label>
+										</c:forEach>
                                     </div>
                                     
                                 </div>                      
@@ -357,23 +273,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                 <div class="row1 row2 scroll-pane">
                                     <div class="col col-4">
                                         <label class="radio"><input type="radio" name="type" checked=""><i></i>所有類型</label>
-                                        <label class="radio"><input type="radio" name="type" ><i></i>圓體</label>
-                                        <label class="radio"><input type="radio" name="type"><i></i>魏碑</label>
-                                        <label class="radio"><input type="radio" name="type"><i></i>篆書</label>
-                                        <label class="radio"><input type="radio" name="type"><i></i>行楷</label>
-                                        <label class="radio"><input type="radio" name="type"><i></i>美術體</label>
-                                        <label class="radio"><input type="radio" name="type"><i></i>書法體</label>
-                                        <label class="radio"><input type="radio" name="type"><i></i>綜藝體</label>
-                                        <label class="radio"><input type="radio" name="type"><i></i>草書</label>
-                                        <label class="radio"><input type="radio" name="type"><i></i>隸書</label>
-                                        <label class="radio"><input type="radio" name="type"><i></i>黑體</label>
-                                        <label class="radio"><input type="radio" name="type"><i></i>行書</label>
-                                        <label class="radio"><input type="radio" name="type"><i></i>楷體</label>
-                                        <label class="radio"><input type="radio" name="type"><i></i>宋體</label>
-                                        <label class="radio"><input type="radio" name="type"><i></i>其他</label>
-
-
-
+                                        <c:forEach items="${typeList}" var="type">
+                                        	<label class="radio"><input id="${type.id}" type="radio"><i></i>${type.name}</label>
+										</c:forEach>
                                     </div>
                                     
                                 </div>                      
@@ -383,11 +285,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                 <div class="row1 row2 scroll-pane">
                                     <div class="col col-4">
                                         <label class="radio"><input type="radio" name="code" checked=""><i></i>所有編碼</label>
-                                        <label class="radio"><input type="radio" name="code"><i></i>統一字元編碼（UNICODE）</label>
-                                        <label class="radio"><input type="radio" name="code"><i></i>繁體中文（BIG5）</label>
-                                        <label class="radio"><input type="radio" name="code"><i></i>簡體大字元集（GBK）</label>
-                                        <label class="radio"><input type="radio" name="code"><i></i>簡體中文（GB2312）</label>
-                                        <label class="radio"><input type="radio" name="code"><i></i>其他</label>
+                                        <c:forEach items="${encodingList}" var="encoding">
+                                        	<label class="radio"><input id="${encoding.id}" type="radio"><i></i>${encoding.name}（${encoding.eName}）</label>
+										</c:forEach>
                                     </div>
                                 </div>                      
                         </section>
@@ -396,10 +296,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                 <div class="row1 row2 scroll-pane">
                                     <div class="col col-4">
                                         <label class="radio"><input type="radio" name="language" checked=""><i></i>所有語系</label>
-                                        <label class="radio"><input type="radio" name="language"><i></i>中文</label>
-                                        <label class="radio"><input type="radio" name="language"><i></i>English</label>
-                                        <label class="radio"><input type="radio" name="language"><i></i>其他</label>
-                                        
+                                        <c:forEach items="${phylumList}" var="phylum">
+                                        	<label class="radio"><input id="${phylum.id}" type="radio"><i></i>${phylum.name}</label>
+										</c:forEach>
                                     </div>
                                 </div>                      
                         </section>
@@ -408,26 +307,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                 <div class="row1 row2 scroll-pane">
                                     <div class="col col-4">
                                         <label class="radio"><input type="radio" name="style" checked=""><i></i>所有風格</label>
-                                        <label class="radio"><input type="radio" name="style"><i></i>非主流字體</label>
-                                        <label class="radio"><input type="radio" name="style"><i></i>變化圖案</label>
-                                        <label class="radio"><input type="radio" name="style"><i></i>招牌標誌</label>
-                                        <label class="radio"><input type="radio" name="style"><i></i>點數字體</label>
-                                        <label class="radio"><input type="radio" name="style"><i></i>波浪字體</label>
-                                        <label class="radio"><input type="radio" name="style"><i></i>動物圖案</label>
-                                        <label class="radio"><input type="radio" name="style"><i></i>廣告字體</label>
-                                        <label class="radio"><input type="radio" name="style"><i></i>空心字體</label>
-                                        <label class="radio"><input type="radio" name="style"><i></i>單線超細</label>
-                                        <label class="radio"><input type="radio" name="style"><i></i>精緻綜藝</label>
-                                        <label class="radio"><input type="radio" name="style"><i></i>固定寬度</label>
-                                        <label class="radio"><input type="radio" name="style"><i></i>卡通動漫</label>
-                                        <label class="radio"><input type="radio" name="style"><i></i>草書</label>
-                                        <label class="radio"><input type="radio" name="style"><i></i>塗鴉</label>
-                                        <label class="radio"><input type="radio" name="style"><i></i>兒童字體</label>
-                                        <label class="radio"><input type="radio" name="style"><i></i>毛筆</label>
-                                        <label class="radio"><input type="radio" name="style"><i></i>美術字體</label>
-                                        <label class="radio"><input type="radio" name="style"><i></i>硬筆手寫</label>
-                                        <label class="radio"><input type="radio" name="style"><i></i>正規字體</label>
-                                        <label class="radio"><input type="radio" name="style"><i></i>其他</label>
+                                    	
+                                    	<c:forEach items="${styleList}" var="style">
+                                        	<label class="radio"><input id="${style.id}" type="radio"><i></i>${style.name}</label>
+										</c:forEach>
                                     </div>
                                 </div>                      
                         </section>

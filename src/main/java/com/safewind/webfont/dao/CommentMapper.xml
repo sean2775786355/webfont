@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.safewind.webfont.dao.CommentDao">
+    <resultMap id="comment" type="com.safewind.webfont.bean.Comment">
+        <id column="id" property="id" />
+        <result column="username" property="username" jdbcType="VARCHAR"/>
+        <result column="upload_time" property="uploadTime"  />
+        <result column="message" property="message" jdbcType="VARCHAR"/>
+        <result column="font_id" property="fontId" />
+        <result column="is_del" property="isDel" />
+
+    </resultMap>
+
+
+    <!--得到用户评论的字体的具体信息 通过评论的编号参数    通过上传时间-->
+    <select id="queryCommentList" resultMap="comment">
+        SELECT id , username  , upload_time , message , font_id , is_del
+        FROM t_comment
+        WHERE is_del =  0
+        ORDER BY upload_time ASC ;
+
+    </select>
+
+    <!--添加用户的评论-->
+    <insert id="addComment" parameterType="com.safewind.webfont.bean.Comment"  useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO t_comment
+        (username , upload_time , message , font_id)
+        VALUES
+        (
+        usename=#{username} ,
+        uploadTime=#{uploadTime} ,
+        message=#{message} ,
+        font_id=#{fontId}
+        )
+    </insert>
+
+    <!--查询（显示）该字体的评论-->
+    <select id="findCommentListByFontId" parameterType="java.lang.Integer" resultMap="comment">
+        SELECT id , username , upload_time ,  message , font_id , is_del
+        FROM t_comment
+        WHERE font_id=#{fontId} AND is_del = 0
+    </select>
+
+    <!--用户删除对该字体的评论     执行的是假删除-->
+    <update id="deleteComment">
+        UPDATE t_comment
+        SET (is_del=1)
+        WHERE font_id=#{fontId}  AND username=#{username}
+    </update>
+
+
+    <!--引用他人的评论-->
+    <select id="quoteOthersComment" resultType="java.lang.String">
+        SELECT message
+        FROM t_comment
+        WHERE is_del = 0 AND  id=#{id}
+    </select>
+
+    <!--回复他人的评论-->
+    <select id="replyOthersComment" resultType="java.lang.String">
+        SELECT username
+        FROM t_comment
+        WHERE is_del = 0 AND  id=#{id}
+    </select>
+
+</mapper>
