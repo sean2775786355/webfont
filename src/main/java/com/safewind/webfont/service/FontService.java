@@ -7,6 +7,7 @@ import com.safewind.webfont.bean.Manufacturer;
 import com.safewind.webfont.bean.Phylum;
 import com.safewind.webfont.bean.Style;
 import com.safewind.webfont.bean.Type;
+import com.safewind.webfont.util.Page;
 
 import java.util.List;
 
@@ -14,9 +15,11 @@ public interface FontService {
 
     //得到字体的集合 含有字体厂商id而非名称
     public List<Font> getFontList();
-
+//    得到字体的集合 含有字体厂商id而非名称(用分页)
+    public List<FontBrief> getFontListPage(Page page);
     //得到的是字体简略信息的一个集合包括厂商名称
     public List<FontBrief> getFontBriefList();
+
 
     //该字体的详细信息      |   返回字体的详细信息      |    id  字体的编号
     public FontDetail findFontDetailById(int id);

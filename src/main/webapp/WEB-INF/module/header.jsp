@@ -16,7 +16,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <link href="${pageContext.request.contextPath}/css/memenu.css" rel="stylesheet" type="text/css" />
     <link href="${pageContext.request.contextPath}/css/bootstrap-switch.min.css" rel="stylesheet" />
     <link href="http://cdn.datatables.net/plug-ins/28e7751dbec/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
-    
 
   </head>
   
@@ -34,7 +33,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </div>
     <div class="collapse navbar-collapse" id="example-navbar-collapse">
         <ul class="nav navbar-nav">
-            
+
             <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                     語言
@@ -44,21 +43,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     <li><a href="#">繁體中文</a></li>
                     <li><a href="#">简体中文</a></li>
                     <li><a href="#">English</a></li>
-                    
                 </ul>
             </li>
         </ul>
 
         <ul class="nav navbar-nav navbar-right"> 
-            <li><a href="#"><span class="glyphicon glyphicon-user"></span> 注册</a></li> 
-            <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> 登录</a></li> 
-        </ul> 
-        <form class="navbar-form navbar-left navbar-right" role="search" action="search.html">
-            <div class="input-group">
-                <input type="text" class="form-control" placeholder="Search">
-                <span class="input-group-btn">
-                    <button type="submit" class="btn btn-default">提交</button>
-                </span>
+            <%--<li><a href="#"><span class="glyphicon glyphicon-user"></span>註冊</a></li>--%>
+            <li><a href="#"><span class="glyphicon glyphicon-user"></span>登錄</a></li>
+        </ul>
+        <form class="navbar-form navbar-left navbar-right form-group has-feedback" role="search" action="#">
+            <div class="form-group has-feedback">
+                <input type="text" class="form-control" placeholder="字體名 廠商 類型 風格">
+                <span class="glyphicon glyphicon-search form-control-feedback" aria-hidden="true" style="font-size: large"></span>
             </div>
             
         </form>
@@ -78,7 +74,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 
                     <ul class="memenu skyblue">
                     <li class="active"><a href="${pageContext.request.contextPath}/index">首頁</a></li>
-                        <li class="grid"><a href="${pageContext.request.contextPath}/font/products">字體列表</a>
+                        <li class="grid"><a href="${pageContext.request.contextPath}/font/fontList">字體列表</a>
                             <div class="mepanel">
                                 <div class="row">
                                     <div class="col1 me-one">
@@ -119,7 +115,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                         </ul>       
                                     </div>
                                     <div class="col1 me-one">
-                                        <h4>更多字體。。。</h4>
+                                        <h4>更多字體......</h4>
                                             
                                     </div>
                                 </div>
@@ -129,23 +125,26 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             <div class="mepanel">
                                 <div class="row">
                                     <div class="col1 me-one">
-                                       <h4><a href ="#">API接口文檔</a></h4>
+                                        <ul>
+                                            <li><a href ="#">API接口文檔</a></li>
+                                            <li><a href="#">後端SDK工具包</a></li>
+                                            <li><a href ="#">H5在綫編輯插件</a></li>
+                                        </ul>
+
                                     </div>
                                     <div class="col1 me-one">
-                                        <h4><a href ="#">後端SDK工具包</a></h4>
+                                        <ul>
+                                            <li><a href ="#">即時文字插件</a></li>
+                                            <li><a href ="#">JS插件(盧教模式)</a></li>
+                                            <li><a href ="#">WordPress挿件</a></li>
+                                        </ul>
                                     </div>
-                                    <div class="col1 me-one">
-                                        <h4><a href ="#">H5在綫編輯插件</a></h4>
+                                    <div class="coll me-one">
+                                        <ul>
+                                            <li><a href ="#">更多</a></li>
+                                        </ul>
                                     </div>
-                                    <div class="col1 me-one">
-                                        <h4><a href ="#">即時文字插件</a></h4>
-                                    </div>
-                                    <div class="col1 me-one">
-                                        <h4><a href ="#">JS插件(盧教模式)</a></h4>
-                                    </div>
-                                    <div class="col1 me-one">
-                                        <h4><a href ="#">WordPress挿件</a></h4>
-                                    </div>
+
 
                                 </div>
                             </div>
@@ -154,28 +153,26 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             <div class="mepanel">
                                 <div class="row">
                                     <div class="col1 me-one">
-                                        <h4>調用方法</h4>
+                                        <ul>
+                                            <li><a>調用方法</a></li>
+                                            <li><a>常見問題</a></li>
+                                            <li><a>使用規則</a></li>
+                                        </ul>
                                     </div>
                                     <div class="col1 me-one">
-                                        <h4>常見問題</h4>
+                                        <ul>
+                                            <li><a>版權人認證流程</a></li>
+                                            <li><a>線下購買認證流程</a></li>
+                                            <li><a>炫幣計費規則</a></li>
+                                        </ul>
                                     </div>
                                     <div class="col1 me-one">
-                                        <h4>使用規則</h4>
+                                        <ul>
+                                            <li><a>意見反饋</a></li>
+                                            <li><a>更多</a></li>
+                                            <li><a></a></li>
+                                        </ul>
                                     </div>
-                                    <div class="col1 me-one">
-                                        <h4>版權人認證流程</h4>
-                                    </div>
-                                    <div class="col1 me-one">
-                                        <h4>線下購買認證流程</h4>
-                                    </div>
-                                    <div class="col1 me-one">
-                                        <h4>炫幣計費規則</h4>
-                                    </div>
-                                    <div class="col1 me-one">
-                                        <h4>意見反饋</h4>
-                                    </div>
-                                    
-                                    
                                 </div>
                             </div>
                         </li>
@@ -195,7 +192,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             </div>
         </div>
     </div>
-    <hr style="height:10px;border:none;border-top:10px groove skyblue;" />
+
 
     <!--bottom-header-->
 <!--header--end-->
@@ -216,8 +213,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
 <script src="http://cdn.datatables.net/plug-ins/28e7751dbec/integration/bootstrap/3/dataTables.bootstrap.js"></script>
 <script type="text/javascript">
-	addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } 
-	    
+	addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); }
 </script>
   </body>
 </html>

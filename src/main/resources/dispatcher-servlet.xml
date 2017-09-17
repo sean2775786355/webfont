@@ -72,6 +72,7 @@
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<!-- 页面上添加了jstl标签 -->
+		<!--该功能：jsp文件中要使用jstl标签时额，Spring MVC 所要使用的配置  viewClass -->
 		<property name="viewClass"
 			value="org.springframework.web.servlet.view.JstlView" />
 		<!-- 配置jsp路径前缀 -->

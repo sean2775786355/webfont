@@ -3,6 +3,7 @@ package com.safewind.webfont.service.impl;
 import com.safewind.webfont.bean.*;
 import com.safewind.webfont.dao.*;
 import com.safewind.webfont.service.FontService;
+import com.safewind.webfont.util.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -47,6 +48,35 @@ public class FontServiceImpl implements FontService {
         return fontDao.queryFontList();
     }
 
+    @Override
+    public List<FontBrief> getFontListPage(Page page) {
+        List<Font> fontList = fontDao.pagequeryFontList(page);
+        List<FontBrief> fontBriefListPage = new ArrayList<>();
+        for(int i=0;i<fontList.size();i++)
+        {
+            FontBrief fontBrief = new FontBrief();
+            fontBrief.setId(fontList.get(i).getId());
+            fontBrief.setName(fontList.get(i).getName());
+            //添加字体中文编码
+            fontBrief.setEncoding(encodingDao.findEncodingById(fontList.get(i).getEncodingId()));
+            //添加字体英文编码
+            fontBrief.seteEncoding(encodingDao.findEEncodingById(fontList.get(i).getEncodingId()));
+            fontBrief.setType(typeDao.findTypeById(fontList.get(i).getTypeId()));
+            fontBrief.setStyle(styleDao.findStyleById(fontList.get(i).getStyleId()));
+            fontBrief.setPhylum(phylumDao.findPhylumById(fontList.get(i).getPhylumId()));
+            fontBrief.setManufacture(manufactureDao.findManufactureById(fontList.get(i).getManufactureId()));
+
+            fontBrief.setCollectedTime(fontList.get(i).getCollectedTime());
+            fontBrief.setUsedTime(fontList.get(i).getUsedTime());
+            fontBrief.setRecommondedTime(fontList.get(i).getRecommondedTime());
+
+
+            fontBriefListPage.add(fontBrief);
+
+        }
+        return fontBriefListPage;
+    }
+
     /**
      * 该方法实现了将字体的厂商id 编码id转化为 厂商名称 字体编码的名称等
      * @return  字体简略信息的一个集合
@@ -80,6 +110,7 @@ public class FontServiceImpl implements FontService {
         }
         return fontBriefList;
     }
+
 
     /**
      * 单个字体的详细信息

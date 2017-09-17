@@ -54,7 +54,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         </ul> 
         <form class="navbar-form navbar-left navbar-right" role="search" action="search.html">
             <div class="input-group">
-                <input type="text" class="form-control" placeholder="Search">
+                <input type="text" class="form-control" placeholder="字體名 類型 廠商 類型">
                 <span class="input-group-btn">
                     <button type="submit" class="btn btn-default">提交</button>
                 </span>

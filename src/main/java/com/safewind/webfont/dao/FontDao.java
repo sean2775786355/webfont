@@ -1,6 +1,7 @@
 package com.safewind.webfont.dao;
 
 import com.safewind.webfont.bean.Font;
+import com.safewind.webfont.util.Page;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -20,6 +21,12 @@ public interface FontDao {
      */
     public List<Font> queryFontList();
 
+    /**
+     * 用于分页查询 查询的数量
+     * @param page
+     * @return
+     */
+    public List<Font> pagequeryFontList(Page page);
     /**
      * 供给用户查看某个字体的详细信息
      * @param id    字体的编号

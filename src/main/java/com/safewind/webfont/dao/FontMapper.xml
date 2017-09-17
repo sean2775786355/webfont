@@ -31,6 +31,14 @@
         ORDER BY used_time
         DESC
     </select>
+    <!--用于分页查询 查询的数量-->
+    <select id="pagequeryFontList" resultMap="font" parameterType="com.safewind.webfont.util.Page">
+        SELECT id,name,manufacturer_id,type_id,encoding_id,phylum_id,style_id,copyright_message,
+                used_time,collected_time,recommended_time,upload_time,is_opensourced,is_genuine
+        FROM t_font
+        ORDER BY id
+        LIMIT #{dbIndex},#{dbNumber}
+    </select>
     <!--查询字体的详细信息   根据字体的id-->
     <select id="findFontDetailById" resultMap="font" parameterType="java.lang.Integer">
         SELECT id,manufacturer_id,type_id,encoding_id,phylum_id,style_id,copyright_message,
