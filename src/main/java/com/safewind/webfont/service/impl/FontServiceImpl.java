@@ -48,6 +48,11 @@ public class FontServiceImpl implements FontService {
         return fontDao.queryFontList();
     }
 
+    /**
+     * 实现分页功能的字体列表
+     * @param page
+     * @return
+     */
     @Override
     public List<FontBrief> getFontListPage(Page page) {
         List<Font> fontList = fontDao.pagequeryFontList(page);
