@@ -13,14 +13,14 @@
     <select id="isRecommendationFont" resultMap="recommendation">
         SELECT id , username , recommend_time , font_id , is_del
         FROM t_recommendation
-        WHERE font_id=#{fontId} AND username=#{username} AND is_del = 0
+        WHERE font_id=#{0} AND username=#{1} AND is_del = 0
     </select>
 
     <!--添加用户推荐的字体-->
-    <insert id="addRecommendationFont" useGeneratedKeys="true" keyProperty="id">
+    <insert id="addRecommendationFont">
         INSERT INTO
         t_recommendation(username ,  recommend_time , font_id)
-        VALUES (#{username} , #{recommendTime}  , #{fontId})
+        VALUES (#{0} , #{1}  , #{2})
     </insert>
 
 

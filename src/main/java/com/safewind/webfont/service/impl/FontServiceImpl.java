@@ -50,8 +50,9 @@ public class FontServiceImpl implements FontService {
 
     /**
      * 实现分页功能的字体列表
-     * @param page
-     * @return
+     *  该方法实现了将字体的厂商id 编码id转化为 厂商名称 字体编码的名称等
+     * @param page 分页的一些信息 总记录数 总条数
+     * @return  字体简略信息的一个集合
      */
     @Override
     public List<FontBrief> getFontListPage(Page page) {
@@ -82,39 +83,6 @@ public class FontServiceImpl implements FontService {
         return fontBriefListPage;
     }
 
-    /**
-     * 该方法实现了将字体的厂商id 编码id转化为 厂商名称 字体编码的名称等
-     * @return  字体简略信息的一个集合
-     */
-    @Override
-    public List<FontBrief> getFontBriefList() {
-
-        List<Font> fontList = fontDao.queryFontList();
-        List<FontBrief> fontBriefList = new ArrayList<>();
-        for(int i=0;i<fontList.size();i++)
-        {
-            FontBrief fontBrief = new FontBrief();
-            fontBrief.setId(fontList.get(i).getId());
-            fontBrief.setName(fontList.get(i).getName());
-            //添加字体中文编码
-            fontBrief.setEncoding(encodingDao.findEncodingById(fontList.get(i).getEncodingId()));
-            //添加字体英文编码
-            fontBrief.seteEncoding(encodingDao.findEEncodingById(fontList.get(i).getEncodingId()));
-            fontBrief.setType(typeDao.findTypeById(fontList.get(i).getTypeId()));
-            fontBrief.setStyle(styleDao.findStyleById(fontList.get(i).getStyleId()));
-            fontBrief.setPhylum(phylumDao.findPhylumById(fontList.get(i).getPhylumId()));
-            fontBrief.setManufacture(manufactureDao.findManufactureById(fontList.get(i).getManufactureId()));
-            
-            fontBrief.setCollectedTime(fontList.get(i).getCollectedTime());
-            fontBrief.setUsedTime(fontList.get(i).getUsedTime());
-            fontBrief.setRecommondedTime(fontList.get(i).getRecommondedTime());
-            
-            
-            fontBriefList.add(fontBrief);
-
-        }
-        return fontBriefList;
-    }
 
 
     /**

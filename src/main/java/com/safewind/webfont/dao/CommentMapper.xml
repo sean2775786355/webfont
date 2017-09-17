@@ -22,16 +22,11 @@
     </select>
 
     <!--添加用户的评论-->
-    <insert id="addComment" parameterType="com.safewind.webfont.bean.Comment"  useGeneratedKeys="true" keyProperty="id">
+    <insert id="addComment" parameterType="com.safewind.webfont.bean.Comment">
         INSERT INTO t_comment
         (username , upload_time , message , font_id)
         VALUES
-        (
-        usename=#{username} ,
-        uploadTime=#{uploadTime} ,
-        message=#{message} ,
-        font_id=#{fontId}
-        )
+        (#{username} ,#{uploadTime} ,#{message} ,#{fontId})
     </insert>
 
     <!--查询（显示）该字体的评论-->
@@ -45,7 +40,7 @@
     <update id="deleteComment">
         UPDATE t_comment
         SET (is_del=1)
-        WHERE font_id=#{fontId}  AND username=#{username}
+        WHERE font_id=#{0}  AND username=#{1}
     </update>
 
 

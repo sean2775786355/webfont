@@ -25,9 +25,9 @@
     
         
         <!--添加收藏的信息--><!--useGeneratedKeys="true" keyProperty="id"自增主键id-->
-        <insert id="addCollectionFont" useGeneratedKeys="true" keyProperty="id">
+        <insert id="addCollectionFont">
             INSERT INTO t_collection(username , collect_time  , font_id)
-            VALUES (#{username}  , #{collectTime}  , #{fontId})
+            VALUES (#{0}  , #{1}  , #{2})
         </insert>
 
 
@@ -35,7 +35,7 @@
         <select id="isCollectionFont" resultMap="collection">
             SELECT id , username  , collect_time  , font_id , is_del
             FROM t_collection
-            WHERE font_id=#{fontId} AND username=#{username}  AND is_del=#{0}
+            WHERE font_id=#{0} AND username=#{1}  AND is_del=0
         </select>
 
 
