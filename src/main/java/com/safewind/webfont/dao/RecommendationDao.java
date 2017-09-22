@@ -13,17 +13,19 @@ import java.util.Date;
 public interface RecommendationDao {
     /**
      * 判断用户是否推荐字体
-     * @param fontId
-     * @param username
+     * recommendation 所传递的属性：
+     *  fontId
+     *  username
      * @return
      */
-    public Recommendation isRecommendationFont(int fontId, String username);
+    public Recommendation isRecommendationFont(Recommendation recommendation);
 
     /**
      * 添加用户推荐字体
-     * @param username
-     * @param recommendTime
-     * @param fontId
+     * recommendation 所传递的属性
+     * username 推荐用户名
+     * recommendTime 推荐时间
+     * fontId 推荐字体编号
      */
-    public void addRecommendationFont(String username, Date recommendTime, int fontId);
+    public void addRecommendationFont(Recommendation recommendation);
 }

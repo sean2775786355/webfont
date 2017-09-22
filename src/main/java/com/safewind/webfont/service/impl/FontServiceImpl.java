@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.regex.Pattern;
 
 /**
  * 字体逻辑层服务层
@@ -18,6 +19,7 @@ import java.util.List;
 @Service
 public class FontServiceImpl implements FontService {
 
+    ///////////////////Dao/////////////////////////////////
     @Autowired
     private FontDao fontDao;    //字体对应的数据库
     @Autowired
@@ -37,6 +39,15 @@ public class FontServiceImpl implements FontService {
     @Autowired
     private  ManufactureDao manufactureDao;         //厂商的数据库
 
+
+    //////////////////bean////////////////////////////////////////
+    @Autowired
+    private Collection collection;                  //收藏字体的对象
+    @Autowired
+    private Comment comment;                    //字体评论对象
+    @Autowired
+    private Recommendation recommendation;      //推荐字体的对象
+
     /**
      * 显示字体列表所使用的方法
      * @return List<Font> 一个字体的集合 包含字体的一些具体体信息 包括字体编号，字体使用次数，等字体的属性
@@ -48,15 +59,18 @@ public class FontServiceImpl implements FontService {
         return fontDao.queryFontList();
     }
 
+
+
     /**
      * 实现分页功能的字体列表
      *  该方法实现了将字体的厂商id 编码id转化为 厂商名称 字体编码的名称等
-     * @param page 分页的一些信息 总记录数 总条数
+     * @param currentPage 当前页数
      * @return  字体简略信息的一个集合
      */
     @Override
-    public List<FontBrief> getFontListPage(Page page) {
-        List<Font> fontList = fontDao.pagequeryFontList(page);
+    public List<FontBrief> getFontListPage(String currentPage) {
+
+        List<Font> fontList = fontDao.pagequeryFontList(this.getInstancePage(currentPage));
         List<FontBrief> fontBriefListPage = new ArrayList<>();
         for(int i=0;i<fontList.size();i++)
         {
@@ -115,7 +129,9 @@ public class FontServiceImpl implements FontService {
      */
     @Override
     public boolean isCollectionFont(int fontId, String username) {
-        if(collectionDao.isCollectionFont(fontId,username)==null)
+        collection.setFontId(fontId);
+        collection.setUsername(username);
+        if(collectionDao.isCollectionFont(collection)==null)
         {
             return false;
         }else {
@@ -131,9 +147,13 @@ public class FontServiceImpl implements FontService {
      */
     @Override
     public void addCollectionFont(String username, int fontId) {
-        //当前时间
-        Date collectTime=new Date();
-        collectionDao.addCollectionFont(username,collectTime,fontId);
+        //用户名
+        collection.setUsername(username);
+        //字体id编号
+        collection.setFontId(fontId);
+        //收藏时间
+        collection.setCollectTime(new Date());
+        collectionDao.addCollectionFont(collection);
 
     }
 
@@ -145,7 +165,9 @@ public class FontServiceImpl implements FontService {
      */
     @Override
     public boolean isRecommendationFont(int fontId, String username) {
-        if(recommendationDao.isRecommendationFont(fontId,username)==null)
+        recommendation.setFontId(fontId);
+        recommendation.setUsername(username);
+        if(recommendationDao.isRecommendationFont(recommendation)==null)
         {
             return false;
 
@@ -165,7 +187,10 @@ public class FontServiceImpl implements FontService {
     public void addRecommendationFont(String username, int fontId) {
         //推荐时间
         Date recommendTime = new Date();
-        recommendationDao.addRecommendationFont(username,recommendTime,fontId);
+        recommendation.setUsername(username);
+        recommendation.setFontId(fontId);
+        recommendation.setRecommendTime(recommendTime);
+        recommendationDao.addRecommendationFont(recommendation);
 
     }
 
@@ -178,12 +203,17 @@ public class FontServiceImpl implements FontService {
     @Override
     public void addComment(String username, String message, int fontId) {
         Date uploadTime = new Date();
-        Comment comment =new Comment();
         comment.setUsername(username);
         comment.setUploadTime(uploadTime);
         comment.setMessage(message);
         comment.setFontId(fontId);
         commentDao.addComment(comment);
+    }
+    public void deleteComment(int fontId,String username)
+    {
+        comment.setFontId(fontId);
+        comment.setUsername(username);
+        commentDao.deleteComment(comment);
     }
 
     /**
@@ -232,6 +262,27 @@ public class FontServiceImpl implements FontService {
     //獲取全部風格
     public List<Style> getAllStyles(){
     	return styleDao.getAllStyles();
+    }
+
+    /**
+     * 关于分页的对象
+     * 得到有关分页的信息
+     * @param currentPage
+     * @return 分页对象
+     */
+    @Override
+    public Page getInstancePage(String currentPage) {
+        Page page=new Page();
+        Pattern pattern = Pattern.compile("[0-9]{1,9}");
+        if(currentPage==null || !pattern.matcher(currentPage).matches())
+        {
+            currentPage = "1";
+        }
+        //所要取出的总记录数
+        page.setTotalNumber(fontDao.countAllFont());
+        page.setCurrentPage(Integer.parseInt(currentPage));
+        page.count();
+        return page;
     }
 
 }

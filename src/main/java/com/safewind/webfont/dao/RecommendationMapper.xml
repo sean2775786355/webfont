@@ -1,27 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.safewind.webfont.dao.RecommendationDao">
-    <resultMap id="recommendation" type="com.safewind.webfont.bean.Recommendation">
-        <id column="id" property="id" />
-        <result column="username" property="username" jdbcType="VARCHAR"/>
-        <result column="recommend_time" property="recommendTime" jdbcType="VARCHAR"/>
-        <result column="font_id" property="fontId"/>
-        <result column="is_del" property="isDel" />
-    </resultMap>
-
     <!--判断用户是否推荐了该字体-->
-    <select id="isRecommendationFont" resultMap="recommendation">
+    <select id="isRecommendationFont" parameterType="com.safewind.webfont.bean.Recommendation" resultType="com.safewind.webfont.bean.Recommendation">
         SELECT id , username , recommend_time , font_id , is_del
         FROM t_recommendation
-        WHERE font_id=#{0} AND username=#{1} AND is_del = 0
+        WHERE font_id=#{fontId} AND username=#{username} AND is_del = 0
     </select>
-
     <!--添加用户推荐的字体-->
-    <insert id="addRecommendationFont">
+    <insert id="addRecommendationFont" parameterType="com.safewind.webfont.bean.Recommendation">
         INSERT INTO
         t_recommendation(username ,  recommend_time , font_id)
-        VALUES (#{0} , #{1}  , #{2})
+        VALUES (#{username} , #{recommendTime}  , #{fontId})
     </insert>
-
 
 </mapper>

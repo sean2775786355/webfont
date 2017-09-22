@@ -30,10 +30,11 @@ public interface CommentDao {
 
     /**
      * 删除用户对字体的评论
-     * @param username  用户名     限制该用户只能删除自己的评论
-     * @param frontId   字体编码    锁定用户删除字体评论的范围
+     * 需要Comment的属性
+     *  username  用户名     限制该用户只能删除自己的评论
+     *  frontId   字体编码    锁定用户删除字体评论的范围
      */
-    public void deleteComment(String username , int frontId);
+    public void deleteComment(Comment comment);
 
     /**
      * 引用他人的评论

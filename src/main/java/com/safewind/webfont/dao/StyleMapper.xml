@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.safewind.webfont.dao.StyleDao">
-    <resultMap id="style" type="com.safewind.webfont.bean.Style">
-        <id column="id" property="id" />
-        <result column="name" property="name" jdbcType="VARCHAR"/>
-    </resultMap>
 
     <select id="findStyleById" resultType="java.lang.String" parameterType="java.lang.Integer">
         SELECT name
@@ -12,7 +8,7 @@
         WHERE id = #{id}
     </select>
     
-    <select id="getAllStyles" resultMap="style">
+    <select id="getAllStyles" resultType="com.safewind.webfont.bean.Style">
     	select * from t_style where 1=1;
     </select>
 </mapper>

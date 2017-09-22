@@ -1,28 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.safewind.webfont.dao.FontDao">
-    <resultMap id="font" type="com.safewind.webfont.bean.Font">
-
-        <id column="id" property="id" />
-        <result column="name" property="name" jdbcType="VARCHAR"/>
-        <result column="manufacturer_id" property="manufactureId" />
-        <result column="type_id" property="typeId" />
-        <result column="encoding_id" property="encodingId" />
-        <result column="phylum_id" property="phylumId" />
-        <result column="style_id" property="styleId" />
-        <result column="copyright_message" property="copyrightMessage" jdbcType="VARCHAR"/>
-        <result column="used_time" property="usedTime" />
-        <result column="collected_time" property="collectedTime" />
-        <result column="recommended_time" property="recommondedTime" />
-        <result column="upload_time" property="uploadTime"  />
-        <result column="is_opensourced" property="isOpensourced" />
-        <result column="is_genuine" property="isGenuine" />
-
-    </resultMap>
-
 
     <!--查询字体列表-->
-    <select id="queryFontList" resultMap="font">
+    <select id="queryFontList" resultType="com.safewind.webfont.bean.Font">
         SELECT id,name,manufacturer_id,type_id,encoding_id,phylum_id,style_id,copyright_message,
         used_time,collected_time,recommended_time,upload_time,is_opensourced,is_genuine
         FROM t_font
@@ -32,7 +13,7 @@
         DESC
     </select>
     <!--用于分页查询 查询的数量-->
-    <select id="pagequeryFontList" resultMap="font" parameterType="com.safewind.webfont.util.Page">
+    <select id="pagequeryFontList" resultType="com.safewind.webfont.bean.Font" parameterType="com.safewind.webfont.util.Page">
         SELECT id,name,manufacturer_id,type_id,encoding_id,phylum_id,style_id,copyright_message,
                 used_time,collected_time,recommended_time,upload_time,is_opensourced,is_genuine
         FROM t_font
@@ -40,7 +21,7 @@
         LIMIT #{dbIndex},#{dbNumber}
     </select>
     <!--查询字体的详细信息   根据字体的id-->
-    <select id="findFontDetailById" resultMap="font" parameterType="java.lang.Integer">
+    <select id="findFontDetailById" resultType="com.safewind.webfont.bean.Font" parameterType="java.lang.Integer">
         SELECT id,name,manufacturer_id,type_id,encoding_id,phylum_id,style_id,copyright_message,
                 used_time,collected_time,recommended_time,upload_time,is_opensourced,is_genuine
         FROM t_font
@@ -54,6 +35,11 @@
     SET collected_time=collected_time+1
     WHERE id=#{id};
     </update>
+
+    <!--计算字体的总数目-->
+    <select id="countAllFont" resultType="java.lang.Long">
+       SELECT COUNT(*) FROM t_font WHERE 1=1;
+    </select>
     
 
 </mapper>

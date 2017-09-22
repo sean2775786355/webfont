@@ -40,4 +40,10 @@ public interface FontDao {
      */
     public void updateFontCollectTime(int id);
 
+    /**
+     * 计算字体的数目
+     * @return
+     */
+    public long countAllFont();
+
 }

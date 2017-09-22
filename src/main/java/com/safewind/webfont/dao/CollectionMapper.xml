@@ -1,23 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.safewind.webfont.dao.CollectionDao">
-        <resultMap id="collection" type="com.safewind.webfont.bean.Collection">
-            <id column="id" property="id"/>
-            <result column="username" property="username" jdbcType="VARCHAR" />
-            <result column="collect_time" property="collectTime"  />
-            <result column="font_id" property="fontId"  />
-            <result column="is_del" property="isDel"  />
-        </resultMap>
 
-
-        <select id="queryCollectionList" resultMap="collection" parameterType="java.lang.Integer">
+        <select id="queryCollectionList" resultType="com.safewind.webfont.bean.Collection" parameterType="java.lang.Integer">
             SELECT id , username , collect_time , font_id , is_del
             FROM t_collection
             WHERE id={id}
         </select>
 
         <!--这是通过收藏的编号查询用户个人收藏的信息-->
-        <select id="queryCollectionById" resultMap="collection" parameterType="java.lang.Integer">
+        <select id="queryCollectionById" resultType="com.safewind.webfont.bean.Collection" parameterType="java.lang.Integer">
             SELECT id , username  , collect_time  , font_id , is_del
             FROM  t_collection
             WHERE id={id}
@@ -27,15 +19,15 @@
         <!--添加收藏的信息--><!--useGeneratedKeys="true" keyProperty="id"自增主键id-->
         <insert id="addCollectionFont">
             INSERT INTO t_collection(username , collect_time  , font_id)
-            VALUES (#{0}  , #{1}  , #{2})
+            VALUES (#{username}  , #{collectTime}  , #{fontId})
         </insert>
 
 
         <!--判断用户是否收藏该字体，没有返回null        用is_del是判断是否被假删除-->
-        <select id="isCollectionFont" resultMap="collection">
+        <select id="isCollectionFont" resultType="com.safewind.webfont.bean.Collection">
             SELECT id , username  , collect_time  , font_id , is_del
             FROM t_collection
-            WHERE font_id=#{0} AND username=#{1}  AND is_del=0
+            WHERE font_id=#{fontId} AND username=#{username}  AND is_del=0
         </select>
 
 

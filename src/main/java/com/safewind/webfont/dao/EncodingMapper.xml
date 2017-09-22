@@ -1,16 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.safewind.webfont.dao.EncodingDao">
-    <resultMap id="encoding" type="com.safewind.webfont.bean.Encoding">
-
-        <id column="id"  property="id" />
-        <result column="name" property="name" jdbcType="VARCHAR"/>
-        <result column="e_name" property="eName" jdbcType="VARCHAR"/>
-    </resultMap>
-
 
     <!--查询编码，得到集合，这个可能有用-->
-    <select id="queryEncodingById" parameterType="java.lang.Integer" resultMap="encoding">
+    <select id="queryEncodingById" parameterType="java.lang.Integer" resultType="com.safewind.webfont.bean.Encoding">
         SELECT name , e_name
         FROM t_encoding
         WHERE id=#{id}
@@ -29,7 +22,7 @@
         WHERE id=#{id}
     </select>
     
-    <select id="getAllEncodings" resultMap="encoding">
+    <select id="getAllEncodings" resultType="com.safewind.webfont.bean.Encoding">
     	select * from t_encoding where 1=1;
     </select>
 

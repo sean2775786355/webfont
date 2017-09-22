@@ -16,9 +16,7 @@ public interface FontService {
     //得到字体的集合 含有字体厂商id而非名称
     public List<Font> getFontList();
 //    得到字体的集合 含有字体厂商id而非名称(用分页)
-    public List<FontBrief> getFontListPage(Page page);
-
-
+    public List<FontBrief> getFontListPage(String currentPage);
 
     //该字体的详细信息      |   返回字体的详细信息      |    id  字体的编号
     public FontDetail findFontDetailById(int id);
@@ -37,6 +35,8 @@ public interface FontService {
 
     //添加用户对字体的评论
     public void addComment(String username,String message,int fontId);
+    //删除用户对字体的评论 执行的是假删除
+    public void deleteComment(int fontId,String username);
 
     //回复评论      |   得到用户名           |       id  评论的id
     public String replyOthersComment(int id);
@@ -58,4 +58,7 @@ public interface FontService {
     
     //獲取全部風格
     public List<Style> getAllStyles();
+
+    //获取page对象
+    public Page getInstancePage(String currentPage);
 }

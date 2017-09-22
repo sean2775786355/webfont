@@ -31,20 +31,22 @@ public interface CollectionDao {
 
     /**
      * 添加用户收藏字体
-     * @param username 用户名
-     * @param collectTime   用户收藏时间
-     * @param fontId    用户收藏字体的编号
+     * collection 含有的属性：
+     *  username 用户名
+     *  collectTime   用户收藏时间
+     *  fontId    用户收藏字体的编号
      */
-    public void addCollectionFont(String username, Date collectTime, int fontId);
+    public void addCollectionFont(Collection collection);
 
 
     /**
      * 判断用户字体是否被收藏 没被收藏返回null
-     * @param fontId    用户所选字体的编号
-     * @param username  用户名
+     * collection 含有的属性：
+     *  fontId    用户所选字体的编号
+     *  username  用户名
      * @return  返回值为空，即用户未收藏该字体，否者用户已经收藏该字体
      *          |有点奇怪的是没有放回boolean值|
      */
-    public Collection isCollectionFont(int fontId,String username);
+    public Collection isCollectionFont(Collection collection);
 
 }

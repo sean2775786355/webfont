@@ -35,17 +35,9 @@ public class FontController {
 	@RequestMapping(value="fontList",method = RequestMethod.GET)
 	public String page(Model model,String currentPage)
 	{
-		Page page=new Page();
-		Pattern pattern = Pattern.compile("[0-9]{1,9}");
-		if(currentPage==null || !pattern.matcher(currentPage).matches())
-		{
-			currentPage = "1";
-		}
-		page.setTotalNumber(fontService.getFontList().size());
-		page.setCurrentPage(Integer.parseInt(currentPage));
-		page.count();
-		List<FontBrief> fontBriefList = fontService.getFontListPage(page);
-		model.addAttribute("pageInfo",page);
+
+		List<FontBrief> fontBriefList = fontService.getFontListPage(currentPage);
+		model.addAttribute("pageInfo",fontService.getInstancePage(currentPage));
 		System.out.println(fontBriefList);
 		System.out.println("============================");
 		System.out.println("查看字体记录数="+fontBriefList.size());

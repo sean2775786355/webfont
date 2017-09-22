@@ -8,7 +8,7 @@ public class Page {
     /**
      * 总条数
      */
-    private int totalNumber;
+    private long totalNumber;
     /**
      * 每页显示的条数
      */
@@ -16,48 +16,48 @@ public class Page {
     /**
      * 当前第几页
      */
-    private int currentPage;
+    private long currentPage;
     /**
      * 总页数
      */
-    private int totalPage;
+    private long totalPage;
     /**
      * 数据库中limit的参数，从第几条开始
      */
-    private int dbIndex;
+    private long dbIndex;
     /**
      * 数据库中limit的参数,一共取多少条
      */
     private int dbNumber;
-    public int getTotalNumber() {
+    public long getTotalNumber() {
         return totalNumber;
     }
 
-    public void setTotalNumber(int totalNumber) {
+    public void setTotalNumber(long totalNumber) {
         this.totalNumber = totalNumber;
     }
 
-    public int getCurrentPage() {
+    public long getCurrentPage() {
         return currentPage;
     }
 
-    public void setCurrentPage(int currentPage) {
+    public void setCurrentPage(long currentPage) {
         this.currentPage = currentPage;
     }
 
-    public int getTotalPage() {
+    public long getTotalPage() {
         return totalPage;
     }
 
-    public void setTotalPage(int totalPage) {
+    public void setTotalPage(long totalPage) {
         this.totalPage = totalPage;
     }
 
-    public int getDbIndex() {
+    public long getDbIndex() {
         return dbIndex;
     }
 
-    public void setDbIndex(int dbIndex) {
+    public void setDbIndex(long dbIndex) {
         this.dbIndex = dbIndex;
     }
 
@@ -75,7 +75,7 @@ public class Page {
     public void count()
     {
         //计算总页数
-        int totalPageTemp =  this.totalNumber/this.pageNumber;
+        long totalPageTemp =  this.totalNumber/this.pageNumber;
         int plus = (this.totalNumber%this.pageNumber)==0 ? 0:1;
         totalPageTemp+=plus;
         if(totalPageTemp<=0)
