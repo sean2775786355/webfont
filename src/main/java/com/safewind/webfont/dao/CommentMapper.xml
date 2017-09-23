@@ -1,51 +1,70 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.safewind.webfont.dao.CommentDao">
-
+    <!--///////////////////////select start/////////////////////////-->
     <!--得到用户评论的字体的具体信息 通过评论的编号参数    通过上传时间-->
     <select id="queryCommentList" resultType="com.safewind.webfont.bean.Comment">
         SELECT id , username  , upload_time , message , font_id , is_del
         FROM t_comment
         WHERE is_del =  0
         ORDER BY upload_time ASC ;
-
     </select>
-
-    <!--添加用户的评论-->
-    <insert id="addComment" parameterType="com.safewind.webfont.bean.Comment">
-        INSERT INTO t_comment
-        (username , upload_time , message , font_id)
-        VALUES
-        (#{username} ,#{uploadTime} ,#{message} ,#{fontId})
-    </insert>
 
     <!--查询（显示）该字体的评论-->
     <select id="findCommentListByFontId" parameterType="java.lang.Integer" resultType="com.safewind.webfont.bean.Comment">
         SELECT id , username , upload_time ,  message , font_id , is_del
         FROM t_comment
-        WHERE font_id=#{fontId} AND is_del = 0
+        WHERE font_id=#{fontId} AND is_del = 0;
     </select>
-
-    <!--用户删除对该字体的评论     执行的是假删除-->
-    <update id="deleteComment" parameterType="com.safewind.webfont.bean.Comment">
-        UPDATE t_comment
-        SET is_del=1
-        WHERE font_id=#{fontId}  AND username=#{username}
-    </update>
-
 
     <!--引用他人的评论-->
     <select id="quoteOthersComment" resultType="java.lang.String">
         SELECT message
         FROM t_comment
-        WHERE is_del = 0 AND  id=#{id}
+        WHERE is_del = 0 AND  id=#{id};
     </select>
 
     <!--回复他人的评论-->
     <select id="replyOthersComment" resultType="java.lang.String">
         SELECT username
         FROM t_comment
-        WHERE is_del = 0 AND  id=#{id}
+        WHERE is_del = 0 AND  id=#{id};
     </select>
+    <!--/////////////////////select end///////////////////////////-->
+
+
+
+
+    <!--/////////////////////insert start///////////////////////////-->
+    <!--添加用户的评论-->
+    <insert id="addComment" parameterType="com.safewind.webfont.bean.Comment">
+        INSERT INTO t_comment
+        (username , upload_time , message , font_id)
+        VALUES
+        (#{username} ,#{uploadTime} ,#{message} ,#{fontId});
+    </insert>
+    <!--/////////////////////insert end///////////////////////////-->
+
+
+
+    <!--/////////////////////update start///////////////////////////-->
+    <!--用户删除对该字体的评论     执行的是假删除-->
+    <update id="deleteComment" parameterType="com.safewind.webfont.bean.Comment">
+        UPDATE t_comment
+        SET is_del=1
+        WHERE font_id=#{fontId}  AND username=#{username};
+    </update>
+
+    <!--/////////////////////update end///////////////////////////-->
+
+
+
+    <!--/////////////////////delete start///////////////////////////-->
+
+
+    <!--/////////////////////delete end///////////////////////////-->
+
+
+
 
 </mapper>

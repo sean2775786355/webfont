@@ -1,15 +1,15 @@
 package com.safewind.webfont.service.impl;
 
 import com.safewind.webfont.bean.*;
+import com.safewind.webfont.bean.Collection;
 import com.safewind.webfont.dao.*;
 import com.safewind.webfont.service.FontService;
 import com.safewind.webfont.util.Page;
+import com.sun.javafx.collections.MappingChange;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 import java.util.regex.Pattern;
 
 /**
@@ -59,6 +59,28 @@ public class FontServiceImpl implements FontService {
         return fontDao.queryFontList();
     }
 
+    /**
+     * 用于模糊查询(页面搜索框 含有：字体名，厂商，类型，风格)
+     * @param searchKeyword  查询的关键字
+     * @return List<Font> 一个字体的集合 包含字体的一些具体体信息 包括字体编号，字体使用次数，等字体的属性
+     * 都可得到
+     */
+    @Override
+    public List<Font> fuzzyQueryFontList(String searchKeyword) {
+
+        return fontDao.fuzzyQueryFontList(searchKeyword);
+    }
+
+    @Override
+    public List<FontBrief> getFuzzyQueryFontListPage(String currentPage,String searchKeyword ) {
+        Page page=this.getInstancePage(currentPage,fontDao.countFuzzyQueryFont(searchKeyword));
+        Map map = new HashMap();
+        map.put("searchKeyword",searchKeyword);
+        map.put("dbIndex",page.getDbIndex());
+        map.put("dbNumber",page.getDbNumber());
+        List<Font> fuzzyFontList = fontDao.pageFuzzyQueryFontList(map);
+        return this.getFontBriefPageByFontList(fuzzyFontList);
+    }
 
 
     /**
@@ -69,32 +91,10 @@ public class FontServiceImpl implements FontService {
      */
     @Override
     public List<FontBrief> getFontListPage(String currentPage) {
-
-        List<Font> fontList = fontDao.pagequeryFontList(this.getInstancePage(currentPage));
-        List<FontBrief> fontBriefListPage = new ArrayList<>();
-        for(int i=0;i<fontList.size();i++)
-        {
-            FontBrief fontBrief = new FontBrief();
-            fontBrief.setId(fontList.get(i).getId());
-            fontBrief.setName(fontList.get(i).getName());
-            //添加字体中文编码
-            fontBrief.setEncoding(encodingDao.findEncodingById(fontList.get(i).getEncodingId()));
-            //添加字体英文编码
-            fontBrief.seteEncoding(encodingDao.findEEncodingById(fontList.get(i).getEncodingId()));
-            fontBrief.setType(typeDao.findTypeById(fontList.get(i).getTypeId()));
-            fontBrief.setStyle(styleDao.findStyleById(fontList.get(i).getStyleId()));
-            fontBrief.setPhylum(phylumDao.findPhylumById(fontList.get(i).getPhylumId()));
-            fontBrief.setManufacture(manufactureDao.findManufactureById(fontList.get(i).getManufactureId()));
-
-            fontBrief.setCollectedTime(fontList.get(i).getCollectedTime());
-            fontBrief.setUsedTime(fontList.get(i).getUsedTime());
-            fontBrief.setRecommondedTime(fontList.get(i).getRecommondedTime());
-
-
-            fontBriefListPage.add(fontBrief);
-
-        }
-        return fontBriefListPage;
+        Page page=this.getInstancePage(currentPage,fontDao.countAllFont());
+        //得到的是全部字体的一个分页
+        List<Font> fontList = fontDao.pageQueryFontList(this.getInstancePage(currentPage,page.getTotalNumber()));
+        return this.getFontBriefPageByFontList(fontList);
     }
 
 
@@ -266,12 +266,12 @@ public class FontServiceImpl implements FontService {
 
     /**
      * 关于分页的对象
-     * 得到有关分页的信息
-     * @param currentPage
+     * 得到有关分页的信息 全部字体
+     * @param currentPage 当前页数
      * @return 分页对象
      */
     @Override
-    public Page getInstancePage(String currentPage) {
+    public Page getInstancePage(String currentPage,long totalNumber) {
         Page page=new Page();
         Pattern pattern = Pattern.compile("[0-9]{1,9}");
         if(currentPage==null || !pattern.matcher(currentPage).matches())
@@ -279,10 +279,43 @@ public class FontServiceImpl implements FontService {
             currentPage = "1";
         }
         //所要取出的总记录数
-        page.setTotalNumber(fontDao.countAllFont());
+        page.setTotalNumber(totalNumber);
         page.setCurrentPage(Integer.parseInt(currentPage));
         page.count();
         return page;
+    }
+
+    /**
+     * 可重复使用的方法 封装方法
+     * 该方法是  通过转换 List<Font>  ===>   List<FontBrief>
+     * @param fontList List<Font>
+     * @return  List<FontBrief>
+     */
+    private List<FontBrief> getFontBriefPageByFontList(List<Font> fontList)
+    {
+        List<FontBrief> fontBriefListPage = new ArrayList<>();
+        for(int i=0;i<fontList.size();i++)
+        {
+            FontBrief fontBrief = new FontBrief();
+            fontBrief.setId(fontList.get(i).getId());
+            fontBrief.setName(fontList.get(i).getName());
+            //添加字体中文编码
+            fontBrief.setEncoding(encodingDao.findEncodingById(fontList.get(i).getEncodingId()));
+            //添加字体英文编码
+            fontBrief.seteEncoding(encodingDao.findEEncodingById(fontList.get(i).getEncodingId()));
+            fontBrief.setType(typeDao.findTypeById(fontList.get(i).getTypeId()));
+            fontBrief.setStyle(styleDao.findStyleById(fontList.get(i).getStyleId()));
+            fontBrief.setPhylum(phylumDao.findPhylumById(fontList.get(i).getPhylumId()));
+            fontBrief.setManufacture(manufactureDao.findManufactureById(fontList.get(i).getManufactureId()));
+
+            fontBrief.setCollectedTime(fontList.get(i).getCollectedTime());
+            fontBrief.setUsedTime(fontList.get(i).getUsedTime());
+            fontBrief.setRecommondedTime(fontList.get(i).getRecommondedTime());
+
+            fontBriefListPage.add(fontBrief);
+
+        }
+        return fontBriefListPage;
     }
 
 }

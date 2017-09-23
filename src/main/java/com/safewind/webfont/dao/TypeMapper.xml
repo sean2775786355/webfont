@@ -2,14 +2,29 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.safewind.webfont.dao.TypeDao">
 
+    <!--////////////////////select start////////////////////////////-->
     <select id="findTypeById" resultType="java.lang.String" parameterType="java.lang.Integer">
         SELECT name
         FROM t_style
-        WHERE id=#{id}
+        WHERE id=#{id};
     </select>
 
 	<select id="getAllTypes" resultType="com.safewind.webfont.bean.Type">
     	select * from t_type where 1=1;
     </select>
 
+    <!--/////////////////////select end///////////////////////////-->
+
+
+
+    <!--////////////////////insert start////////////////////////////-->
+    <!--////////////////////insert end////////////////////////////-->
+
+
+    <!--////////////////////update start////////////////////////////-->
+    <!--////////////////////update end////////////////////////////-->
+
+
+    <!--////////////////////delete start////////////////////////////-->
+    <!--////////////////////delete end////////////////////////////-->
 </mapper>

@@ -5,6 +5,7 @@ import com.safewind.webfont.util.Page;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * create By seanChrist 2017/08/04 22:20
@@ -26,7 +27,26 @@ public interface FontDao {
      * @param page
      * @return
      */
-    public List<Font> pagequeryFontList(Page page);
+    public List<Font> pageQueryFontList(Page page);
+
+    /**
+     * 用于模糊查询(页面搜索框 含有：字体名，厂商，类型，风格)
+     * @param searchKeyword 查询的关键词
+     * @return 字体的集合
+     */
+    public List<Font> fuzzyQueryFontList(String searchKeyword);
+
+
+    /**
+     * 分页查询的到的字体
+     * @param map 含有搜索关键字   查询的开始 和结束
+     *            属性名：
+     *            searchKeyword
+     *            dbIndex
+     *            dbNumber
+     * @return 字体集合
+     */
+    public List<Font> pageFuzzyQueryFontList(Map map);
     /**
      * 供给用户查看某个字体的详细信息
      * @param id    字体的编号
@@ -45,5 +65,12 @@ public interface FontDao {
      * @return
      */
     public long countAllFont();
+
+    /**
+     * 模糊查询后计算查的字体的数量
+     * @param searchKeyword 查询关键字
+     * @return          模糊查询数量  long
+     */
+    public long countFuzzyQueryFont(String searchKeyword);
 
 }

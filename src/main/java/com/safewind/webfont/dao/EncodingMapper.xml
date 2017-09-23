@@ -2,29 +2,45 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.safewind.webfont.dao.EncodingDao">
 
+    <!--//////////////////select start//////////////////////////////-->
     <!--查询编码，得到集合，这个可能有用-->
     <select id="queryEncodingById" parameterType="java.lang.Integer" resultType="com.safewind.webfont.bean.Encoding">
         SELECT name , e_name
         FROM t_encoding
-        WHERE id=#{id}
+        WHERE id=#{id};
     </select>
 
     <!--查询编码中文名字-->
     <select id="findEncodingById" parameterType="java.lang.Integer" resultType="java.lang.String">
         SELECT name
         FROM t_encoding
-        WHERE id=#{id}
+        WHERE id=#{id};
     </select>
     <!--查询编码英文名字-->
     <select id="findEEncodingById" parameterType="java.lang.Integer" resultType="java.lang.String">
         SELECT e_name
         FROM  t_encoding
-        WHERE id=#{id}
+        WHERE id=#{id};
     </select>
     
     <select id="getAllEncodings" resultType="com.safewind.webfont.bean.Encoding">
     	select * from t_encoding where 1=1;
     </select>
+
+    <!--////////////////////select end////////////////////////////-->
+
+
+
+    <!--////////////////////insert start////////////////////////////-->
+    <!--////////////////////insert end////////////////////////////-->
+
+
+    <!--////////////////////update start////////////////////////////-->
+    <!--////////////////////update end////////////////////////////-->
+
+
+    <!--////////////////////delete start////////////////////////////-->
+    <!--/////////////////////delete end///////////////////////////-->
 
 
 

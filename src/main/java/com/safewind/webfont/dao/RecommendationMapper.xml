@@ -1,17 +1,36 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.safewind.webfont.dao.RecommendationDao">
+
+    <!--///////////////////select start/////////////////////////////-->
     <!--判断用户是否推荐了该字体-->
     <select id="isRecommendationFont" parameterType="com.safewind.webfont.bean.Recommendation" resultType="com.safewind.webfont.bean.Recommendation">
         SELECT id , username , recommend_time , font_id , is_del
         FROM t_recommendation
-        WHERE font_id=#{fontId} AND username=#{username} AND is_del = 0
+        WHERE font_id=#{fontId} AND username=#{username} AND is_del = 0;
     </select>
     <!--添加用户推荐的字体-->
     <insert id="addRecommendationFont" parameterType="com.safewind.webfont.bean.Recommendation">
         INSERT INTO
         t_recommendation(username ,  recommend_time , font_id)
-        VALUES (#{username} , #{recommendTime}  , #{fontId})
+        VALUES (#{username} , #{recommendTime}  , #{fontId});
     </insert>
+
+    <!--///////////////////select end/////////////////////////////-->
+
+
+
+    <!--///////////////////insert start/////////////////////////////-->
+    <!--///////////////////insert end/////////////////////////////-->
+
+
+
+    <!--///////////////////update start/////////////////////////////-->
+    <!--///////////////////update end/////////////////////////////-->
+
+
+    <!--///////////////////delete start/////////////////////////////-->
+    <!--///////////////////delete end/////////////////////////////-->
+
 
 </mapper>

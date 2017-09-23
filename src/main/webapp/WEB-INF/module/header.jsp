@@ -51,9 +51,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <%--<li><a href="#"><span class="glyphicon glyphicon-user"></span>註冊</a></li>--%>
             <li><a href="#"><span class="glyphicon glyphicon-user"></span>登錄</a></li>
         </ul>
-        <form class="navbar-form navbar-left navbar-right form-group has-feedback" role="search" action="#">
+        <form class="navbar-form navbar-left navbar-right form-group has-feedback" role="search" action="${pageContext.request.contextPath}/font/search">
             <div class="form-group has-feedback">
-                <input type="text" class="form-control" placeholder="字體名 廠商 類型 風格">
+                <input type="text" name="searchKeyword" class="form-control" placeholder="字體名 廠商 類型 風格">
                 <span class="glyphicon glyphicon-search form-control-feedback" aria-hidden="true" style="font-size: large"></span>
             </div>
             

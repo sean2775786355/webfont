@@ -1,14 +1,25 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.safewind.webfont.dao.ManufactureDao">
-
+    <!--///////////////////select start/////////////////////////////-->
     <select id="findManufactureById" parameterType="java.lang.Integer" resultType="java.lang.String">
         SELECT name
         FROM t_manufacturer
-        WHERE id=#{id}
+        WHERE id=#{id};
     </select>
     
     <select id="getAllManufacturers" resultType="com.safewind.webfont.bean.Manufacturer">
-    	select * from t_manufacturer where 1=1;
+    	select id , name from t_manufacturer where 1=1;
     </select>
+    <!--///////////////////select end/////////////////////////////-->
+
+    <!--///////////////////insert start/////////////////////////////-->
+    <!--///////////////////insert end/////////////////////////////-->
+
+    <!--////////////////////update start////////////////////////////-->
+    <!--////////////////////update end////////////////////////////-->
+
+
+    <!--////////////////////delete start////////////////////////////-->
+    <!--////////////////////delete end////////////////////////////-->
 </mapper>

@@ -3,6 +3,7 @@ package com.safewind.webfont.controller;
 import java.util.List;
 import java.util.regex.Pattern;
 
+import com.safewind.webfont.dao.FontDao;
 import com.safewind.webfont.util.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,7 +25,8 @@ public class FontController {
 
 	@Autowired
 	private FontService fontService;
-
+	@Autowired
+	private FontDao fontDao;
 
 	/**
 	 * 自己写一个分页的功能
@@ -37,7 +39,7 @@ public class FontController {
 	{
 
 		List<FontBrief> fontBriefList = fontService.getFontListPage(currentPage);
-		model.addAttribute("pageInfo",fontService.getInstancePage(currentPage));
+		model.addAttribute("pageInfo",fontService.getInstancePage(currentPage,fontDao.countAllFont()));
 		System.out.println(fontBriefList);
 		System.out.println("============================");
 		System.out.println("查看字体记录数="+fontBriefList.size());
@@ -70,7 +72,45 @@ public class FontController {
 		return "/font/fontList";
 	}
 	@RequestMapping(value="/search",method=RequestMethod.GET)
-	public String search(){
+	public String search(Model model,String searchKeyword,String currentPage){
+
+		model.addAttribute("searchKeyword",searchKeyword);
+		//使用的一个正则表达式
+		if(currentPage==null || !Pattern.compile("[0-9]{1,9}").matcher(currentPage).matches())
+		{
+			currentPage = "1";
+		}
+		List<FontBrief> fontBriefList = fontService.getFuzzyQueryFontListPage(currentPage,searchKeyword);
+		model.addAttribute("pageInfo",fontService.getInstancePage(currentPage,fontDao.countFuzzyQueryFont(searchKeyword)));
+		System.out.println(fontBriefList);
+		System.out.println("============================");
+		System.out.println("查看字体记录数="+fontBriefList.size());
+		model.addAttribute("fontBriefList",fontBriefList);
+		///////////////////////
+		List<Manufacturer> manufacturerList = fontService.getAllManufacturers();
+		System.out.println(manufacturerList);
+		System.out.println("============================");
+		model.addAttribute("manufacturerList", manufacturerList);
+
+		List<Style> styleList = fontService.getAllStyles();
+		System.out.println(styleList);
+		System.out.println("============================");
+		model.addAttribute("styleList", styleList);
+
+		List<Encoding> encodingList = fontService.getAllEncodings();
+		System.out.println(encodingList);
+		System.out.println("============================");
+		model.addAttribute("encodingList", encodingList);
+
+		List<Phylum> phylumList = fontService.getAllPhylums();
+		System.out.println(phylumList);
+		System.out.println("============================");
+		model.addAttribute("phylumList", phylumList);
+
+		List<Type> typeList = fontService.getAllTypes();
+		System.out.println(typeList);
+		System.out.println("============================");
+		model.addAttribute("typeList", typeList);
 		return "/font/search";
 	}
 }

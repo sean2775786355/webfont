@@ -1,16 +1,32 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.safewind.webfont.dao.ConsumerDao">
-
+    <!--///////////////////select start/////////////////////////////-->
     <!--查询用户的  有可能有用 目前没用-->
     <select id="findConsumerById" parameterType="java.lang.Integer" resultType="com.safewind.webfont.bean.Consumer">
         SELECT  id, username , personalized_signature , phone , tel , nickname , sex ,
                 work_place , email , qq_num , wechat_num , company_name , company_industry
-        FROM t_consumer
+        FROM t_consumer;
     </select>
+
+    <!--///////////////////select end/////////////////////////////-->
+
+    <!--///////////////////insert start/////////////////////////////-->
 
     <!--用户注册时添加id 添加用户名 添加电话号码-->
 
+    <!--///////////////////insert end/////////////////////////////-->
+
+    <!--///////////////////update start/////////////////////////////-->
+
     <!--用户登录后 完善自己的个人资料-->
 
+    <!--///////////////////update end/////////////////////////////-->
+
+
+
+    <!--///////////////////delete start/////////////////////////////-->
+
+
+    <!--///////////////////delete end/////////////////////////////-->
 </mapper>

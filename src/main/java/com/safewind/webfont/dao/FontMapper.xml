@@ -2,6 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.safewind.webfont.dao.FontDao">
 
+    <!--////////////////////select start////////////////////////////-->
     <!--查询字体列表-->
     <select id="queryFontList" resultType="com.safewind.webfont.bean.Font">
         SELECT id,name,manufacturer_id,type_id,encoding_id,phylum_id,style_id,copyright_message,
@@ -12,20 +13,87 @@
         ORDER BY used_time
         DESC
     </select>
+
+    <!--计算字体的总数目-->
+    <select id="countAllFont" resultType="java.lang.Long">
+        SELECT COUNT(*) FROM t_font WHERE 1=1;
+    </select>
+
+    <!--用于模糊查询(页面搜索框 含有：字体名，厂商，类型，风格)-->
+    <select id="fuzzyQueryFontList" resultType="com.safewind.webfont.bean.Font" parameterType="java.lang.String">
+        SELECT id,name,manufacturer_id,type_id,encoding_id,phylum_id,style_id,copyright_message,
+        used_time,collected_time,recommended_time,upload_time,is_opensourced,is_genuine
+        FROM t_font
+        <where>
+            <if test="_parameter != null">
+                name LIKE CONCAT(CONCAT('%', #{_parameter}), '%')
+                OR
+                manufacturer_id =
+                      (SELECT id FROM t_manufacturer WHERE name LIKE CONCAT(CONCAT('%', #{_parameter}), '%') LIMIT 0,1)
+                OR
+                type_id =
+                      (SELECT id FROM t_type WHERE name LIKE CONCAT(CONCAT('%', #{_parameter}), '%') LIMIT 0,1)
+                OR
+                style_id =
+                      (SELECT id FROM t_style WHERE name LIKE CONCAT(CONCAT('%', #{_parameter}), '%') LIMIT 0,1)
+            </if>
+        </where>
+    </select>
+
+    <select id="pageFuzzyQueryFontList" resultType="com.safewind.webfont.bean.Font" parameterType="java.util.Map">
+        SELECT id,name,manufacturer_id,type_id,encoding_id,phylum_id,style_id,copyright_message,
+        used_time,collected_time,recommended_time,upload_time,is_opensourced,is_genuine
+        FROM t_font
+        <where>
+            <if test="searchKeyword != null">
+                name LIKE CONCAT(CONCAT('%', #{searchKeyword}), '%')
+                OR
+                manufacturer_id =
+                (SELECT id FROM t_manufacturer WHERE name LIKE CONCAT(CONCAT('%', #{searchKeyword}), '%') LIMIT 0,1)
+                OR
+                type_id =
+                (SELECT id FROM t_type WHERE name LIKE CONCAT(CONCAT('%', #{searchKeyword}), '%') LIMIT 0,1)
+                OR
+                style_id =
+                (SELECT id FROM t_style WHERE name LIKE CONCAT(CONCAT('%', #{searchKeyword}), '%') LIMIT 0,1)
+            </if>
+        </where>
+        LIMIT #{dbIndex},#{dbNumber};
+    </select>
+    <!--用于模糊查询(页面搜索框 含有：字体名，厂商，类型，风格) 字体的数量-->
+    <select id="countFuzzyQueryFont" resultType="java.lang.Long" parameterType="java.lang.String">
+        SELECT COUNT(*)
+        FROM t_font
+        <where>
+            <if test="_parameter != null">
+                name LIKE CONCAT(CONCAT('%', #{_parameter}), '%')
+                OR
+                manufacturer_id =
+                (SELECT id FROM t_manufacturer WHERE name LIKE CONCAT(CONCAT('%', #{_parameter}), '%') LIMIT 0,1)
+                OR
+                type_id =
+                (SELECT id FROM t_type WHERE name LIKE CONCAT(CONCAT('%', #{_parameter}), '%') LIMIT 0,1)
+                OR
+                style_id =
+                (SELECT id FROM t_style WHERE name LIKE CONCAT(CONCAT('%', #{_parameter}), '%') LIMIT 0,1)
+            </if>
+        </where>
+
+    </select>
     <!--用于分页查询 查询的数量-->
-    <select id="pagequeryFontList" resultType="com.safewind.webfont.bean.Font" parameterType="com.safewind.webfont.util.Page">
+    <select id="pageQueryFontList" resultType="com.safewind.webfont.bean.Font" parameterType="com.safewind.webfont.util.Page">
         SELECT id,name,manufacturer_id,type_id,encoding_id,phylum_id,style_id,copyright_message,
                 used_time,collected_time,recommended_time,upload_time,is_opensourced,is_genuine
         FROM t_font
         ORDER BY id
-        LIMIT #{dbIndex},#{dbNumber}
+        LIMIT #{dbIndex},#{dbNumber};
     </select>
     <!--查询字体的详细信息   根据字体的id-->
     <select id="findFontDetailById" resultType="com.safewind.webfont.bean.Font" parameterType="java.lang.Integer">
         SELECT id,name,manufacturer_id,type_id,encoding_id,phylum_id,style_id,copyright_message,
                 used_time,collected_time,recommended_time,upload_time,is_opensourced,is_genuine
         FROM t_font
-        WHERE id=#{id}
+        WHERE id=#{id};
     </select>
 
     <!--判断用户如果没有收藏字体，添加收藏字体，更新字体收藏的次数-->
@@ -36,10 +104,21 @@
     WHERE id=#{id};
     </update>
 
-    <!--计算字体的总数目-->
-    <select id="countAllFont" resultType="java.lang.Long">
-       SELECT COUNT(*) FROM t_font WHERE 1=1;
-    </select>
-    
+
+    <!--//////////////////////select end//////////////////////////-->
+
+
+    <!--//////////////////////insert start//////////////////////////-->
+    <!--//////////////////////insert end//////////////////////////-->
+
+
+    <!--//////////////////////update start//////////////////////////-->
+    <!--//////////////////////update end//////////////////////////-->
+
+
+    <!--//////////////////////delete start//////////////////////////-->
+    <!--//////////////////////delete end//////////////////////////-->
+
+
 
 </mapper>

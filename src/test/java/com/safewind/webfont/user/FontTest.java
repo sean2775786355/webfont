@@ -10,6 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
+
 @ContextConfiguration("classpath:spring-mybatis.xml")
 @RunWith(SpringJUnit4ClassRunner.class)
 public class FontTest {
@@ -23,15 +27,6 @@ public class FontTest {
     private CommentDao commentDao;
     @Autowired
     private FontDao fontDao;
-//    测试分页所要计算的数据
-//    @Test
-//    public void testPagingCalculate()
-//    {
-//        PagingCaculate pagingCaculate=new PagingCaculate(fontService.getFontBriefList(),4);
-//        System.out.println("========================================== "+pagingCaculate.getNumPage()+"====================================="+pagingCaculate.getNumRow());
-//    }
-
-//  测试用户收藏该字体
 
     @Test
     public void test()
@@ -59,6 +54,17 @@ public class FontTest {
 //        测试添加用户推荐该字体到数据库
 //        fontService.addRecommendationFont("ahui",5);
 //        System.out.println("+++++++++++++++测试用户是否推荐该字体+++++++++++++++++++++"+fontService.isRecommendationFont(5,"ahui"));
+
+
+//        System.out.println("==============模糊查询 得到字体名 字体厂商编号等================"+fontService.fuzzyQueryFontList("黑体"));
+
+//        Map map= new HashMap();
+//        map.put("searchKeyword","义启");
+//        map.put("dbIndex",1);
+//        map.put("dbNumber",1);
+//        System.out.println("=============模糊查询分页================"+fontDao.pageFuzzyQueryFontList(map));
+
+//        System.out.println("============模糊查询分页============"+fontService.getFuzzyQueryFontListPage("1","义启"));
     }
 
 

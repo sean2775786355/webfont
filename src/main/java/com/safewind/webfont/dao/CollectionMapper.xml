@@ -2,35 +2,53 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.safewind.webfont.dao.CollectionDao">
 
-        <select id="queryCollectionList" resultType="com.safewind.webfont.bean.Collection" parameterType="java.lang.Integer">
+    <!--/////////////////////select start///////////////////////////-->
+        <!--通过收藏id 查找收藏字体的集合-->
+        <select id="queryCollectionList" parameterType="java.lang.Integer" resultType="com.safewind.webfont.bean.Collection" >
             SELECT id , username , collect_time , font_id , is_del
             FROM t_collection
-            WHERE id={id}
+            WHERE id={id};
         </select>
-
         <!--这是通过收藏的编号查询用户个人收藏的信息-->
-        <select id="queryCollectionById" resultType="com.safewind.webfont.bean.Collection" parameterType="java.lang.Integer">
+        <select id="queryCollectionById" parameterType="java.lang.Integer" resultType="com.safewind.webfont.bean.Collection" >
             SELECT id , username  , collect_time  , font_id , is_del
             FROM  t_collection
-            WHERE id={id}
+            WHERE id={id};
         </select>
-    
-        
-        <!--添加收藏的信息--><!--useGeneratedKeys="true" keyProperty="id"自增主键id-->
-        <insert id="addCollectionFont">
-            INSERT INTO t_collection(username , collect_time  , font_id)
-            VALUES (#{username}  , #{collectTime}  , #{fontId})
-        </insert>
 
 
-        <!--判断用户是否收藏该字体，没有返回null        用is_del是判断是否被假删除-->
-        <select id="isCollectionFont" resultType="com.safewind.webfont.bean.Collection">
+        <!--判断用户是否收藏该字体，没有返回null    用is_del是判断是否被假删除-->
+        <select id="isCollectionFont" resultType="com.safewind.webfont.bean.Collection" parameterType="com.safewind.webfont.bean.Collection">
             SELECT id , username  , collect_time  , font_id , is_del
             FROM t_collection
-            WHERE font_id=#{fontId} AND username=#{username}  AND is_del=0
+            WHERE font_id=#{fontId} AND username=#{username}  AND is_del=0;
         </select>
+    <!--/////////////////////select end///////////////////////////-->
 
 
+    <!--/////////////////////insert start///////////////////////////-->
+        <!--添加收藏的信息--><!--useGeneratedKeys="true" keyProperty="id"自增主键id-->
+        <insert id="addCollectionFont" parameterType="com.safewind.webfont.bean.Collection" useGeneratedKeys="true" keyProperty="id">
+            INSERT INTO t_collection(username , collect_time  , font_id)
+            VALUES (#{username}  , #{collectTime}  , #{fontId});
+        </insert>
+
+    <!--/////////////////////insert end///////////////////////////-->
+
+
+
+
+    <!--/////////////////////update start///////////////////////////-->
+
+    <!--/////////////////////update end///////////////////////////-->
+
+
+
+
+
+    <!--/////////////////////delete start///////////////////////////-->
+
+    <!--//////////////////////delete end//////////////////////////-->
 
 
 
