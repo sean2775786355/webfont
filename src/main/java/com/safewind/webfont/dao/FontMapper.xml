@@ -19,6 +19,124 @@
         SELECT COUNT(*) FROM t_font WHERE 1=1;
     </select>
 
+    <!--分页精确查询 得到字体
+     @param map 含有属性  查询开始  | 结束
+                 属性名：
+                    manufacturerId    厂商id
+                    typeId            类型id
+                    encodingId        编码id
+                    phylumId          语系id
+                    styleId           风格id
+                    dbIndex
+                    dbNumber
+                    默认是：manufacturer 信黑 1  type 黑体 10  encoding 繁体中文 2
+                           phylum  中文 2  style 精致综艺 10 -->
+    <select id="pageExactSearchFontList" resultType="com.safewind.webfont.bean.Font" parameterType="java.util.Map" >
+        SELECT id,name,manufacturer_id,type_id,encoding_id,phylum_id,style_id,copyright_message,
+        used_time,collected_time,recommended_time,upload_time,is_opensourced,is_genuine
+        FROM t_font
+        WHERE
+        is_opensourced = 0
+        <choose>
+            <when test="manufacturerId != null">
+                AND  manufacturer_id=#{manufacturerId}
+            </when>
+            <otherwise>
+                AND manufacturer_id=55
+            </otherwise>
+        </choose>
+
+        <choose>
+            <when test="typeId != null">
+                AND type_id=#{typeId}
+            </when>
+            <otherwise>
+                AND type_id=1
+            </otherwise>
+        </choose>
+
+        <choose>
+            <when test="encodingId!=null">
+                AND encoding_id=#{encodingId}
+            </when>
+            <otherwise>
+                AND encoding_id=2
+            </otherwise>
+        </choose>
+
+        <choose>
+            <when test="phylumId!=null">
+                AND phylum_id=#{phylumId}
+            </when>
+            <otherwise>
+                AND phylum_id=2
+            </otherwise>
+        </choose>
+
+        <choose>
+            <when test="styleId!=null">
+                AND style_id=#{styleId}
+            </when>
+            <otherwise>
+                AND style_id=10
+            </otherwise>
+        </choose>
+        ORDER BY used_time  DESC
+        LIMIT #{dbIndex},#{dbNumber}
+    </select>
+
+    <!--精确查询 得到字体数目-->
+    <select id="countExactSearchFontList" parameterType="java.util.Map" resultType="java.lang.Long">
+        SELECT COUNT(*)
+        FROM t_font
+        WHERE
+        is_opensourced = 0
+        <choose>
+            <when test="manufacturerId != null">
+                AND  manufacturer_id=#{manufacturerId}
+            </when>
+            <otherwise>
+                AND manufacturer_id=55
+            </otherwise>
+        </choose>
+
+        <choose>
+            <when test="typeId != null">
+                AND type_id=#{typeId}
+            </when>
+            <otherwise>
+                AND type_id=1
+            </otherwise>
+        </choose>
+
+        <choose>
+            <when test="encodingId!=null">
+                AND encoding_id=#{encodingId}
+            </when>
+            <otherwise>
+                AND encoding_id=2
+            </otherwise>
+        </choose>
+
+        <choose>
+            <when test="phylumId!=null">
+                AND phylum_id=#{phylumId}
+            </when>
+            <otherwise>
+                AND phylum_id=2
+            </otherwise>
+        </choose>
+
+        <choose>
+            <when test="styleId!=null">
+                AND style_id=#{styleId}
+            </when>
+            <otherwise>
+                AND style_id=10
+            </otherwise>
+        </choose>
+    </select>
+
     <!--用于模糊查询(页面搜索框 含有：字体名，厂商，类型，风格)-->
     <select id="fuzzyQueryFontList" resultType="com.safewind.webfont.bean.Font" parameterType="java.lang.String">
         SELECT id,name,manufacturer_id,type_id,encoding_id,phylum_id,style_id,copyright_message,
@@ -40,6 +158,7 @@
         </where>
     </select>
 
+    <!--用于分页模糊查询 查询的数量-->
     <select id="pageFuzzyQueryFontList" resultType="com.safewind.webfont.bean.Font" parameterType="java.util.Map">
         SELECT id,name,manufacturer_id,type_id,encoding_id,phylum_id,style_id,copyright_message,
         used_time,collected_time,recommended_time,upload_time,is_opensourced,is_genuine
@@ -57,9 +176,13 @@
                 style_id =
                 (SELECT id FROM t_style WHERE name LIKE CONCAT(CONCAT('%', #{searchKeyword}), '%') LIMIT 0,1)
             </if>
+            AND is_opensourced = 0
         </where>
+        ORDER BY used_time
+        DESC
         LIMIT #{dbIndex},#{dbNumber};
     </select>
+
     <!--用于模糊查询(页面搜索框 含有：字体名，厂商，类型，风格) 字体的数量-->
     <select id="countFuzzyQueryFont" resultType="java.lang.Long" parameterType="java.lang.String">
         SELECT COUNT(*)
@@ -80,6 +203,7 @@
         </where>
 
     </select>
+
     <!--用于分页查询 查询的数量-->
     <select id="pageQueryFontList" resultType="com.safewind.webfont.bean.Font" parameterType="com.safewind.webfont.util.Page">
         SELECT id,name,manufacturer_id,type_id,encoding_id,phylum_id,style_id,copyright_message,
@@ -88,6 +212,7 @@
         ORDER BY id
         LIMIT #{dbIndex},#{dbNumber};
     </select>
+
     <!--查询字体的详细信息   根据字体的id-->
     <select id="findFontDetailById" resultType="com.safewind.webfont.bean.Font" parameterType="java.lang.Integer">
         SELECT id,name,manufacturer_id,type_id,encoding_id,phylum_id,style_id,copyright_message,
@@ -96,27 +221,117 @@
         WHERE id=#{id};
     </select>
 
-    <!--判断用户如果没有收藏字体，添加收藏字体，更新字体收藏的次数-->
-    
-    <update id="updateFontCollectTime"   parameterType="com.safewind.webfont.bean.Font">
-    UPDATE t_font
-    SET collected_time=collected_time+1
-    WHERE id=#{id};
-    </update>
-
-
     <!--//////////////////////select end//////////////////////////-->
 
 
+
+
     <!--//////////////////////insert start//////////////////////////-->
+
+    <!--管理员添加字体
+         name           字体名称
+         manufactureId  厂商编号
+         typeId     类型编号
+         encodingId 编码ID
+         phylumId   语系编号
+         styleId    风格编号
+         copyrightMessage   版权信息
+         used_time collected_time recommended_time 设置成 0 (因为刚添加的字体的使用次数 收藏次数 推荐次数没有)
+         isOpensourced  是否开源：0.开源；1.不开源
+         isGenuine  是否正版：0. 是正版；1.不是正版
+         -->
+    <insert id="addFont" parameterType="com.safewind.webfont.bean.Font"  useGeneratedKeys="true" keyProperty="id">
+        INSERT
+        INTO
+        t_font
+        (name , manufacturer_id ,  type_id ,  encoding_id , phylum_id ,
+         style_id , copyright_message , used_time , collected_time ,
+         recommended_time, upload_time,  is_opensourced, is_genuine)
+        VALUES
+         (#{name} , #{manufactureId} ,#{typeId} , #{encodingId} ,
+         #{phylumId}, #{styleId}, #{copyrightMessage}, 0 , 0, 0 ,
+         NOW(), #{isOpensourced}, #{isGenuine})
+    </insert>
     <!--//////////////////////insert end//////////////////////////-->
 
 
+
+
     <!--//////////////////////update start//////////////////////////-->
+    <!--判断用户如果没有收藏字体，添加收藏字体，更新字体收藏的次数-->
+
+    <update id="updateAddFontCollectTime"   parameterType="java.lang.Integer">
+        UPDATE t_font
+        SET collected_time=collected_time+1
+        WHERE id=#{_parameter};
+    </update>
+
+
+    <!--判断用户如果要删除收藏字体，减少收藏字体，更新字体收藏的次数-->
+    <update id="updateReduceFontCollectTime" parameterType="java.lang.Integer">
+        UPDATE t_font
+        SET collected_time=collected_time-1
+        WHERE id=#{_parameter};
+    </update>
+
+    <!--管理员和用户修改字体的一些属性
+    修改的属性有：
+         name           字体名称
+         manufactureId  厂商编号
+         typeId     类型编号
+         encodingId 编码ID
+         phylumId   语系编号
+         styleId    风格编号
+         copyrightMessage   版权信息
+         isOpensourced  是否开源：0.开源；1.不开源
+
+         isGenuine  是否正版：0. 是正版；1.不是正版
+        目前测试不成功因为含有外键
+    -->
+    <update id="updateFont"  parameterType="com.safewind.webfont.bean.Font" >
+        UPDATE  t_font
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null and name != '' ">
+                name = #{name},
+            </if>
+            <if test="manufactureId != null and manufactureId != 0">
+                manufacturer_id = #{manufactureId},
+            </if>
+            <if test="typeId != null and typeId != 0">
+                type_id=#{typeId},
+            </if>
+            <if test="encodingId != null and encodingId  != 0">
+                encoding_id=#{encodingId},
+            </if>
+            <if test="phylumId != null and phylumId != 0 ">
+                phylum_id=#{phylumId},
+            </if>
+            <if test="styleId != null and styleId != 0">
+                style_id=#{styleId},
+            </if>
+            <if test="copyrightMessage != null and copyrightMessage != '' ">
+                copyright_message=#{copyrightMessage},
+            </if>
+            <if test="isOpensourced != null">
+                is_opensourced=#{isOpensourced},
+            </if>
+            <if test="isGenuine != null">
+                is_genuine=#{isGenuine},
+            </if>
+        </trim>
+        WHERE id=#{id}
+    </update>
+
     <!--//////////////////////update end//////////////////////////-->
 
 
+
+
     <!--//////////////////////delete start//////////////////////////-->
+    <!--管理员删除某个字体 以字体id 删除字体 执行-->
+    <delete id="deleteFont"  parameterType="java.lang.Integer">
+          DELETE FROM  t_font WHERE id = #{_parameter}
+    </delete>
     <!--//////////////////////delete end//////////////////////////-->
 
 

@@ -14,12 +14,29 @@
     <!--///////////////////select end/////////////////////////////-->
 
     <!--///////////////////insert start/////////////////////////////-->
+    <!--添加厂商-->
+    <insert id="addManufacturers" useGeneratedKeys="true" keyProperty="id" parameterType="com.safewind.webfont.bean.Manufacturer">
+      INSERT INTO  t_manufacturer(name)   VALUES(#{name});
+    </insert>
     <!--///////////////////insert end/////////////////////////////-->
 
     <!--////////////////////update start////////////////////////////-->
+    <!--通过厂商id编号更新厂商名-->
+    <update id="updateManufacturersName" parameterType="com.safewind.webfont.bean.Manufacturer">
+        UPDATE t_manufacturer
+        SET
+        name = #{name}
+        WHERE id = #{id};
+    </update>
     <!--////////////////////update end////////////////////////////-->
 
 
     <!--////////////////////delete start////////////////////////////-->
+    <!--删除某个厂商 需要注意:这操作有风险!!!!!-->
+    <delete id="deleteManufacturers" parameterType="java.lang.Integer">
+        DELETE
+        FROM t_manufacturer
+        WHERE id = #{_parameter}
+    </delete>
     <!--////////////////////delete end////////////////////////////-->
 </mapper>

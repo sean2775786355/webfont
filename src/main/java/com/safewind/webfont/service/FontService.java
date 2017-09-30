@@ -10,6 +10,7 @@ import com.safewind.webfont.bean.Type;
 import com.safewind.webfont.util.Page;
 
 import java.util.List;
+import java.util.Map;
 
 public interface FontService {
 
@@ -40,6 +41,21 @@ public interface FontService {
      * @return      字体的简略信息
      */
     public List<FontBrief> getFuzzyQueryFontListPage(String currentPage,String searchKeyword);
+
+
+    /**
+     * 分页精确查询 得到字体
+     *     查询开始  | 结束
+     *            属性名：
+     *        @param     currentPage
+     *        @param     manufacturerId    厂商id
+     *        @param     typeId            类型id
+     *        @param     encodingId        编码id
+     *        @param     phylumId          语系id
+     *        @param     styleId           风格id
+     * @return  字体集合    List<FontBrief>
+     */
+    public List<FontBrief> getPageExactSearchFontList(String currentPage,int manufacturerId ,int  encodingId,int typeId,int phylumId,int styleId);
 
     /**
      * 该字体的详细信息      |   返回字体的详细信息      |    id  字体的编号
@@ -142,5 +158,31 @@ public interface FontService {
      * @return  分页对象 Page
      */
     public Page getInstancePage(String currentPage,long totalNumber);
+
+    /**
+     * 计算字体的数目
+     * 这是用于初次显示字体列表
+     * @return 字体的数目
+     */
+    public long countAllFont();
+
+    /**
+     * 模糊查询 计算总记录数
+     * @param searchKeyword
+     * @return 模糊查询的记录总数
+     */
+    public long countFuzzyQueryFont(String searchKeyword);
+
+    /**
+     * 分页精确查询 得到字体map 含有属性  查询开始  | 结束
+     * @param
+     *           manufacturerId    厂商id
+     *            typeId            类型id
+     *            encodingId        编码id
+     *            phylumId          语系id
+     *            styleId           风格id
+     * @return  精确查询字体的数目
+     */
+    public long countExactSearchFontList(int manufacturerId ,int  encodingId,int typeId,int phylumId,int styleId);
 
 }

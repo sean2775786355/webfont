@@ -10,16 +10,25 @@
 
     
     <select id="getAllStyles" resultType="com.safewind.webfont.bean.Style">
-    	select * from t_style where 1=1;
+    	select id , name from t_style where 1=1;
     </select>
 
     <!--//////////////////select end//////////////////////////////-->
 
 
     <!--//////////////////insert start//////////////////////////////-->
+    <!--添加字体的风格-->
+    <insert id="addStyles" parameterType="com.safewind.webfont.bean.Style">
+        INSERT INTO t_style(name) VALUES(#{name});
+    </insert>
     <!--//////////////////insert end//////////////////////////////-->
 
     <!--///////////////////update start/////////////////////////////-->
+    <update id="updateStyles" parameterType="com.safewind.webfont.bean.Style">
+        UPDATE t_style
+        SET name = #{name}
+        WHERE id = #{id};
+    </update>
     <!--///////////////////update end/////////////////////////////-->
 
 

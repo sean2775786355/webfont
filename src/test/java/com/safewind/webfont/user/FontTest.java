@@ -1,8 +1,11 @@
 package com.safewind.webfont.user;
 
+import com.safewind.webfont.bean.Font;
+import com.safewind.webfont.bean.Phylum;
 import com.safewind.webfont.dao.CollectionDao;
 import com.safewind.webfont.dao.CommentDao;
 import com.safewind.webfont.dao.FontDao;
+import com.safewind.webfont.dao.PhylumDao;
 import com.safewind.webfont.service.FontService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -27,9 +30,15 @@ public class FontTest {
     private CommentDao commentDao;
     @Autowired
     private FontDao fontDao;
+    @Autowired
+    private PhylumDao phylumDao;
+    @Autowired
+    private Font font;
+    @Autowired
+    private Phylum phylum;
 
     @Test
-    public void test()
+    public void Test1()
     {
 //        测试给字体添加评论
 //        fontService.addComment("ahui","这个字体还不错",5);
@@ -65,6 +74,53 @@ public class FontTest {
 //        System.out.println("=============模糊查询分页================"+fontDao.pageFuzzyQueryFontList(map));
 
 //        System.out.println("============模糊查询分页============"+fontService.getFuzzyQueryFontListPage("1","义启"));
+
+
+//        System.out.println("============查看字体收藏的数目 通过字体编号=============="+collectionDao.countCollectionFontByFontId(10));
+    }
+
+    @Test
+    public void Test2()
+    {
+//      @param map 含有属性  查询开始  | 结束
+//            *            属性名：
+//                 manufacturerId    厂商id
+//                 typeId            类型id
+//                 encodingId        编码id
+//                 phylumId          语系id
+//                 styleId           风格id
+//                dbIndex
+//                dbNumber
+////        测试精确查询
+//        Map map=new HashMap();
+//        map.put("manufacturerId",55);
+//        map.put("typeId",1);
+//        map.put("encodingId",1);
+//        map.put("phylumId",2);
+//        map.put("styleId",1);
+//        map.put("dbIndex",0);
+//        map.put("dbNumber",5);
+//        System.out.println("=======查询数据库字体的第一条记录========"+fontDao.pageExactSearchFontList(map));
+//        System.out.println("===========精确查询数量================"+fontService.countExactSearchFontList(55,1,1,2,1));
+//        System.out.println("===========精确分页查询==================="+fontService.getPageExactSearchFontList("1",55,1,1,2,1));
+
+//        成功删除放回的是1   ,失败删除返回的是0  实际上是返回的影响记录的行数
+//        System.out.println("==========测试删除时的放回结果=============="+fontDao.deleteFont(13));
+
+//          目前是错的 因为含有                  外键
+//        font.setId(11);
+//        font.setManufactureId(8);
+//        font.setTypeId(7);
+//        font.setEncodingId(2);
+//        font.setPhylumId(2);
+//        font.setStyleId(10);
+//        font.setCopyrightMessage("这是一个好的字体");
+
+//        System.out.println("===============测试更新的放回结果===================="+fontDao.updateFont(font));
+//        phylum.setId(3);
+//        phylum.setName("其他");
+//        System.out.println("===============测试数据库更新是否返回行数====================="+phylumDao.updatePhylumsName(phylum));
+//          经过测试update 同样可以返回影响的行数 即记录数  不需要在  ***Mapper.xml中写入 resultType  在接口***Dao.java中写入返回类型int即可
     }
 
 

@@ -22,4 +22,18 @@ public interface StyleDao {
 
     //獲取全部風格
     public List<Style> getAllStyles();
+
+    /**
+     * 添加字体风格
+     * @param style 风格对象
+     * @return  影响的记录数
+     */
+    public int addStyles(Style style);
+
+    /**
+     * 更新字体风格名
+     * @param style    风格对象
+     * @return  影响的记录数
+     */
+    public int updateStyles(Style style);
 }

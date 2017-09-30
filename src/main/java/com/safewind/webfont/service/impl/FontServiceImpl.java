@@ -5,7 +5,6 @@ import com.safewind.webfont.bean.Collection;
 import com.safewind.webfont.dao.*;
 import com.safewind.webfont.service.FontService;
 import com.safewind.webfont.util.Page;
-import com.sun.javafx.collections.MappingChange;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -71,6 +70,12 @@ public class FontServiceImpl implements FontService {
         return fontDao.fuzzyQueryFontList(searchKeyword);
     }
 
+    /**
+     * 通过模糊查询 搜索框的模糊查询
+     * @param currentPage   当前页数
+     * @param searchKeyword 搜索关键字
+     * @return
+     */
     @Override
     public List<FontBrief> getFuzzyQueryFontListPage(String currentPage,String searchKeyword ) {
         Page page=this.getInstancePage(currentPage,fontDao.countFuzzyQueryFont(searchKeyword));
@@ -79,7 +84,22 @@ public class FontServiceImpl implements FontService {
         map.put("dbIndex",page.getDbIndex());
         map.put("dbNumber",page.getDbNumber());
         List<Font> fuzzyFontList = fontDao.pageFuzzyQueryFontList(map);
-        return this.getFontBriefPageByFontList(fuzzyFontList);
+        return this.transformFontListToFontBriefPage(fuzzyFontList);
+    }
+
+    @Override
+    public List<FontBrief> getPageExactSearchFontList(String currentPage, int manufacturerId ,int  encodingId,int typeId,int phylumId,int styleId) {
+        Map map = new HashMap();
+        map.put("manufacturerId",manufacturerId);
+        map.put("typeId",typeId);
+        map.put("encodingId",encodingId);
+        map.put("phylumId",phylumId);
+        map.put("styleId",styleId);
+        Page page=this.getInstancePage(currentPage,fontDao.countExactSearchFontList(map));
+        map.put("dbIndex",page.getDbIndex());
+        map.put("dbNumber",page.getDbNumber());
+        List<Font> fontList = fontDao.pageExactSearchFontList(map);
+        return this.transformFontListToFontBriefPage(fontList);
     }
 
 
@@ -94,7 +114,7 @@ public class FontServiceImpl implements FontService {
         Page page=this.getInstancePage(currentPage,fontDao.countAllFont());
         //得到的是全部字体的一个分页
         List<Font> fontList = fontDao.pageQueryFontList(this.getInstancePage(currentPage,page.getTotalNumber()));
-        return this.getFontBriefPageByFontList(fontList);
+        return this.transformFontListToFontBriefPage(fontList);
     }
 
 
@@ -209,6 +229,12 @@ public class FontServiceImpl implements FontService {
         comment.setFontId(fontId);
         commentDao.addComment(comment);
     }
+
+    /**
+     * 删除自己对字体的评论 但执行的是假删除 只是不给用户显示数据罢了。
+     * @param fontId    字体编号
+     * @param username  用户名
+     */
     public void deleteComment(int fontId,String username)
     {
         comment.setFontId(fontId);
@@ -285,13 +311,50 @@ public class FontServiceImpl implements FontService {
         return page;
     }
 
+    @Override
+    public long countAllFont() {
+
+        return fontDao.countAllFont();
+    }
+
+    /**
+     * 模糊查询 计算总记录数
+     * @param searchKeyword
+     * @return 模糊查询的记录总数
+     */
+    @Override
+    public long countFuzzyQueryFont(String searchKeyword) {
+
+        return fontDao.countFuzzyQueryFont(searchKeyword);
+    }
+
+    /**
+     * 精确分类查询
+     * @param manufacturerId    厂商id
+     * @param encodingId    编码id
+     * @param typeId    类型id
+     * @param phylumId   语系id
+     * @param styleId   风格id
+     * @return 得到精确分类查询结果的数目
+     */
+    @Override
+    public long countExactSearchFontList(int manufacturerId,int encodingId, int typeId, int phylumId, int styleId) {
+        Map map=new HashMap();
+        map.put("manufacturerId",manufacturerId);
+        map.put("typeId",typeId);
+        map.put("encodingId",encodingId);
+        map.put("phylumId",phylumId);
+        map.put("styleId",styleId);
+        return fontDao.countExactSearchFontList(map);
+    }
+
     /**
      * 可重复使用的方法 封装方法
      * 该方法是  通过转换 List<Font>  ===>   List<FontBrief>
      * @param fontList List<Font>
      * @return  List<FontBrief>
      */
-    private List<FontBrief> getFontBriefPageByFontList(List<Font> fontList)
+    private List<FontBrief> transformFontListToFontBriefPage(List<Font> fontList)
     {
         List<FontBrief> fontBriefListPage = new ArrayList<>();
         for(int i=0;i<fontList.size();i++)

@@ -49,4 +49,11 @@ public interface CollectionDao {
      */
     public Collection isCollectionFont(Collection collection);
 
+    /**
+     * 通过该字体编号查找收藏该字体的数量
+     * @param fontId    字体编号
+     * @return      收藏字体的数量  long
+     */
+    public long countCollectionFontByFontId(int fontId);
+
 }

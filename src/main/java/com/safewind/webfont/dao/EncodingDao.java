@@ -39,7 +39,18 @@ public interface EncodingDao {
     
     //獲取全部編碼
     public List<Encoding> getAllEncodings();
-    
+
+    /**
+     * 管理员 添加字体编码操作
+     * @param encoding 字体编码
+     */
+    public void addEncodings(Encoding encoding);
+
+    /**
+     * 管理员 通过字体编码id 修改 字体编码的中文名字和英文名字
+     * @param encoding  字体编码对象
+     */
+    public void updateEncodings(Encoding encoding);
     
 
 }

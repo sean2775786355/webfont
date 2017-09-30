@@ -25,8 +25,6 @@ public class FontController {
 
 	@Autowired
 	private FontService fontService;
-	@Autowired
-	private FontDao fontDao;
 
 	/**
 	 * 自己写一个分页的功能
@@ -35,11 +33,12 @@ public class FontController {
 	 * @return
 	 */
 	@RequestMapping(value="fontList",method = RequestMethod.GET)
-	public String page(Model model,String currentPage)
+
+	public String fontList(Model model,String currentPage)
 	{
 
 		List<FontBrief> fontBriefList = fontService.getFontListPage(currentPage);
-		model.addAttribute("pageInfo",fontService.getInstancePage(currentPage,fontDao.countAllFont()));
+		model.addAttribute("pageInfo",fontService.getInstancePage(currentPage,fontService.countAllFont()));
 		System.out.println(fontBriefList);
 		System.out.println("============================");
 		System.out.println("查看字体记录数="+fontBriefList.size());
@@ -71,8 +70,17 @@ public class FontController {
 		model.addAttribute("typeList", typeList);
 		return "/font/fontList";
 	}
+
+	/**
+	 * 用搜索框搜索字体列表的操作
+	 * 分页功能的实现实际上是在查询数据库时限制查询的条数 limit
+	 * @param model
+	 * @param searchKeyword		搜索的关键字
+	 * @param currentPage		当前的页数
+	 * @return
+	 */
 	@RequestMapping(value="/search",method=RequestMethod.GET)
-	public String search(Model model,String searchKeyword,String currentPage){
+	public String searchFont(Model model,String searchKeyword,String currentPage){
 
 		model.addAttribute("searchKeyword",searchKeyword);
 		//使用的一个正则表达式
@@ -81,7 +89,7 @@ public class FontController {
 			currentPage = "1";
 		}
 		List<FontBrief> fontBriefList = fontService.getFuzzyQueryFontListPage(currentPage,searchKeyword);
-		model.addAttribute("pageInfo",fontService.getInstancePage(currentPage,fontDao.countFuzzyQueryFont(searchKeyword)));
+		model.addAttribute("pageInfo",fontService.getInstancePage(currentPage,fontService.countFuzzyQueryFont(searchKeyword)));
 		System.out.println(fontBriefList);
 		System.out.println("============================");
 		System.out.println("查看字体记录数="+fontBriefList.size());

@@ -20,7 +20,9 @@
 
 
 <body>
-<jsp:include page="../module/header.jsp"></jsp:include>
+<jsp:include page="../module/header.jsp">
+    <jsp:param name="searchKeyword" value="${searchKeyword}"></jsp:param>
+</jsp:include>
 <br>
 <br>
 <br>
@@ -67,8 +69,8 @@
                         </div>
                     </c:forEach>
                     <ul class="pagination pull-right">
-                        <li><a href="${pageContext.request.contextPath}/font/fontList?currentPage=1">首頁</a></li>
-                        <li><a href="${pageContext.request.contextPath}/font/fontList?currentPage=${pageInfo.currentPage-1} & searchKeyword=${searchKeyword}">上一頁</a></li>
+                        <%--<li><a href="${pageContext.request.contextPath}/font/fontList?currentPage=1">首頁</a></li>--%>
+                        <li><a href="${pageContext.request.contextPath}/font/fontList?currentPage=${pageInfo.currentPage-1} & searchKeyword=${searchKeyword}">&lt;&lt;</a></li>
                         <li><a href="${pageContext.request.contextPath}/font/fontList?currentPage=${pageInfo.currentPage}  & searchKeyword=${searchKeyword}">${pageInfo.currentPage}</a></li>
                         <c:if test="${(pageInfo.currentPage+1)<=pageInfo.totalPage}">
                             <li><a href="${pageContext.request.contextPath}/font/fontList?currentPage=${pageInfo.currentPage+1}  & searchKeyword=${searchKeyword}">${pageInfo.currentPage+1}</a></li>
@@ -83,8 +85,8 @@
                             <li><a href="${pageContext.request.contextPath}/font/fontList?currentPage=${pageInfo.currentPage+4}  & searchKeyword=${searchKeyword}">${pageInfo.currentPage+4}</a></li>
                         </c:if>
 
-                        <li><a href="${pageContext.request.contextPath}/font/fontList?currentPage=${pageInfo.currentPage+1}  & searchKeyword=${searchKeyword}">下一頁</a></li>
-                        <li><a href="${pageContext.request.contextPath}/font/fontList?currentPage=${pageInfo.totalPage}  & searchKeyword=${searchKeyword}">尾頁</a></li>
+                        <li><a href="${pageContext.request.contextPath}/font/fontList?currentPage=${pageInfo.currentPage+1}  & searchKeyword=${searchKeyword}">&gt;&gt;</a></li>
+                        <%--<li><a href="${pageContext.request.contextPath}/font/fontList?currentPage=${pageInfo.totalPage}  & searchKeyword=${searchKeyword}">尾頁</a></li>--%>
                     </ul>
 
                     <div class="clearfix"></div>

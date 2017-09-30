@@ -10,7 +10,7 @@
     </select>
     
     <select id="getAllPhylums" resultType="com.safewind.webfont.bean.Phylum">
-    	select * from t_phylum where 1=1;
+    	select id , name from t_phylum where 1=1;
     </select>
 
     <!--//////////////////select end//////////////////////////////-->
@@ -18,11 +18,23 @@
 
 
     <!--//////////////////insert start//////////////////////////////-->
+    <!--添加字体语系-->
+    <insert id="addPhylums" parameterType="com.safewind.webfont.bean.Phylum">
+        INSERT INTO t_phylum(name) VALUES(#{name});
+    </insert>
     <!--//////////////////insert end//////////////////////////////-->
 
 
 
     <!--//////////////////update start//////////////////////////////-->
+        <!--修改字体语系的名字-->
+    <update id="updatePhylumsName" parameterType="com.safewind.webfont.bean.Phylum">
+        UPDATE t_phylum
+        SET
+        name = #{name}
+        WHERE id = #{id};
+
+    </update>
     <!--//////////////////update end//////////////////////////////-->
 
 

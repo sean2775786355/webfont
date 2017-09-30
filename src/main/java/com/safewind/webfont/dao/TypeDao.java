@@ -22,5 +22,11 @@ public interface TypeDao {
 
     //獲取全部類型
     public List<Type> getAllTypes();
-    
+
+    /**
+     * 添加字体的类型
+     * @param type  字体类型对象
+     * @return  影响的记录数
+     */
+    public int addTypes(Type type);
 }

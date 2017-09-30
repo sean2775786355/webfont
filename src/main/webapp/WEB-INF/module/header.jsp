@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.util.*" contentType="text/html; charset=UTF-8"%>
+<%@ page language="java" import="java.util.*" isELIgnored="false" contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
 <%
 String path = request.getContextPath();
@@ -53,7 +53,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         </ul>
         <form class="navbar-form navbar-left navbar-right form-group has-feedback" role="search" action="${pageContext.request.contextPath}/font/search">
             <div class="form-group has-feedback">
-                <input type="text" name="searchKeyword" class="form-control" placeholder="字體名 廠商 類型 風格">
+                <input id="search" type="text" name="searchKeyword" class="form-control" placeholder="字體名 廠商 類型 風格" value="${searchKeyword}">
                 <span class="glyphicon glyphicon-search form-control-feedback" aria-hidden="true" style="font-size: large"></span>
             </div>
             
@@ -215,5 +215,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script type="text/javascript">
 	addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); }
 </script>
+
   </body>
 </html>

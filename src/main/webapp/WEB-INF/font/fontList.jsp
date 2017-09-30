@@ -67,8 +67,8 @@
                         </div>
                     </c:forEach>
                     <ul class="pagination pull-right">
-                        <li><a href="${pageContext.request.contextPath}/font/fontList?currentPage=1">首頁</a></li>
-                        <li><a href="${pageContext.request.contextPath}/font/fontList?currentPage=${pageInfo.currentPage-1}">上一頁</a></li>
+                        <%--<li><a href="${pageContext.request.contextPath}/font/fontList?currentPage=1">首頁</a></li>--%>
+                        <li><a href="${pageContext.request.contextPath}/font/fontList?currentPage=${pageInfo.currentPage-1}">&lt;&lt;</a></li>
                         <li><a href="${pageContext.request.contextPath}/font/fontList?currentPage=${pageInfo.currentPage}">${pageInfo.currentPage}</a></li>
                         <c:if test="${(pageInfo.currentPage+1)<=pageInfo.totalPage}">
                             <li><a href="${pageContext.request.contextPath}/font/fontList?currentPage=${pageInfo.currentPage+1}">${pageInfo.currentPage+1}</a></li>
@@ -83,8 +83,8 @@
                             <li><a href="${pageContext.request.contextPath}/font/fontList?currentPage=${pageInfo.currentPage+4}">${pageInfo.currentPage+4}</a></li>
                         </c:if>
 
-                        <li><a href="${pageContext.request.contextPath}/font/fontList?currentPage=${pageInfo.currentPage+1}">下一頁</a></li>
-                        <li><a href="${pageContext.request.contextPath}/font/fontList?currentPage=${pageInfo.totalPage}">尾頁</a></li>
+                        <li><a href="${pageContext.request.contextPath}/font/fontList?currentPage=${pageInfo.currentPage+1}">&gt;&gt;</a></li>
+                        <%--<li><a href="${pageContext.request.contextPath}/font/fontList?currentPage=${pageInfo.totalPage}">尾頁</a></li>--%>
                     </ul>
 
                     <div class="clearfix"></div>
@@ -200,7 +200,7 @@
             <div class="col-md-3 infor-left">
                 <h3>炫字網</h3>
                 <h4>
-                        <span>炫字網是全球第一中文網頁字體（在線字體）服務平台。
+                    <span>炫字網是全球第一中文網頁字體（在線字體）服務平台。</span>
                 </h4>
                 <h5>炫字網，中文網頁字體首選。</h5>
                 <p><a href="mailto:example@email.com">contact@example.com</a></p>

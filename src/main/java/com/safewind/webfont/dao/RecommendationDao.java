@@ -28,4 +28,10 @@ public interface RecommendationDao {
      * fontId 推荐字体编号
      */
     public void addRecommendationFont(Recommendation recommendation);
+
+    /**
+     * 通过字体id删除用户推荐的字体当然连带的反应是字体推荐数减一
+     * @param fontId
+     */
+    public void deleteRecommendationFont(int fontId);
 }

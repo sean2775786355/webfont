@@ -29,13 +29,23 @@
 
     <!--////////////////////select end////////////////////////////-->
 
-
-
     <!--////////////////////insert start////////////////////////////-->
+    <!--添加字体的编码,有可能不只目前的3种编码-->
+    <insert id="addEncodings" parameterType="com.safewind.webfont.bean.Encoding" useGeneratedKeys="true" keyProperty="id">
+        INSERT
+        INTO t_encoding(name , e_name)
+        VALUES (#{name} , #{eName});
+    </insert>
     <!--////////////////////insert end////////////////////////////-->
 
 
     <!--////////////////////update start////////////////////////////-->
+    <!--修改字体编码 以id为标识-->
+    <update id="updateEncodings" parameterType="java.lang.Integer">
+        UPDATE t_encoding
+        SET name = #{name} , e_name = #{eName}
+        WHERE id=#{_parameter}
+    </update>
     <!--////////////////////update end////////////////////////////-->
 
 

@@ -10,7 +10,7 @@
     </select>
 
 	<select id="getAllTypes" resultType="com.safewind.webfont.bean.Type">
-    	select * from t_type where 1=1;
+    	select id , name from t_type where 1=1;
     </select>
 
     <!--/////////////////////select end///////////////////////////-->
@@ -18,6 +18,11 @@
 
 
     <!--////////////////////insert start////////////////////////////-->
+
+    <!--添加字体的类型-->
+    <insert id="addTypes" parameterType="com.safewind.webfont.bean.Type">
+        INSERT INTO t_type(name)  VALUES (#{name});
+    </insert>
     <!--////////////////////insert end////////////////////////////-->
 
 

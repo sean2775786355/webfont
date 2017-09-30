@@ -21,7 +21,20 @@ public interface PhylumDao {
     public String findPhylumById(int id);
     
   
-    //獲取全部語系
+    //获取全部语系
     public List<Phylum> getAllPhylums();
-  
+
+    /**
+     * 修改字体语系的名字
+     * @param phylum 字体语系的一个对象
+     * @return  返回记录数
+     */
+    public int updatePhylumsName(Phylum phylum);
+
+    /**
+     * 添加语系
+     * @param phylum    语系对象
+     * @return  返回影响记录数
+     */
+    public int addPhylums(Phylum phylum);
 }
