@@ -13,8 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @ContextConfiguration("classpath:spring-mybatis.xml")
@@ -36,7 +36,6 @@ public class FontTest {
     private Font font;
     @Autowired
     private Phylum phylum;
-
     @Test
     public void Test1()
     {
@@ -100,16 +99,15 @@ public class FontTest {
 //        map.put("styleId",1);
 //        map.put("dbIndex",0);
 //        map.put("dbNumber",5);
-//        System.out.println("=======查询数据库字体的第一条记录========"+fontDao.pageExactSearchFontList(map));
-//        System.out.println("===========精确查询数量================"+fontService.countExactSearchFontList(55,1,1,2,1));
-//        System.out.println("===========精确分页查询==================="+fontService.getPageExactSearchFontList("1",55,1,1,2,1));
+//        List<Font> fontList =fontDao.pageExactSearchFontList(map);
+//        System.out.println("========================"+fontList.get(0).getManufacturerId()+"=========="+fontList.get(0).getName());
 
 //        成功删除放回的是1   ,失败删除返回的是0  实际上是返回的影响记录的行数
 //        System.out.println("==========测试删除时的放回结果=============="+fontDao.deleteFont(13));
 
 //          目前是错的 因为含有                  外键
 //        font.setId(11);
-//        font.setManufactureId(8);
+//        font.setManufacturerId(8);
 //        font.setTypeId(7);
 //        font.setEncodingId(2);
 //        font.setPhylumId(2);
@@ -121,6 +119,12 @@ public class FontTest {
 //        phylum.setName("其他");
 //        System.out.println("===============测试数据库更新是否返回行数====================="+phylumDao.updatePhylumsName(phylum));
 //          经过测试update 同样可以返回影响的行数 即记录数  不需要在  ***Mapper.xml中写入 resultType  在接口***Dao.java中写入返回类型int即可
+//
+//        font.setManufacturerId(8);
+//        List<FontBrief> fontBriefList= fontService.getPageExactSearchFontList("1",font);
+//        System.out.println("==========fontBriefList============"+fontBriefList.toString());
+//        System.out.println("==========count fontBriefList==========="+fontService.countExactSearchFontList(font));
+
     }
 
 

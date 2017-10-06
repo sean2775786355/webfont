@@ -88,13 +88,13 @@ public class FontServiceImpl implements FontService {
     }
 
     @Override
-    public List<FontBrief> getPageExactSearchFontList(String currentPage, int manufacturerId ,int  encodingId,int typeId,int phylumId,int styleId) {
+    public List<FontBrief> getPageExactSearchFontList(String currentPage, Font font) {
         Map map = new HashMap();
-        map.put("manufacturerId",manufacturerId);
-        map.put("typeId",typeId);
-        map.put("encodingId",encodingId);
-        map.put("phylumId",phylumId);
-        map.put("styleId",styleId);
+        map.put("manufacturerId",font.getManufacturerId());
+        map.put("typeId",font.getTypeId());
+        map.put("encodingId",font.getEncodingId());
+        map.put("phylumId",font.getPhylumId());
+        map.put("styleId",font.getStyleId());
         Page page=this.getInstancePage(currentPage,fontDao.countExactSearchFontList(map));
         map.put("dbIndex",page.getDbIndex());
         map.put("dbNumber",page.getDbNumber());
@@ -130,7 +130,7 @@ public class FontServiceImpl implements FontService {
         Font font = fontDao.findFontDetailById(id);
         fontDetail.setId(id);
         fontDetail.setName(font.getName());
-        fontDetail.setManufacture(manufactureDao.findManufactureById(font.getManufactureId()));
+        fontDetail.setManufacture(manufactureDao.findManufactureById(font.getManufacturerId()));
         fontDetail.setType(typeDao.findTypeById(font.getTypeId()));
         fontDetail.setEncoding(encodingDao.findEncodingById(font.getEncodingId()));
         fontDetail.seteEncoding(encodingDao.findEncodingById(font.getEncodingId()));
@@ -330,21 +330,22 @@ public class FontServiceImpl implements FontService {
 
     /**
      * 精确分类查询
-     * @param manufacturerId    厂商id
-     * @param encodingId    编码id
-     * @param typeId    类型id
-     * @param phylumId   语系id
-     * @param styleId   风格id
+     * @param font 属性
+     *  manufacturerId    厂商id
+     *  encodingId    编码id
+     *  typeId    类型id
+     *  phylumId   语系id
+     *  styleId   风格id
      * @return 得到精确分类查询结果的数目
      */
     @Override
-    public long countExactSearchFontList(int manufacturerId,int encodingId, int typeId, int phylumId, int styleId) {
+    public long countExactSearchFontList(Font font) {
         Map map=new HashMap();
-        map.put("manufacturerId",manufacturerId);
-        map.put("typeId",typeId);
-        map.put("encodingId",encodingId);
-        map.put("phylumId",phylumId);
-        map.put("styleId",styleId);
+        map.put("manufacturerId",font.getManufacturerId());
+        map.put("typeId",font.getTypeId());
+        map.put("encodingId",font.getEncodingId());
+        map.put("phylumId",font.getPhylumId());
+        map.put("styleId",font.getStyleId());
         return fontDao.countExactSearchFontList(map);
     }
 
@@ -369,7 +370,7 @@ public class FontServiceImpl implements FontService {
             fontBrief.setType(typeDao.findTypeById(fontList.get(i).getTypeId()));
             fontBrief.setStyle(styleDao.findStyleById(fontList.get(i).getStyleId()));
             fontBrief.setPhylum(phylumDao.findPhylumById(fontList.get(i).getPhylumId()));
-            fontBrief.setManufacture(manufactureDao.findManufactureById(fontList.get(i).getManufactureId()));
+            fontBrief.setManufacture(manufactureDao.findManufactureById(fontList.get(i).getManufacturerId()));
 
             fontBrief.setCollectedTime(fontList.get(i).getCollectedTime());
             fontBrief.setUsedTime(fontList.get(i).getUsedTime());

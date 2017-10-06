@@ -75,51 +75,51 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     <ul class="memenu skyblue">
                     <li class="active"><a href="${pageContext.request.contextPath}/index">首頁</a></li>
                         <li class="grid"><a href="${pageContext.request.contextPath}/font/fontList">字體列表</a>
-                            <div class="mepanel">
-                                <div class="row">
-                                    <div class="col1 me-one">
-                                        <h4>廠商</h4>
-                                        <ul>
-                                            <li><a href ="#">信黑</a></li>
-                                            <li><a href ="#">書法家</a></li>
-                                            <li><a href ="#">陳繼世</a></li>
-                                            <li><a href ="#">字體中國</a></li>
-                                            <li><a href ="#">蘋果</a></li>
-                                            <li><a href ="#">字體管家</a></li>
-                                            <li><a href ="#">本墨</a></li>
-                                            <li><a href ="#">更多...</a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="col1 me-one">
-                                        <h4>類型</h4>
-                                        <ul>
-                                            <li><a href ="#">圓體</a></li>
-                                            <li><a href ="#">魏碑</a></li>
-                                            <li><a href ="#">篆書</a></li>
-                                            <li><a href ="#">行楷</a></li>
-                                            <li><a href ="#">美素體</a></li>
-                                            <li><a href ="#">書法體</a></li>
-                                            <li><a href ="#">綜藝體</a></li>
-                                            <li><a href ="#">更多...</a></li>
-                                        </ul>   
-                                    </div>
-                                    <div class="col1 me-one">
-                                        <h4>編碼</h4>
-                                        <ul>
-                                            <li><a href ="#">統一字符編碼(UNICODE)</a></li>
-                                            <li><a href ="#">繁體中文(BIG5)</a></li>
-                                            <li><a href ="#">簡體大字符集(GBK)</a></li>
-                                            <li><a href ="#">簡體中文(GB2312)</a></li>
-                                            <li><a href ="#">其他</a></li>
-                                            
-                                        </ul>       
-                                    </div>
-                                    <div class="col1 me-one">
-                                        <h4>更多字體......</h4>
-                                            
-                                    </div>
-                                </div>
-                            </div>
+                            <%--<div class="mepanel">--%>
+                                <%--<div class="row">--%>
+                                    <%--<div class="col1 me-one">--%>
+                                        <%--<h4>廠商</h4>--%>
+                                        <%--<ul>--%>
+                                            <%--<li><a href ="#">信黑</a></li>--%>
+                                            <%--<li><a href ="#">書法家</a></li>--%>
+                                            <%--<li><a href ="#">陳繼世</a></li>--%>
+                                            <%--<li><a href ="#">字體中國</a></li>--%>
+                                            <%--<li><a href ="#">蘋果</a></li>--%>
+                                            <%--<li><a href ="#">字體管家</a></li>--%>
+                                            <%--<li><a href ="#">本墨</a></li>--%>
+                                            <%--<li><a href ="#">更多...</a></li>--%>
+                                        <%--</ul>--%>
+                                    <%--</div>--%>
+                                    <%--<div class="col1 me-one">--%>
+                                        <%--<h4>類型</h4>--%>
+                                        <%--<ul>--%>
+                                            <%--<li><a href ="#">圓體</a></li>--%>
+                                            <%--<li><a href ="#">魏碑</a></li>--%>
+                                            <%--<li><a href ="#">篆書</a></li>--%>
+                                            <%--<li><a href ="#">行楷</a></li>--%>
+                                            <%--<li><a href ="#">美素體</a></li>--%>
+                                            <%--<li><a href ="#">書法體</a></li>--%>
+                                            <%--<li><a href ="#">綜藝體</a></li>--%>
+                                            <%--<li><a href ="#">更多...</a></li>--%>
+                                        <%--</ul>   --%>
+                                    <%--</div>--%>
+                                    <%--<div class="col1 me-one">--%>
+                                        <%--<h4>編碼</h4>--%>
+                                        <%--<ul>--%>
+                                            <%--<li><a href ="#">統一字符編碼(UNICODE)</a></li>--%>
+                                            <%--<li><a href ="#">繁體中文(BIG5)</a></li>--%>
+                                            <%--<li><a href ="#">簡體大字符集(GBK)</a></li>--%>
+                                            <%--<li><a href ="#">簡體中文(GB2312)</a></li>--%>
+                                            <%--<li><a href ="#">其他</a></li>--%>
+                                            <%----%>
+                                        <%--</ul>       --%>
+                                    <%--</div>--%>
+                                    <%--<div class="col1 me-one">--%>
+                                        <%--<h4>更多字體......</h4>--%>
+                                            <%----%>
+                                    <%--</div>--%>
+                                <%--</div>--%>
+                            <%--</div>--%>
                         </li>
                         <li class="grid"><a href="#">SDK/插件</a>
                             <div class="mepanel">

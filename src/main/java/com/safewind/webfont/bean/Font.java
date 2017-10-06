@@ -13,7 +13,7 @@ public class Font {
 
     private int id;                    //字体编号
     private String name;                //字体名称
-    private int manufactureId;         //字体厂商的编号
+    private int manufacturerId;         //字体厂商的编号
     private int typeId;                //字体类型的编号
     private int encodingId;            //字体编码的编号id
     private int phylumId;              //字体语系的编号
@@ -60,12 +60,12 @@ public class Font {
         this.name = name;
     }
 
-    public int getManufactureId() {
-        return manufactureId;
+    public int getManufacturerId() {
+        return manufacturerId;
     }
 
-    public void setManufactureId(int manufactureId) {
-        this.manufactureId = manufactureId;
+    public void setManufacturerId(int manufacturerId) {
+        this.manufacturerId = manufacturerId;
     }
 
     public int getTypeId() {
@@ -147,7 +147,7 @@ public class Font {
         return "Font{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", manufactureId=" + manufactureId +
+                ", manufacturerId=" + manufacturerId +
                 ", typeId=" + typeId +
                 ", encodingId=" + encodingId +
                 ", phylumId=" + phylumId +

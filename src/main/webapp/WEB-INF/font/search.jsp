@@ -14,6 +14,7 @@
     <title>炫字網-首頁-勵志打造最好的字體服務平臺</title>
     <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="http://cdn.datatables.net/1.10.15/css/jquery.dataTables.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/docs.min.css" type="text/css" >
     <link href="${pageContext.request.contextPath}/css/style.css" rel="stylesheet" type="text/css" media="all" />
     <link href="${pageContext.request.contextPath}/css/memenu.css" rel="stylesheet" type="text/css" media="all" />
 </head>
@@ -41,6 +42,7 @@
         </div>
     </div>
 </div>
+<input type="hidden" id="main-header" value="${pageContext.request.contextPath}" />
 <!--end-breadcrumbs-->
 <!--prdt-starts-->
 <div class="prdt">
@@ -70,22 +72,22 @@
                     </c:forEach>
                     <ul class="pagination pull-right">
                         <%--<li><a href="${pageContext.request.contextPath}/font/fontList?currentPage=1">首頁</a></li>--%>
-                        <li><a href="${pageContext.request.contextPath}/font/fontList?currentPage=${pageInfo.currentPage-1} & searchKeyword=${searchKeyword}">&lt;&lt;</a></li>
-                        <li><a href="${pageContext.request.contextPath}/font/fontList?currentPage=${pageInfo.currentPage}  & searchKeyword=${searchKeyword}">${pageInfo.currentPage}</a></li>
+                        <li><a href="${pageContext.request.contextPath}/font/search?currentPage=${pageInfo.currentPage-1}&searchKeyword=${searchKeyword}">&lt;&lt;</a></li>
+                        <li><a href="${pageContext.request.contextPath}/font/search?currentPage=${pageInfo.currentPage}&searchKeyword=${searchKeyword}">${pageInfo.currentPage}</a></li>
                         <c:if test="${(pageInfo.currentPage+1)<=pageInfo.totalPage}">
-                            <li><a href="${pageContext.request.contextPath}/font/fontList?currentPage=${pageInfo.currentPage+1}  & searchKeyword=${searchKeyword}">${pageInfo.currentPage+1}</a></li>
+                            <li><a href="${pageContext.request.contextPath}/font/search?currentPage=${pageInfo.currentPage+1}&searchKeyword=${searchKeyword}">${pageInfo.currentPage+1}</a></li>
                         </c:if>
                         <c:if test="${(pageInfo.currentPage+2)<=pageInfo.totalPage}">
-                            <li><a href="${pageContext.request.contextPath}/font/fontList?currentPage=${pageInfo.currentPage+2}  & searchKeyword=${searchKeyword}">${pageInfo.currentPage+2}</a></li>
+                            <li><a href="${pageContext.request.contextPath}/font/search?currentPage=${pageInfo.currentPage+2}&searchKeyword=${searchKeyword}">${pageInfo.currentPage+2}</a></li>
                         </c:if>
                         <c:if test="${(pageInfo.currentPage+3)<=pageInfo.totalPage}">
-                            <li><a href="${pageContext.request.contextPath}/font/fontList?currentPage=${pageInfo.currentPage+3}  & searchKeyword=${searchKeyword}">${pageInfo.currentPage+3}</a></li>
+                            <li><a href="${pageContext.request.contextPath}/font/search?currentPage=${pageInfo.currentPage+3}  & searchKeyword=${searchKeyword}">${pageInfo.currentPage+3}</a></li>
                         </c:if>
                         <c:if test="${(pageInfo.currentPage+4)<=pageInfo.totalPage}">
-                            <li><a href="${pageContext.request.contextPath}/font/fontList?currentPage=${pageInfo.currentPage+4}  & searchKeyword=${searchKeyword}">${pageInfo.currentPage+4}</a></li>
+                            <li><a href="${pageContext.request.contextPath}/font/search?currentPage=${pageInfo.currentPage+4}  & searchKeyword=${searchKeyword}">${pageInfo.currentPage+4}</a></li>
                         </c:if>
 
-                        <li><a href="${pageContext.request.contextPath}/font/fontList?currentPage=${pageInfo.currentPage+1}  & searchKeyword=${searchKeyword}">&gt;&gt;</a></li>
+                        <li><a href="${pageContext.request.contextPath}/font/search?currentPage=${pageInfo.currentPage+1}  & searchKeyword=${searchKeyword}">&gt;&gt;</a></li>
                         <%--<li><a href="${pageContext.request.contextPath}/font/fontList?currentPage=${pageInfo.totalPage}  & searchKeyword=${searchKeyword}">尾頁</a></li>--%>
                     </ul>
 
@@ -96,66 +98,79 @@
 
             </div>
             <div class="col-md-3 prdt-right">
-                <div class="w_sidebar">
-                    <section class="sky-form">
-                        <h4>廠商</h4>
-                        <div class="row1 row2 scroll-pane">
-                            <div class="col col-4">
-                                <label class="radio"><input type="radio" name="factory" checked=""><i></i>所有廠商</label>
-                                <c:forEach items="${manufacturerList}" var="manufacturer">
-                                    <label class="radio"><input id="${manufacturer.id}" type="radio"><i></i>${manufacturer.name}</label>
+                <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix">
+                    <ul class="nav bs-docs-sidenav" id="test">
+                        <br/><br/>
+                        <!-- 添加了active就能被展开 -->
+                        <li class="">
+                            <a >廠商</a>
+                            <ul class="nav">
+                                <c:forEach items="${manufacturerList}" var="manufacturer" end="25">
+                                    <li class="">
+                                        <a>
+                                            <input id="manufacturer" type="radio" name="manufacturer" value="${manufacturer.id}"/>${manufacturer.name}
+                                        </a>
+                                    </li>
                                 </c:forEach>
-                            </div>
+                            </ul>
+                        </li>
 
-                        </div>
-                    </section>
-                    <section class="sky-form">
-                        <h4>類型</h4>
-                        <div class="row1 row2 scroll-pane">
-                            <div class="col col-4">
-                                <label class="radio"><input type="radio" name="type" checked=""><i></i>所有類型</label>
+                        <li class="">
+                            <a >類型</a>
+                            <ul class="nav">
                                 <c:forEach items="${typeList}" var="type">
-                                    <label class="radio"><input id="${type.id}" type="radio"><i></i>${type.name}</label>
+                                    <li class="">
+                                        <a>
+                                            <input id="type" type="radio" name="type" value="${type.id}"> ${type.name}
+                                        </a>
+                                    </li>
                                 </c:forEach>
-                            </div>
+                            </ul>
+                        </li>
 
-                        </div>
-                    </section>
-                    <section class="sky-form">
-                        <h4>編碼</h4>
-                        <div class="row1 row2 scroll-pane">
-                            <div class="col col-4">
-                                <label class="radio"><input type="radio" name="code" checked=""><i></i>所有編碼</label>
+
+
+                        <li class="">
+                            <a >編碼</a>
+                            <ul class="nav">
                                 <c:forEach items="${encodingList}" var="encoding">
-                                    <label class="radio"><input id="${encoding.id}" type="radio"><i></i>${encoding.name}（${encoding.eName}）</label>
+                                    <li class="">
+                                        <a>
+                                            <input id="encoding" type="radio" name="encoding" value="${encoding.id}">${encoding.name}
+                                        </a>
+                                    </li>
                                 </c:forEach>
-                            </div>
-                        </div>
-                    </section>
-                    <section class="sky-form">
-                        <h4>語系</h4>
-                        <div class="row1 row2 scroll-pane">
-                            <div class="col col-4">
-                                <label class="radio"><input type="radio" name="language" checked=""><i></i>所有語系</label>
-                                <c:forEach items="${phylumList}" var="phylum">
-                                    <label class="radio"><input id="${phylum.id}" type="radio"><i></i>${phylum.name}</label>
-                                </c:forEach>
-                            </div>
-                        </div>
-                    </section>
-                    <section class="sky-form">
-                        <h4>風格</h4>
-                        <div class="row1 row2 scroll-pane">
-                            <div class="col col-4">
-                                <label class="radio"><input type="radio" name="style" checked=""><i></i>所有風格</label>
+                            </ul>
+                        </li>
 
-                                <c:forEach items="${styleList}" var="style">
-                                    <label class="radio"><input id="${style.id}" type="radio"><i></i>${style.name}</label>
+                        <li class="">
+                            <a >語系</a>
+                            <ul class="nav">
+                                <c:forEach items="${phylumList}" var="phylum">
+                                    <li>
+                                        <a>
+                                            <input id="phylum" type="radio" name="phylum" value="${phylum.id}">${phylum.name}
+                                        </a>
+                                    </li>
                                 </c:forEach>
-                            </div>
-                        </div>
-                    </section>
-                </div>
+                            </ul>
+                        </li>
+
+                        <li class="">
+                            <a >風格</a>
+                            <ul class="nav">
+                                <c:forEach items="${styleList}" var="style">
+                                    <li class="">
+                                        <a>
+                                            <input id="style" type="radio" name="style" value="${style.id}">${style.name}
+                                        </a>
+                                    </li>
+                                </c:forEach>
+                            </ul>
+                        </li>
+                        <li class="" onclick="submit();"><a>搜索</a></li>
+                    </ul>
+                </nav>
             </div>
             <div class="clearfix"></div>
         </div>
@@ -231,7 +246,8 @@
 <script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
 <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script type="text/javascript" charset="utf8" src="http://cdn.datatables.net/1.10.15/js/jquery.dataTables.js"></script>
-<script src="${pageContext.request.contextPath}/js/simpleCart.min.js"> </script>
+<script src="${pageContext.request.contextPath}/js/simpleCart.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/docs.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/memenu.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jqPaginator.js"></script>
 
@@ -254,7 +270,20 @@
 
     });
 
+    //动态的向 点击的li标签加入 class="active"
+    $('#test li').click(function(event) {
+        /* Act on the event */
+        $(this).siblings('li').removeClass('active');
+        $(this).addClass('active')
+    });
+    //默认第一页
+    var currentPage =1;
+    function submit() {
+        var root = $('#main-header').val();
+        window.location.href=root+"/font/exactSearch?currentPage="+currentPage+"&manufacturerId="+$('#manufacturer:checked').val()
+            +"&typeId="+$('#type:checked').val()+"&encodingId="+ $('#encoding:checked').val()+"&phylumId="+$('#phylum:checked').val()+"&styleId="+$('#style:checked').val();
 
+    }
 </script>
 <!--js--end-->
 </body>

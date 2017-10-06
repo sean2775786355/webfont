@@ -69,22 +69,22 @@
                     </c:forEach>
                     <ul class="pagination pull-right">
                         <%--<li><a href="${pageContext.request.contextPath}/font/fontList?currentPage=1">首頁</a></li>--%>
-                        <li><a href="${pageContext.request.contextPath}/font/fontList?currentPage=${pageInfo.currentPage-1}">&lt;&lt;</a></li>
-                        <li><a href="${pageContext.request.contextPath}/font/fontList?currentPage=${pageInfo.currentPage}">${pageInfo.currentPage}</a></li>
+                        <li><a href="${pageContext.request.contextPath}/font/exactSearch?currentPage=${pageInfo.currentPage-1}&manufacturerId=${font.manufacturerId}&typeId=${font.typeId}&encodingId=${font.encodingId}&phylumId=${font.phylumId}&styleId=${font.styleId}">&lt;&lt;</a></li>
+                        <li><a href="${pageContext.request.contextPath}/font/exactSearch?currentPage=${pageInfo.currentPage}&manufacturerId=${font.manufacturerId}&typeId=${font.typeId}&encodingId=${font.encodingId}&phylumId=${font.phylumId}&styleId=${font.styleId}">${pageInfo.currentPage}</a></li>
                         <c:if test="${(pageInfo.currentPage+1)<=pageInfo.totalPage}">
-                            <li><a href="${pageContext.request.contextPath}/font/fontList?currentPage=${pageInfo.currentPage+1}">${pageInfo.currentPage+1}</a></li>
+                            <li><a href="${pageContext.request.contextPath}/font/exactSearch?currentPage=${pageInfo.currentPage+1}&manufacturerId=${font.manufacturerId}&typeId=${font.typeId}&encodingId=${font.encodingId}&phylumId=${font.phylumId}&styleId=${font.styleId}">${pageInfo.currentPage+1}</a></li>
                         </c:if>
                         <c:if test="${(pageInfo.currentPage+2)<=pageInfo.totalPage}">
-                            <li><a href="${pageContext.request.contextPath}/font/fontList?currentPage=${pageInfo.currentPage+2}">${pageInfo.currentPage+2}</a></li>
+                            <li><a href="${pageContext.request.contextPath}/font/exactSearch?currentPage=${pageInfo.currentPage+2}&manufacturerId=${font.manufacturerId}&typeId=${font.typeId}&encodingId=${font.encodingId}&phylumId=${font.phylumId}&styleId=${font.styleId}">${pageInfo.currentPage+2}</a></li>
                         </c:if>
                         <c:if test="${(pageInfo.currentPage+3)<=pageInfo.totalPage}">
-                            <li><a href="${pageContext.request.contextPath}/font/fontList?currentPage=${pageInfo.currentPage+3}">${pageInfo.currentPage+3}</a></li>
+                            <li><a href="${pageContext.request.contextPath}/font/exactSearch?currentPage=${pageInfo.currentPage+3}&manufacturerId=${font.manufacturerId}&typeId=${font.typeId}&encodingId=${font.encodingId}&phylumId=${font.phylumId}&styleId=${font.styleId}">${pageInfo.currentPage+3}</a></li>
                         </c:if>
                         <c:if test="${(pageInfo.currentPage+4)<=pageInfo.totalPage}">
-                            <li><a href="${pageContext.request.contextPath}/font/fontList?currentPage=${pageInfo.currentPage+4}">${pageInfo.currentPage+4}</a></li>
+                            <li><a href="${pageContext.request.contextPath}/font/exactSearch?currentPage=${pageInfo.currentPage+4}&manufacturerId=${font.manufacturerId}&typeId=${font.typeId}&encodingId=${font.encodingId}&phylumId=${font.phylumId}&styleId=${font.styleId}">${pageInfo.currentPage+4}</a></li>
                         </c:if>
 
-                        <li><a href="${pageContext.request.contextPath}/font/fontList?currentPage=${pageInfo.currentPage+1}">&gt;&gt;</a></li>
+                        <li><a href="${pageContext.request.contextPath}/font/exactSearch?currentPage=${pageInfo.currentPage+1}&manufacturerId=${font.manufacturerId}&typeId=${font.typeId}&encodingId=${font.encodingId}&phylumId=${font.phylumId}&styleId=${font.styleId}">&gt;&gt;</a></li>
                         <%--<li><a href="${pageContext.request.contextPath}/font/fontList?currentPage=${pageInfo.totalPage}">尾頁</a></li>--%>
                     </ul>
 
@@ -105,11 +105,11 @@
                             <a >廠商</a>
                             <ul class="nav">
                                 <c:forEach items="${manufacturerList}" var="manufacturer" end="25">
-                                <li class="">
-                                    <a>
-                                    <input id="manufacturer" type="radio" name="manufacturer" value="${manufacturer.id}"/>${manufacturer.name}
-                                    </a>
-                                </li>
+                                    <li class="">
+                                        <a>
+                                            <input id="manufacturer" type="radio" name="manufacturer" value="${manufacturer.id}"/>${manufacturer.name}
+                                        </a>
+                                    </li>
                                 </c:forEach>
                             </ul>
                         </li>
@@ -118,11 +118,11 @@
                             <a >類型</a>
                             <ul class="nav">
                                 <c:forEach items="${typeList}" var="type">
-                                <li class="">
-                                    <a>
-                                       <input id="type" type="radio" name="type" value="${type.id}"> ${type.name}
-                                    </a>
-                                </li>
+                                    <li class="">
+                                        <a>
+                                            <input id="type" type="radio" name="type" value="${type.id}"> ${type.name}
+                                        </a>
+                                    </li>
                                 </c:forEach>
                             </ul>
                         </li>
@@ -133,11 +133,11 @@
                             <a >編碼</a>
                             <ul class="nav">
                                 <c:forEach items="${encodingList}" var="encoding">
-                                <li class="">
-                                    <a>
-                                        <input id="encoding" type="radio" name="encoding" value="${encoding.id}">${encoding.name}
-                                    </a>
-                                </li>
+                                    <li class="">
+                                        <a>
+                                            <input id="encoding" type="radio" name="encoding" value="${encoding.id}">${encoding.name}
+                                        </a>
+                                    </li>
                                 </c:forEach>
                             </ul>
                         </li>
@@ -146,11 +146,11 @@
                             <a >語系</a>
                             <ul class="nav">
                                 <c:forEach items="${phylumList}" var="phylum">
-                                <li>
-                                    <a>
-                                        <input id="phylum" type="radio" name="phylum" value="${phylum.id}">${phylum.name}
-                                    </a>
-                                </li>
+                                    <li>
+                                        <a>
+                                            <input id="phylum" type="radio" name="phylum" value="${phylum.id}">${phylum.name}
+                                        </a>
+                                    </li>
                                 </c:forEach>
                             </ul>
                         </li>
@@ -159,11 +159,11 @@
                             <a >風格</a>
                             <ul class="nav">
                                 <c:forEach items="${styleList}" var="style">
-                                <li class="">
-                                    <a>
-                                      <input id="style" type="radio" name="style" value="${style.id}">${style.name}
-                                    </a>
-                                </li>
+                                    <li class="">
+                                        <a>
+                                            <input id="style" type="radio" name="style" value="${style.id}">${style.name}
+                                        </a>
+                                    </li>
                                 </c:forEach>
                             </ul>
                         </li>

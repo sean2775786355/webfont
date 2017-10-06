@@ -12,7 +12,7 @@ public class Page {
     /**
      * 每页显示的条数
      */
-    private int pageNumber = 6;
+    private int pageNumber = 3;
     /**
      * 当前第几页
      */

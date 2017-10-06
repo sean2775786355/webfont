@@ -37,50 +37,22 @@
         FROM t_font
         WHERE
         is_opensourced = 0
-        <choose>
-            <when test="manufacturerId != null">
-                AND  manufacturer_id=#{manufacturerId}
-            </when>
-            <otherwise>
-                AND manufacturer_id=55
-            </otherwise>
-        </choose>
+        <if test="manufacturerId != 0">
+            AND  manufacturer_id=#{manufacturerId}
+        </if>
+        <if test="typeId != 0">
+            AND type_id=#{typeId}
+        </if>
 
-        <choose>
-            <when test="typeId != null">
-                AND type_id=#{typeId}
-            </when>
-            <otherwise>
-                AND type_id=1
-            </otherwise>
-        </choose>
-
-        <choose>
-            <when test="encodingId!=null">
-                AND encoding_id=#{encodingId}
-            </when>
-            <otherwise>
-                AND encoding_id=2
-            </otherwise>
-        </choose>
-
-        <choose>
-            <when test="phylumId!=null">
-                AND phylum_id=#{phylumId}
-            </when>
-            <otherwise>
-                AND phylum_id=2
-            </otherwise>
-        </choose>
-
-        <choose>
-            <when test="styleId!=null">
-                AND style_id=#{styleId}
-            </when>
-            <otherwise>
-                AND style_id=10
-            </otherwise>
-        </choose>
+        <if test="encodingId != 0">
+            AND encoding_id=#{encodingId}
+        </if>
+        <if test="phylumId != 0">
+            AND phylum_id=#{phylumId}
+        </if>
+        <if test="styleId != 0">
+            AND style_id=#{styleId}
+        </if>
         ORDER BY used_time  DESC
         LIMIT #{dbIndex},#{dbNumber}
     </select>
@@ -91,50 +63,22 @@
         FROM t_font
         WHERE
         is_opensourced = 0
-        <choose>
-            <when test="manufacturerId != null">
-                AND  manufacturer_id=#{manufacturerId}
-            </when>
-            <otherwise>
-                AND manufacturer_id=55
-            </otherwise>
-        </choose>
+        <if test="manufacturerId != 0">
+            AND  manufacturer_id=#{manufacturerId}
+        </if>
+        <if test="typeId != 0">
+            AND type_id=#{typeId}
+        </if>
 
-        <choose>
-            <when test="typeId != null">
-                AND type_id=#{typeId}
-            </when>
-            <otherwise>
-                AND type_id=1
-            </otherwise>
-        </choose>
-
-        <choose>
-            <when test="encodingId!=null">
-                AND encoding_id=#{encodingId}
-            </when>
-            <otherwise>
-                AND encoding_id=2
-            </otherwise>
-        </choose>
-
-        <choose>
-            <when test="phylumId!=null">
-                AND phylum_id=#{phylumId}
-            </when>
-            <otherwise>
-                AND phylum_id=2
-            </otherwise>
-        </choose>
-
-        <choose>
-            <when test="styleId!=null">
-                AND style_id=#{styleId}
-            </when>
-            <otherwise>
-                AND style_id=10
-            </otherwise>
-        </choose>
+        <if test="encodingId != 0">
+            AND encoding_id=#{encodingId}
+        </if>
+        <if test="phylumId != 0">
+            AND phylum_id=#{phylumId}
+        </if>
+        <if test="styleId != 0">
+            AND style_id=#{styleId}
+        </if>
     </select>
 
     <!--用于模糊查询(页面搜索框 含有：字体名，厂商，类型，风格)-->
@@ -230,7 +174,7 @@
 
     <!--管理员添加字体
          name           字体名称
-         manufactureId  厂商编号
+         manufacturerId  厂商编号
          typeId     类型编号
          encodingId 编码ID
          phylumId   语系编号
@@ -248,7 +192,7 @@
          style_id , copyright_message , used_time , collected_time ,
          recommended_time, upload_time,  is_opensourced, is_genuine)
         VALUES
-         (#{name} , #{manufactureId} ,#{typeId} , #{encodingId} ,
+         (#{name} , #{manufacturerId} ,#{typeId} , #{encodingId} ,
          #{phylumId}, #{styleId}, #{copyrightMessage}, 0 , 0, 0 ,
          NOW(), #{isOpensourced}, #{isGenuine})
     </insert>
@@ -277,7 +221,7 @@
     <!--管理员和用户修改字体的一些属性
     修改的属性有：
          name           字体名称
-         manufactureId  厂商编号
+         manufacturerId  厂商编号
          typeId     类型编号
          encodingId 编码ID
          phylumId   语系编号
@@ -294,8 +238,8 @@
             <if test="name != null and name != '' ">
                 name = #{name},
             </if>
-            <if test="manufactureId != null and manufactureId != 0">
-                manufacturer_id = #{manufactureId},
+            <if test="manufacturerId != null and manufacturerId != 0">
+                manufacturer_id = #{manufacturerId},
             </if>
             <if test="typeId != null and typeId != 0">
                 type_id=#{typeId},

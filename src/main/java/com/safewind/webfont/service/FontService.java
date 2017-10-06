@@ -48,14 +48,15 @@ public interface FontService {
      *     查询开始  | 结束
      *            属性名：
      *        @param     currentPage
-     *        @param     manufacturerId    厂商id
-     *        @param     typeId            类型id
-     *        @param     encodingId        编码id
-     *        @param     phylumId          语系id
-     *        @param     styleId           风格id
+     *        @param font  属性
+     *             manufacturerId    厂商id
+     *             typeId            类型id
+     *             encodingId        编码id
+     *             phylumId          语系id
+     *             styleId           风格id
      * @return  字体集合    List<FontBrief>
      */
-    public List<FontBrief> getPageExactSearchFontList(String currentPage,int manufacturerId ,int  encodingId,int typeId,int phylumId,int styleId);
+    public List<FontBrief> getPageExactSearchFontList(String currentPage,Font font);
 
     /**
      * 该字体的详细信息      |   返回字体的详细信息      |    id  字体的编号
@@ -176,13 +177,14 @@ public interface FontService {
     /**
      * 分页精确查询 得到字体map 含有属性  查询开始  | 结束
      * @param
-     *           manufacturerId    厂商id
+     * @param font 属性
+     *              厂商id
      *            typeId            类型id
      *            encodingId        编码id
      *            phylumId          语系id
      *            styleId           风格id
      * @return  精确查询字体的数目
      */
-    public long countExactSearchFontList(int manufacturerId ,int  encodingId,int typeId,int phylumId,int styleId);
+    public long countExactSearchFontList(Font font);
 
 }
