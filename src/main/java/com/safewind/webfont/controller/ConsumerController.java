@@ -33,8 +33,9 @@ public class ConsumerController{
 	 * @return
 	 */
 	@RequestMapping(value="consumerRepost" ,method=RequestMethod.GET)
-	public void ConsumerRepost(Consumer consumer){
+	public String ConsumerRepost(Consumer consumer){
 		consumerService.ConsumerRepost(consumer);
+		return "/consumer/consumerInfo";
 		
 		
 	}
@@ -55,7 +56,8 @@ public class ConsumerController{
 	 * 
 	 */
 	@RequestMapping(value="phoneInfo",method=RequestMethod.GET)
-	public void ChangePhone(int id,String phone){
+	public String ChangePhone(int id,String phone){
 		consumerService.ChangePhone(id, phone);
+		return "/consumer/consumerInfo";
 	}
 }
