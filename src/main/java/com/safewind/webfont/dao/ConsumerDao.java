@@ -2,9 +2,16 @@ package com.safewind.webfont.dao;
 
 import org.springframework.stereotype.Repository;
 
-/**
- * @function 对用户的具体信息操作的接口
- */
+import com.safewind.webfont.bean.Consumer;
+
 @Repository
-public interface ConsumerDao {
+public interface ConsumerDao{
+	
+	public Consumer ConsumerInfo(int id);
+	
+	public void ConsumerRepost(Consumer consumer);
+	
+	public String PhoneInfo(int id);
+	
+	public void ChangePhone(int id,String phone);
 }
