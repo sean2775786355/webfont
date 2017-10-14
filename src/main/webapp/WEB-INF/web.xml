@@ -80,7 +80,8 @@
 	</filter>
 	<filter-mapping>
 		<filter-name>shiroFilter</filter-name>
-		<url-pattern>/user/*</url-pattern>
+		<!--目前没拦截到user的路径 这里记着修改回来-->
+		<url-pattern>/users/*</url-pattern>
 	</filter-mapping>
 
 	<!--<welcome-file-list> <welcome-file>/WEB-INF/view/index.jsp</welcome-file> 
