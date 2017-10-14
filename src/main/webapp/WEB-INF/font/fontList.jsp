@@ -54,8 +54,8 @@
                                 <div class="product-bottom">
                                     <h3>${fontBrief.manufacture}|${fontBrief.type}|${fontBrief.encoding}（${fontBrief.eEncoding}）|${fontBrief.phylum}|${fontBrief.style}</h3><br/>
                                     <div class="btn-group pull-right" style="margin:10px">
-                                        <button class="btn btn-primary">使用</button>
-                                        <button class="btn btn-success">收藏</button>
+                                        <button  class="btn btn-primary">使用</button>
+                                        <button value="${fontBrief.id}" onclick="" class="btn btn-success">收藏</button>
                                     </div>
                                     <br/>
                                     <h3 class="">${fontBrief.collectedTime}收藏/ ${fontBrief.recommondedTime}推薦/ ${fontBrief.usedTime}使用/ ${fontBrief.recommondedTime}評論</h3>
@@ -67,9 +67,11 @@
                             </div>
                         </div>
                     </c:forEach>
+                    <!--页码显示-->
                     <ul class="pagination pull-right">
-                        <%--<li><a href="${pageContext.request.contextPath}/font/fontList?currentPage=1">首頁</a></li>--%>
-                        <li><a href="${pageContext.request.contextPath}/font/fontList?currentPage=${pageInfo.currentPage-1}">&lt;&lt;</a></li>
+                        <c:if test="${(pageInfo.currentPage-1)>=1}">
+                            <li><a href="${pageContext.request.contextPath}/font/fontList?currentPage=${pageInfo.currentPage-1}">&lt;&lt;</a></li>
+                        </c:if>
                         <li><a href="${pageContext.request.contextPath}/font/fontList?currentPage=${pageInfo.currentPage}">${pageInfo.currentPage}</a></li>
                         <c:if test="${(pageInfo.currentPage+1)<=pageInfo.totalPage}">
                             <li><a href="${pageContext.request.contextPath}/font/fontList?currentPage=${pageInfo.currentPage+1}">${pageInfo.currentPage+1}</a></li>
@@ -83,19 +85,14 @@
                         <c:if test="${(pageInfo.currentPage+4)<=pageInfo.totalPage}">
                             <li><a href="${pageContext.request.contextPath}/font/fontList?currentPage=${pageInfo.currentPage+4}">${pageInfo.currentPage+4}</a></li>
                         </c:if>
-
-                        <li><a href="${pageContext.request.contextPath}/font/fontList?currentPage=${pageInfo.currentPage+1}">&gt;&gt;</a></li>
-                        <%--<li><a href="${pageContext.request.contextPath}/font/fontList?currentPage=${pageInfo.totalPage}">尾頁</a></li>--%>
+                        <c:if test="${(pageInfo.currentPage+1)<=pageInfo.totalPage}">
+                            <li><a href="${pageContext.request.contextPath}/font/fontList?currentPage=${pageInfo.currentPage+1}">&gt;&gt;</a></li>
+                        </c:if>
                     </ul>
-
                     <div class="clearfix"></div>
                 </div>
-
-                <div id="page">
-
-                </div>
-
             </div>
+            <!--右侧栏-->
             <div class="col-md-3 prdt-right">
                 <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix">
                     <ul class="nav bs-docs-sidenav" id="test">
@@ -104,12 +101,13 @@
                         <li class="">
                             <a >廠商</a>
                             <ul class="nav">
-                                <c:forEach items="${manufacturerList}" var="manufacturer" end="25">
-                                <li class="">
-                                    <a>
-                                    <input id="manufacturer" type="radio" name="manufacturer" value="${manufacturer.id}"/>${manufacturer.name}
-                                    </a>
-                                </li>
+                                <c:forEach items="${manufacturerList}" var="manufacturer" end="20"  varStatus="status">
+                                    <li class="">
+                                        <a>
+                                            <input id="manufacturer" size="5" type="radio" name="manufacturer" value="${manufacturer.id}"/>${manufacturer.name}
+                                        </a>
+                                    </li>
+
                                 </c:forEach>
                             </ul>
                         </li>
@@ -167,6 +165,32 @@
                                 </c:forEach>
                             </ul>
                         </li>
+                        <li>
+                            <!--排序就写成静态的吧！ 避免给服务器造成过大负载-->
+                            <a>排序</a>
+                            <ul class="nav">
+                                <li class="">
+                                    <a>
+                                        <input  type="radio" name="sort" value="1">使用最多
+                                    </a>
+                                </li>
+                                <li class="">
+                                    <a>
+                                        <input  type="radio" name="sort" value="2">推荐最多
+                                    </a>
+                                </li>
+                                <li class="">
+                                    <a>
+                                        <input  type="radio" name="sort" value="3">收藏最多
+                                    </a>
+                                </li>
+                                <li class="">
+                                    <a>
+                                        <input  type="radio" name="sort" value="4">最新上传
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
                         <li class="" onclick="submit();"><a>搜索</a></li>
                     </ul>
                 </nav>
@@ -180,66 +204,7 @@
 <!--设置根路径-->
 <input type="hidden" id="main-header" value="${pageContext.request.contextPath}" />
 <!--footer-->
-<div class="information">
-    <div class="container">
-        <div class="infor-top">
-            <div class="col-md-3 infor-left">
-                <h3>Follow Us</h3>
-                <ul>
-                    <li><a href="#"><span class="fb"></span><h6>Facebook</h6></a></li>
-                    <li><a href="#"><span class="twit"></span><h6>Twitter</h6></a></li>
-                    <li><a href="#"><span class="google"></span><h6>Google+</h6></a></li>
-                </ul>
-            </div>
-            <div class="col-md-3 infor-left">
-                <h3>了解炫字網</h3>
-                <ul>
-                    <li><a href="#"><p>關於我們</p></a></li>
-                    <li><a href="#"><p>定制個性字庫服務</p></a></li>
-                    <li><a href="#"><p>有問題請聯繫我們</p></a></li>
-                    <li><a href="#"><p>服務的知名客戶</p></a></li>
-                    <li><a href="#"><p>榮譽之旅</p></a></li>
-                    <li><a href="#"><p>幫助中心</p></a></li>
-
-                </ul>
-            </div>
-            <div class="col-md-3 infor-left">
-                <h3>立即聯繫我們</h3>
-                <ul>
-                    <li><a href="#"><p>QQ：</p></a></li>
-                    <li><a href="#"><p>536269586</p></a></li>
-                    <li><a href="#"><p>微信公眾號：</p></a></li>
-                    <li><a href="#"><p>xuanziwang007</p></a></li>
-                    <li><a href="#"><p>QQ交流群:</p></a></li>
-                    <li><a href="#"><p>0235629584</p></a></li>
-                </ul>
-            </div>
-            <div class="col-md-3 infor-left">
-                <h3>炫字網</h3>
-                <h4>
-                    <span>炫字網是全球第一中文網頁字體（在線字體）服務平台。</span>
-                </h4>
-                <h5>炫字網，中文網頁字體首選。</h5>
-                <p><a href="mailto:example@email.com">contact@example.com</a></p>
-            </div>
-            <div class="clearfix"></div>
-        </div>
-    </div>
-</div>
-
-<div class="footer">
-    <div class="container">
-        <div class="footer-top">
-            <div class="col-md-6 footer-left">
-
-            </div>
-            <div class="col-md-6 footer-right">
-                <p>Copyright &copy; 2017.safewind All rights reserved.<a target="_blank" href="http://www.cssmoban.com/"></a></p>
-            </div>
-            <div class="clearfix"></div>
-        </div>
-    </div>
-</div>
+<jsp:include page="../module/footer.jsp" flush="true"></jsp:include>
 <!--footer--end-->
 
 <!--js-->
@@ -270,7 +235,6 @@
 
     });
 
-
 </script>
 <script type="text/javascript">
     //动态的向 点击的li标签加入 class="active"
@@ -279,14 +243,15 @@
         $(this).siblings('li').removeClass('active');
         $(this).addClass('active')
     });
-
+    //默认第一页
     var currentPage =1;
     function submit() {
         var root = $('#main-header').val();
-        window.location.href=root+"/font/exactSearch?currentPage="+currentPage+"&manufacturerId="+$('#manufacturer:checked').val()
-            +"&typeId="+$('#type:checked').val()+"&encodingId="+ $('#encoding:checked').val()+"&phylumId="+$('#phylum:checked').val()+"&styleId="+$('#style:checked').val();
-
+        window.location.href=root+"/font/exactSearch/"+currentPage+"/"+$('#manufacturer:checked').val()+"/"
+            +$('#type:checked').val()+"/"+ $('#encoding:checked').val()+"/"+$('#phylum:checked').val()+"/"
+            +$('#style:checked').val()+"/"+$('input[name="sort"]:checked').val();
     }
+
 </script>
 <!--js--end-->
 </body>
