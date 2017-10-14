@@ -2,6 +2,7 @@ package com.safewind.webfont.user;
 
 import com.safewind.webfont.bean.Font;
 import com.safewind.webfont.bean.Phylum;
+import com.safewind.webfont.controller.FontController;
 import com.safewind.webfont.dao.CollectionDao;
 import com.safewind.webfont.dao.CommentDao;
 import com.safewind.webfont.dao.FontDao;
@@ -22,6 +23,8 @@ import java.util.Map;
 public class FontTest {
 
 
+    @Autowired
+    private FontController fontController;
     @Autowired
     private FontService fontService;
     @Autowired
@@ -125,6 +128,16 @@ public class FontTest {
 //        System.out.println("==========fontBriefList============"+fontBriefList.toString());
 //        System.out.println("==========count fontBriefList==========="+fontService.countExactSearchFontList(font));
 
+    }
+
+    /**
+     * 字体收藏的测试
+     */
+    @Test
+    public void CollectionFontTest()
+    {
+
+//        System.out.println("================"+fontController.CollectionFont("7","ahui"));
     }
 
 
