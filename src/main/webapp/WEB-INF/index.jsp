@@ -100,10 +100,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/memenu.js"></script>
 <script>$(document).ready(function(){$(".memenu").memenu();});</script> 
 <!--dropdown-->
-<script src="${pageContext.request.contextPath}/js/jquery.easydropdown.js"></script>           
+<script src="${pageContext.request.contextPath}/js/jquery.easydropdown.js"></script>
+<script type="application/x-javascript">
+        addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); }
+        $(function(){
+            //固定头部
+            $(document).bind('mousewheel', function() {
+                if($(window).scrollTop()==0){
+                    $("#header1").attr("class", "navbar navbar-default");
+                }else {
+                    $("#header1").attr("class", "navbar navbar-default navbar-fixed-top")
+                }
+            });
 
-<script type="application/x-javascript"> 
-    addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } 
+
+        });
+
 </script>
 
   </body>
