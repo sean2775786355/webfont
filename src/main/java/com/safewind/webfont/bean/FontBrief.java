@@ -14,7 +14,6 @@ public class FontBrief {
     private String  phylum;     		//字体的语系
     private String  style;      		//字体的风格
     private String  manufacture;        //字体厂商
-    
     private int usedTime;              //字体被使用的次数
     private int collectedTime;         //字体被收藏的次数
     private int recommondedTime;       //字体被推荐的次数
