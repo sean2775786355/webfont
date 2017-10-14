@@ -168,6 +168,37 @@
                                 </c:forEach>
                             </ul>
                         </li>
+                        <li>
+                            <!--排序就写成静态的吧！ 避免给服务器造成过大负载-->
+                            <a>排序</a>
+                            <ul class="nav">
+                                <li class="">
+                                    <a>
+                                        <input  type="radio" name="sort" value="1">使用最多
+                                    </a>
+                                </li>
+                                <li class="">
+                                    <a>
+                                        <input  type="radio" name="sort" value="2">推荐最多
+                                    </a>
+                                </li>
+                                <li class="">
+                                    <a>
+                                        <input  type="radio" name="sort" value="3">评论最多
+                                    </a>
+                                </li>
+                                <li class="">
+                                    <a>
+                                        <input  type="radio" name="sort" value="4">收藏最多
+                                    </a>
+                                </li>
+                                <li class="">
+                                    <a>
+                                        <input  type="radio" name="sort" value="5">最新上传
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
                         <li class="" onclick="submit();"><a>搜索</a></li>
                     </ul>
                 </nav>
@@ -178,68 +209,8 @@
 </div>
 <!--product-end-->
 <!--page--end-->
-
 <!--footer-->
-<div class="information">
-    <div class="container">
-        <div class="infor-top">
-            <div class="col-md-3 infor-left">
-                <h3>Follow Us</h3>
-                <ul>
-                    <li><a href="#"><span class="fb"></span><h6>Facebook</h6></a></li>
-                    <li><a href="#"><span class="twit"></span><h6>Twitter</h6></a></li>
-                    <li><a href="#"><span class="google"></span><h6>Google+</h6></a></li>
-                </ul>
-            </div>
-            <div class="col-md-3 infor-left">
-                <h3>了解炫字網</h3>
-                <ul>
-                    <li><a href="#"><p>關於我們</p></a></li>
-                    <li><a href="#"><p>定制個性字庫服務</p></a></li>
-                    <li><a href="#"><p>有問題請聯繫我們</p></a></li>
-                    <li><a href="#"><p>服務的知名客戶</p></a></li>
-                    <li><a href="#"><p>榮譽之旅</p></a></li>
-                    <li><a href="#"><p>幫助中心</p></a></li>
-
-                </ul>
-            </div>
-            <div class="col-md-3 infor-left">
-                <h3>立即聯繫我們</h3>
-                <ul>
-                    <li><a href="#"><p>QQ：</p></a></li>
-                    <li><a href="#"><p>536269586</p></a></li>
-                    <li><a href="#"><p>微信公眾號：</p></a></li>
-                    <li><a href="#"><p>xuanziwang007</p></a></li>
-                    <li><a href="#"><p>QQ交流群:</p></a></li>
-                    <li><a href="#"><p>0235629584</p></a></li>
-                </ul>
-            </div>
-            <div class="col-md-3 infor-left">
-                <h3>炫字網</h3>
-                <h4>
-                        <span>炫字網是全球第一中文網頁字體（在線字體）服務平台。
-                </h4>
-                <h5>炫字網，中文網頁字體首選。</h5>
-                <p><a href="mailto:example@email.com">contact@example.com</a></p>
-            </div>
-            <div class="clearfix"></div>
-        </div>
-    </div>
-</div>
-
-<div class="footer">
-    <div class="container">
-        <div class="footer-top">
-            <div class="col-md-6 footer-left">
-
-            </div>
-            <div class="col-md-6 footer-right">
-                <p>Copyright &copy; 2017.safewind All rights reserved.<a target="_blank" href="http://www.cssmoban.com/"></a></p>
-            </div>
-            <div class="clearfix"></div>
-        </div>
-    </div>
-</div>
+<jsp:include page="../module/footer.jsp" flush="true"></jsp:include>
 <!--footer--end-->
 
 <!--js-->
@@ -280,8 +251,9 @@
     var currentPage =1;
     function submit() {
         var root = $('#main-header').val();
-        window.location.href=root+"/font/exactSearch?currentPage="+currentPage+"&manufacturerId="+$('#manufacturer:checked').val()
-            +"&typeId="+$('#type:checked').val()+"&encodingId="+ $('#encoding:checked').val()+"&phylumId="+$('#phylum:checked').val()+"&styleId="+$('#style:checked').val();
+        window.location.href=root+"/font/exactSearch/"+currentPage+"/"+$('#manufacturer:checked').val()+"/"
+            +$('#type:checked').val()+"/"+ $('#encoding:checked').val()+"/"+$('#phylum:checked').val()+"/"
+            +$('#style:checked').val()+"/"+$('input[name="sort"]:checked').val();
 
     }
 </script>
