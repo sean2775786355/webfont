@@ -87,8 +87,20 @@ public class FontServiceImpl implements FontService {
         return this.transformFontListToFontBriefPage(fuzzyFontList);
     }
 
+    /**
+     *
+     * @param     currentPage
+     * @param font  属性
+     *             manufacturerId    厂商id
+     *             typeId            类型id
+     *             encodingId        编码id
+     *             phylumId          语系id
+     *             styleId           风格id
+     * @param sort  用来字体排序的
+     * @return
+     */
     @Override
-    public List<FontBrief> getPageExactSearchFontList(String currentPage, Font font) {
+    public List<FontBrief> getPageExactSearchFontList(String currentPage, Font font,String sort) {
         Map map = new HashMap();
         map.put("manufacturerId",font.getManufacturerId());
         map.put("typeId",font.getTypeId());
@@ -98,6 +110,11 @@ public class FontServiceImpl implements FontService {
         Page page=this.getInstancePage(currentPage,fontDao.countExactSearchFontList(map));
         map.put("dbIndex",page.getDbIndex());
         map.put("dbNumber",page.getDbNumber());
+        if(!sort.equals("undefined"))
+        {
+            Integer.parseInt(sort);
+        }
+        map.put("sort",sort);
         List<Font> fontList = fontDao.pageExactSearchFontList(map);
         return this.transformFontListToFontBriefPage(fontList);
     }
@@ -175,6 +192,21 @@ public class FontServiceImpl implements FontService {
         collection.setCollectTime(new Date());
         collectionDao.addCollectionFont(collection);
 
+    }
+
+    /**
+     * 更新字体的收藏次数
+     * @param fontId    字体编号
+     * @return  true 更新字体收藏次数成功   |     false   更新字体收藏次数失败
+     */
+    @Override
+    public boolean updateAddFontCollectTime(int fontId) {
+        if(fontDao.updateAddFontCollectTime(fontId)!=0)
+        {
+            return true;
+        }else {
+            return false;
+        }
     }
 
     /**

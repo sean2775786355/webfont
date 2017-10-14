@@ -53,7 +53,20 @@
         <if test="styleId != 0">
             AND style_id=#{styleId}
         </if>
-        ORDER BY used_time  DESC
+        <choose>
+            <when test="sort = 2">
+                ORDER BY recommended_time DESC
+            </when>
+            <when test="sort = 3">
+                ORDER BY collected_time DESC
+            </when>
+            <when test="sort = 4">
+                ORDER BY upload_time DESC
+            </when>
+            <otherwise>
+                ORDER BY used_time  DESC
+            </otherwise>
+        </choose>
         LIMIT #{dbIndex},#{dbNumber}
     </select>
 

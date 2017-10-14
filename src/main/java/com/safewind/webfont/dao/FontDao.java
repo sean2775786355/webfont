@@ -70,7 +70,7 @@ public interface FontDao {
 
     /**
      *当用户收藏字体时，调用此接口，更新数据库字体的收藏次数       增加次数
-     * @param id 更新字体次数的字体编号
+     * @param id 更新字体次数的 |  字体编号
      * @return 影响的记录数
      */
     public int updateAddFontCollectTime(int id);

@@ -56,7 +56,7 @@ public interface FontService {
      *             styleId           风格id
      * @return  字体集合    List<FontBrief>
      */
-    public List<FontBrief> getPageExactSearchFontList(String currentPage,Font font);
+    public List<FontBrief> getPageExactSearchFontList(String currentPage,Font font,String sort);
 
     /**
      * 该字体的详细信息      |   返回字体的详细信息      |    id  字体的编号
@@ -77,6 +77,13 @@ public interface FontService {
      * @param fontId 收藏字体id
      */
     public void addCollectionFont(String username , int fontId);
+
+    /**
+     * 更新字体的收藏次数
+     * @param fontId    字体编号
+     * @return  true 更新字体收藏次数成功   |     false   更新字体收藏次数失败
+     */
+    public boolean updateAddFontCollectTime(int fontId);
 
     /**
      * 判断用户是否推荐该字体
