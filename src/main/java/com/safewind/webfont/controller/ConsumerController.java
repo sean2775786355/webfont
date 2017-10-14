@@ -29,7 +29,7 @@ public class ConsumerController{
 	
 	/**
 	 * 提交修改后的个人信息
-	 * @param model
+	 * @param
 	 * @return
 	 */
 	@RequestMapping(value="consumerRepost" ,method=RequestMethod.GET)
@@ -53,9 +53,9 @@ public class ConsumerController{
 	
 	/**
 	 * 更改手机号码
-	 * 
+	 * 上下两个value不能一样
 	 */
-	@RequestMapping(value="phoneInfo",method=RequestMethod.GET)
+	@RequestMapping(value="phoneInfo1",method=RequestMethod.GET)
 	public String ChangePhone(int id,String phone){
 		consumerService.ChangePhone(id, phone);
 		return "/consumer/consumerInfo";
