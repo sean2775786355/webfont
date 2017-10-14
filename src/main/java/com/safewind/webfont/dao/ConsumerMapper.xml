@@ -1,32 +1,40 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.safewind.webfont.dao.ConsumerDao">
-    <!--///////////////////select start/////////////////////////////-->
-    <!--查询用户的  有可能有用 目前没用-->
-    <select id="findConsumerById" parameterType="java.lang.Integer" resultType="com.safewind.webfont.bean.Consumer">
-        SELECT  id, username , personalized_signature , phone , tel , nickname , sex ,
-                work_place , email , qq_num , wechat_num , company_name , company_industry
-        FROM t_consumer;
-    </select>
 
-    <!--///////////////////select end/////////////////////////////-->
-
-    <!--///////////////////insert start/////////////////////////////-->
-
-    <!--用户注册时添加id 添加用户名 添加电话号码-->
-
-    <!--///////////////////insert end/////////////////////////////-->
-
-    <!--///////////////////update start/////////////////////////////-->
-
-    <!--用户登录后 完善自己的个人资料-->
-
-    <!--///////////////////update end/////////////////////////////-->
-
-
-
-    <!--///////////////////delete start/////////////////////////////-->
-
-
-    <!--///////////////////delete end/////////////////////////////-->
+	
+	
+	<select id="ConsumerInfo" resultType="com.safewind.webfont.bean.Consumer" parameterType="int">
+		select personalized_signature,phone,tel,nickname,sex,work_place,email,qq_num,
+		wechat_num,company_name,company_industry from t_consumer where id=#{id}
+	
+	</select>
+	
+	<update id="ConsumerRepost" >
+		update t_consumer 
+		set 
+		nickname = #{nickname}, 
+		sex =#{sex} , 
+		tel=#{tel},
+		work_place =#{workPlace} , 
+		email =#{email} , 
+		qq_num = #{qqNum}, 
+		wechat_num =#{wechatNum}, 
+		company_name = #{companyName}, 
+		company_industry =#{companyIndustry} 
+		where id = #{id}
+	</update>
+	
+	<select id="PhoneInfo" parameterType="int" resultType="String">
+		select phone from t_consumer where id = #{id}
+	</select> 
+	
+	<update id="ChangePhone">
+		update  t_consumer  
+		
+		set phone = #{1} 
+		
+		where id = #{0}
+	</update>
+	
 </mapper>
