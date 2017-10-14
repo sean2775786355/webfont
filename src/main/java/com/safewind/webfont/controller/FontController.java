@@ -4,15 +4,13 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 import com.safewind.webfont.bean.*;
+import com.safewind.webfont.constant.MsgAlertConstant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import com.safewind.webfont.service.FontService;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 @RequestMapping("/font")
@@ -127,12 +125,16 @@ public class FontController {
 	 * @param encodingId	编码编号
 	 * @param phylumId		语系编号
 	 * @param styleId	风格编号
+	 *
 	 * @return
 	 */
-	@RequestMapping(value = "/exactSearch",method = RequestMethod.GET)
-	public String exactSearchOne(Model model,String currentPage,String manufacturerId,String typeId,
-								 String encodingId,String phylumId,String styleId)
+	@RequestMapping(value = "/exactSearch/{currentPage}/{manufacturerId}/{typeId}/{encodingId}/{phylumId}/{styleId}/{sort}",method = RequestMethod.GET)
+	public String exactSearchOne(Model model, @PathVariable("currentPage") String currentPage,@PathVariable("manufacturerId") String manufacturerId,
+								@PathVariable("typeId") String typeId,@PathVariable("encodingId") String encodingId,@PathVariable("phylumId") String phylumId,
+								 @PathVariable("styleId") String styleId,@PathVariable("sort") String sort)
+
 	{
+		//字体对象
 		Font font = new Font();
 		if(!manufacturerId.equals("undefined"))
 		{
@@ -159,7 +161,8 @@ public class FontController {
 			currentPage = "1";
 		}
 		model.addAttribute("font",font);
-		List<FontBrief> fontBriefList = fontService.getPageExactSearchFontList(currentPage,font);
+		model.addAttribute("sort",sort);
+		List<FontBrief> fontBriefList = fontService.getPageExactSearchFontList(currentPage,font,sort);
 		model.addAttribute("fontBriefList",fontBriefList);
 		model.addAttribute("pageInfo",fontService.getInstancePage(currentPage,fontService.countExactSearchFontList(font)));
 		List<Manufacturer> manufacturerList = fontService.getAllManufacturers();
@@ -180,4 +183,33 @@ public class FontController {
 	}
 
 
+	/**
+	 *
+	 * 用户收藏字体的操作 通过ajax进行异步操作
+	 * @param fontId	字体id
+	 * @param username	用户名
+	 * @return	提示信息 String
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/CollectionFont",method = RequestMethod.POST)
+	public String CollectionFont(String fontId,String username)
+	{
+		//如果放在service层处理业务逻辑 感觉不方便，没有结合面向接口编程	|	虽然有点违背cotroller的作用	个人感觉条理清晰
+		if(fontService.isCollectionFont(Integer.parseInt(fontId),username))
+		{
+			return MsgAlertConstant.USER_HASED_COLLECTION_FONT;
+		}else {
+			//用户收藏字体的逻辑
+			//1.添加用户收藏改字体
+			fontService.addCollectionFont(username,Integer.parseInt(fontId));
+			//2.增加字体收藏次数
+			if(fontService.updateAddFontCollectTime(Integer.parseInt(fontId)))
+			{
+				return MsgAlertConstant.USER_COLLECTION_FONT_SUCCESS;
+			}else {
+				return MsgAlertConstant.USER_COLLECTION_FONT_FAIL;
+			}
+
+		}
+	}
 }
