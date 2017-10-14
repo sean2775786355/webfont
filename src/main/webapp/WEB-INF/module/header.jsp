@@ -214,6 +214,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script src="http://cdn.datatables.net/plug-ins/28e7751dbec/integration/bootstrap/3/dataTables.bootstrap.js"></script>
 <script type="text/javascript">
 	addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); }
+
+	//搜索框变大变小功能
+	$('#search').on('focus', function() {
+        $(this).attr({
+            size: '55'
+        });
+    });
+    $('#search').blur(function(event) {
+        $(this).removeAttr('size');
+    });
 </script>
 
   </body>
