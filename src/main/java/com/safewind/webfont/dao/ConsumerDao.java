@@ -7,11 +7,11 @@ import com.safewind.webfont.bean.Consumer;
 @Repository
 public interface ConsumerDao{
 	
-	public Consumer ConsumerInfo(int id);
+	public Consumer ConsumerInfo(String username);
 	
-	public void ConsumerRepost(Consumer consumer);
+	public int ConsumerRepost(Consumer consumer);
 	
-	public String PhoneInfo(int id);
+	public String PhoneInfo(String username);
 	
-	public void ChangePhone(int id,String phone);
+	public int ChangePhone(Consumer consumer);
 }
