@@ -9,35 +9,49 @@ import com.safewind.webfont.service.ConsumerService;
 
 @Service
 public class ConsumerServiceImpl implements ConsumerService{
-	@Autowired ConsumerDao consumerDao;
-	
+	@Autowired
+	ConsumerDao consumerDao;
+	@Autowired
+	Consumer consumer;
 	
 	//预览个人信息
 	@Override
-	public Consumer ConsumerInfo(int id){
-		Consumer consumerInfo=consumerDao.ConsumerInfo(id);
+	public Consumer ConsumerInfo(String username){
+		Consumer consumerInfo=consumerDao.ConsumerInfo(username);
 		return consumerInfo;
 	}
 	
 	
 	//完善个人信息
 	@Override
-	public void ConsumerRepost(Consumer consumer){
-		consumerDao.ConsumerRepost(consumer);
+	public boolean ConsumerRepost(Consumer consumer){
+		if(consumerDao.ConsumerRepost(consumer)==1)
+		{
+			return true;
+		}else
+		{
+			return false;
+		}
 		
 	}
 	
 	//显示已绑定手机号
 	@Override
-	public String PhoneInfo(int id) {
-		String phoneInfo=consumerDao.PhoneInfo(id);
+	public String PhoneInfo(String username) {
+		String phoneInfo=consumerDao.PhoneInfo(username);
 		return phoneInfo;
 	}
 	
-	//更改绑定手机号
+	//更改绑定手机号 返回为真表示成功，返回会false，表示失败
 	@Override
-	public void ChangePhone(int id,String phone){
-		consumerDao.ChangePhone(id,phone);
-		
+	public boolean ChangePhone(String username,String phone){
+		consumer.setUsername(username);
+		consumer.setPhone(phone);
+		if(consumerDao.ChangePhone(consumer)==1)
+		{
+			return true;
+		}else {
+			return false;
+		}
 	}
 }

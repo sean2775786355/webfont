@@ -7,24 +7,24 @@ public interface ConsumerService{
 	 * 预览个人信息
 	 */
 	
-	public Consumer ConsumerInfo(int id);
+	public Consumer ConsumerInfo(String username);
 	
 	/*
 	 * 完善个人信息
 	 */
 	
-	public void ConsumerRepost(Consumer consumer);
+	public boolean ConsumerRepost(Consumer consumer);
 	
 	/*
 	 * 显示已绑定的手机号
 	 */
 	
-	public String PhoneInfo(int id);
+	public String PhoneInfo(String username);
 	
 	/*
 	 * 更换绑定手机号
 	 */
 	
-	public void ChangePhone(int id,String phone);
+	public boolean ChangePhone(String username,String phone);
 	
 }
