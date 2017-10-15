@@ -4,15 +4,18 @@
 
 	
 	
-	<select id="ConsumerInfo" resultType="com.safewind.webfont.bean.Consumer" parameterType="int">
-		select personalized_signature,phone,tel,nickname,sex,work_place,email,qq_num,
-		wechat_num,company_name,company_industry from t_consumer where id=#{id}
-	
+	<select id="ConsumerInfo" resultType="com.safewind.webfont.bean.Consumer" parameterType="java.lang.String">
+		SELECT
+		username, personalized_signature,phone,tel,
+		nickname,sex,work_place,email,qq_num,
+		wechat_num,company_name,company_industry
+		FROM t_consumer
+		WHERE username=#{username}
 	</select>
 	
-	<update id="ConsumerRepost" >
-		update t_consumer 
-		set 
+	<update id="ConsumerRepost" parameterType="com.safewind.webfont.bean.Consumer">
+		UPDATE t_consumer
+		SET
 		nickname = #{nickname}, 
 		sex =#{sex} , 
 		tel=#{tel},
@@ -22,19 +25,19 @@
 		wechat_num =#{wechatNum}, 
 		company_name = #{companyName}, 
 		company_industry =#{companyIndustry} 
-		where id = #{id}
+		WHERE username=#{username}
 	</update>
 	
-	<select id="PhoneInfo" parameterType="int" resultType="String">
-		select phone from t_consumer where id = #{id}
+	<select id="PhoneInfo" parameterType="java.lang.String" resultType="java.lang.String">
+		SELECT phone
+		FROM t_consumer
+		WHERE username=#{username}
 	</select> 
 	
-	<update id="ChangePhone">
-		update  t_consumer  
-		
-		set phone = #{1} 
-		
-		where id = #{0}
+	<update id="ChangePhone" parameterType="com.safewind.webfont.bean.Consumer">
+		update  t_consumer
+		set phone = #{phone}
+		where username=#{username}
 	</update>
 	
 </mapper>
