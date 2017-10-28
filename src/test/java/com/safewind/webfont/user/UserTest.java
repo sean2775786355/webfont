@@ -26,9 +26,9 @@ public class UserTest {
 	
 	@Test
 	public void test() {
-		/*User user = new User();
-		user.setUsername("18342210821");
-		user.setPassword("QIjiahui1998");
+		User user = new User();
+		user.setUsername("test");
+		user.setPassword("test");
 		user.setHeadPic("");
 		user.setRank(0);
 		user.setCreateUsername((String)SecurityUtils.getSubject().getPrincipal());
@@ -37,7 +37,7 @@ public class UserTest {
 		passwordHelper.encryptPassword(user);
 		
 		User user_create = userService.createUser(user);
-		System.out.println(user_create);*/
+		System.out.println(user_create);
 	}
 	
 	@Test
@@ -49,9 +49,9 @@ public class UserTest {
 	
 	@Test
 	public void UserPasswordModify(){
-		//userService.UserPasswordModify("18342210821", "mactawishHui");
+		userService.UserPasswordModify("ahui", "ahui");
 		//userService.deleteUser("18342210821");
 		//System.out.println(userService.findByUsername("18342210821"));
-	} 
+	}
 
 }

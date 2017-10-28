@@ -49,7 +49,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
         <ul class="nav navbar-nav navbar-right"> 
             <%--<li><a href="#"><span class="glyphicon glyphicon-user"></span>註冊</a></li>--%>
-            <li><a href="#"><span class="glyphicon glyphicon-user"></span>登錄</a></li>
+            <li><a href="${pageContext.request.contextPath}/login"><span class="glyphicon glyphicon-user"></span>登錄</a></li>
         </ul>
         <form class="navbar-form navbar-left navbar-right form-group has-feedback" role="search" action="${pageContext.request.contextPath}/font/search">
             <div class="form-group has-feedback">
