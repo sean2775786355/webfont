@@ -58,53 +58,53 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <div class="row well">
                 <div class="col-xs-5">
                     <div class="input-group">
-                    <span class="input-group-addon" style=""><span class="glyphicon glyphicon-pencil"></span>&nbsp;暱稱：</span><input class="form-control" disabled="disabled" value=""></input>
+                    <span class="input-group-addon" style=""><span class="glyphicon glyphicon-pencil"></span>&nbsp;暱稱：</span><input class="form-control" disabled="disabled" value="李宗仁"></input>
                     </div>
                     <br/>
                     <div class="input-group">
                     <span class="input-group-addon">
-                    <span class="glyphicon glyphicon-pencil"></span>性別：</span><input class="form-control" disabled="disabled" value=""></input>
+                    <span class="glyphicon glyphicon-pencil"></span>性別：</span><input class="form-control" disabled="disabled" value="男"></input>
                     </div>
                     <br/>
                     <div class="input-group">
                     <span class="input-group-addon">
-                    <span class="glyphicon glyphicon-pencil"></span>個性簽名：</span><input class="form-control" disabled="disabled" value=""></input>
+                    <span class="glyphicon glyphicon-pencil"></span>個性簽名：</span><input class="form-control" disabled="disabled" value="无"></input>
                     </div>
                     <br/>
                     <div class="input-group">
                     <span class="input-group-addon">
-                    <span class="glyphicon glyphicon-pencil"></span>手機：</span><input class="form-control" disabled="disabled" value=""></input>
+                    <span class="glyphicon glyphicon-pencil"></span>手機：</span><input class="form-control" disabled="disabled" value="17349254822"></input>
                     </div>
                     <br/>
                     <div class="input-group">
                     <span class="input-group-addon">
-                    <span class="glyphicon glyphicon-pencil"></span>電話：</span><input class="form-control" disabled="disabled" value=""></input>
+                    <span class="glyphicon glyphicon-pencil"></span>電話：</span><input class="form-control" disabled="disabled" value="无"></input>
                     </div>
                     <br/>
                     <div class="input-group">
                     <span class="input-group-addon">
-                    <span class="glyphicon glyphicon-pencil"></span>所在地：</span><input class="form-control" disabled="disabled" value=""></input></div><br/>
+                    <span class="glyphicon glyphicon-pencil"></span>所在地：</span><input class="form-control" disabled="disabled" value="台湾高雄"></input></div><br/>
                 </div>
                 <div class="col-xs-2"></div>
                 <div class="col-xs-5">
                     <div class="input-group">
                     <span class="input-group-addon">
-                    <span class="glyphicon glyphicon-pencil"></span>郵箱：</span><input class="form-control" disabled="disabled" value=""></input>
+                    <span class="glyphicon glyphicon-pencil"></span>郵箱：</span><input class="form-control" disabled="disabled" value="lizongren@gmail.com"></input>
                     </div>
                     <br/>
                     <div class="input-group">
                     <span class="input-group-addon">
-                    <span class="glyphicon glyphicon-pencil"></span>QQ：</span><input class="form-control" disabled="disabled" value=""></input>
+                    <span class="glyphicon glyphicon-pencil"></span>QQ：</span><input class="form-control" disabled="disabled" value="无"></input>
                     </div>
                     <br/>
                     <div class="input-group">
                     <span class="input-group-addon">
-                    <span class="glyphicon glyphicon-pencil"></span>微信：</span><input class="form-control" disabled="disabled" value=""></input>
+                    <span class="glyphicon glyphicon-pencil"></span>微信：</span><input class="form-control" disabled="disabled" value="无"></input>
                     </div>
                     <br/>
                     <div class="input-group">
                     <span class="input-group-addon">
-                    <span class="glyphicon glyphicon-pencil"></span>公司行業：</span><input class="form-control" disabled="disabled" value=""></input>
+                    <span class="glyphicon glyphicon-pencil"></span>公司行業：</span><input class="form-control" disabled="disabled" value="电子行业"></input>
                     </div>
                     <br/>
                     <div class="input-group">
@@ -124,7 +124,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <form action="#" method="post">
                 <div class="col-xs-5">
                     <div class="input-group">
-                    <span class="input-group-addon" style=""><span class="glyphicon glyphicon-pencil"></span>&nbsp;暱稱：</span><input name="name" type="text" class="form-control"  value=""></input>
+                    <span class="input-group-addon" style=""><span class="glyphicon glyphicon-pencil"></span>&nbsp;暱稱：</span><input name="name" type="text" class="form-control"  value="李宗仁"></input>
                     </div>
                     <br/>
                     <div class="input-group">
