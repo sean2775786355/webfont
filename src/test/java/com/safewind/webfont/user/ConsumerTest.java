@@ -17,6 +17,6 @@ public class ConsumerTest {
     {
 //        System.out.println("========ahui手机号：=========="+consumerService.PhoneInfo("ahui"));
 //        System.out.println("==========ahui的个人信息==========="+consumerService.ConsumerInfo("ahui"));
-//        System.out.println("======================"+consumerService.ChangePhone("ahui","12554215112"));
+//        System.out.println("======================"+consumerService.ChangePhone("ahui","12854215112"));
     }
 }

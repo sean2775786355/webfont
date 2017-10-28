@@ -79,6 +79,14 @@ public interface FontService {
     public void addCollectionFont(String username , int fontId);
 
     /**
+     * 用户删除该字体的收藏
+     * @param username
+     * @param fontId
+     * @return  true 删除成功  false 删除失败
+     */
+    public boolean deleteCollectionFont(String username , int fontId);
+
+    /**
      * 更新字体的收藏次数
      * @param fontId    字体编号
      * @return  true 更新字体收藏次数成功   |     false   更新字体收藏次数失败

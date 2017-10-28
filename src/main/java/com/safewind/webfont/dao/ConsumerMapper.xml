@@ -10,7 +10,7 @@
 		nickname,sex,work_place,email,qq_num,
 		wechat_num,company_name,company_industry
 		FROM t_consumer
-		WHERE username=#{username}
+		WHERE username=#{_parameter}
 	</select>
 	
 	<update id="ConsumerRepost" parameterType="com.safewind.webfont.bean.Consumer">

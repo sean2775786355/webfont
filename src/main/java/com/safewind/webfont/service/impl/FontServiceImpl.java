@@ -195,6 +195,25 @@ public class FontServiceImpl implements FontService {
     }
 
     /**
+     * 用户执行删除收藏的字体
+     * @param username  用户名
+     * @param fontId    字体id
+     * @return
+     */
+    @Override
+    public boolean deleteCollectionFont(String username, int fontId) {
+        collection.setFontId(fontId);
+        collection.setUsername(username);
+        if(collectionDao.deleteCollectionFont(collection)==1)
+        {
+            return true;
+        }else {
+            return false;
+        }
+
+    }
+
+    /**
      * 更新字体的收藏次数
      * @param fontId    字体编号
      * @return  true 更新字体收藏次数成功   |     false   更新字体收藏次数失败

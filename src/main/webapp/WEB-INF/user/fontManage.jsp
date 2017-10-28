@@ -77,11 +77,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     <p style="margin: 15px;font-size: 15px;">*字體廠商</p>
                     <select class="form-control" name="fontMaker">
                     <!-- 從數據庫取 -->
-                      <option>1</option>
-                      <option>2</option>
-                      <option>3</option>
-                      <option>4</option>
-                      <option>5</option>
+                      <c:forEach var="manufacturer" items="${manufacturerList}">
+                          <option>${manufacturer.name}</option>
+                      </c:forEach>
                     </select>
                 </div>
             </div>
@@ -93,11 +91,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     <p style="margin: 15px;font-size: 15px;">*字體類型</p>
                     <select class="form-control" name="fontType">
                     <!-- 從數據庫取 -->
-                      <option>1</option>
-                      <option>2</option>
-                      <option>3</option>
-                      <option>4</option>
-                      <option>5</option>
+                      <c:forEach items="${typeList}" var="type">
+                          <option>${type.name}</option>
+                      </c:forEach>
                     </select>
                 </div>
             </div>
@@ -109,11 +105,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     <p style="margin: 15px;font-size: 15px;">*字體編碼</p>
                     <select class="form-control" name="fontEncoding">
                     <!-- 從數據庫取 -->
-                      <option>1</option>
-                      <option>2</option>
-                      <option>3</option>
-                      <option>4</option>
-                      <option>5</option>
+                      <c:forEach items="${encodingList}" var="encoding">
+                          <option>${encoding.name}</option>
+                      </c:forEach>
                     </select>
                 </div>
             </div>
@@ -125,11 +119,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     <p style="margin: 15px;font-size: 15px;">*字體語系</p>
                     <select class="form-control" name="fontFamily">
                     <!-- 從數據庫取 -->
-                      <option>1</option>
-                      <option>2</option>
-                      <option>3</option>
-                      <option>4</option>
-                      <option>5</option>
+                        <c:forEach items="${phylumList}" var="phylum">
+                            <option>${phylum.name}</option>
+                        </c:forEach>
                     </select>
                 </div>
             </div>
@@ -141,11 +133,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     <p style="margin: 15px;font-size: 15px;">*字體風格</p>
                     <select class="form-control" name="fontStyle">
                     <!-- 從數據庫取 -->
-                      <option>1</option>
-                      <option>2</option>
-                      <option>3</option>
-                      <option>4</option>
-                      <option>5</option>
+                      <c:forEach items="${styleList}" var="style">
+                          <option>${style.name}</option>
+                      </c:forEach>
                     </select>
                 </div>
             </div>
@@ -217,25 +207,25 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         </thead> 
                         <tbody>
                             <tr> 
-                              <th width="10%">123</th> 
-                              <th width="10%">13</th> 
-                              <th width="10%">456</th> 
-                              <th width="10%">768</th>
-                              <th width="10%">3154.4</th>
+                              <th width="10%">1</th>
+                              <th width="10%">1</th>
+                              <th width="10%">2017-10-18</th>
+                              <th width="10%">华文龙体</th>
+                              <th width="10%">未通过</th>
                             </tr> 
                             <tr> 
-                              <th width="10%">123</th> 
-                              <th width="10%">13</th> 
-                              <th width="10%">456</th> 
-                              <th width="10%">768</th>
-                              <th width="10%">3154.4</th>
+                              <th width="10%">2</th>
+                              <th width="10%">2</th>
+                              <th width="10%">2017-9-18</th>
+                              <th width="10%">中国黑体</th>
+                              <th width="10%">未通过</th>
                             </tr> 
                             <tr> 
-                              <th width="10%">123</th> 
-                              <th width="10%">13</th> 
-                              <th width="10%">456</th> 
-                              <th width="10%">768</th>
-                              <th width="10%">3154.4</th>
+                              <th width="10%">3</th>
+                              <th width="10%">3</th>
+                              <th width="10%">2017-9-18</th>
+                              <th width="10%">行楷</th>
+                              <th width="10%">未通过</th>
                             </tr> 
 
                         </tbody> 
@@ -277,27 +267,26 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         </thead> 
                         <tbody>
                             <tr> 
-                              <th width="10%">123</th> 
-                              <th width="10%">13</th> 
-                              <th width="10%">456</th> 
-                              <th width="10%">768</th>
-                              <th width="10%">3154.4</th>
+                              <th width="10%">1</th>
+                              <th width="10%">1</th>
+                              <th width="10%">2017/05/06</th>
+                              <th width="10%">华文龙体</th>
+                              <th width="10%">审核中</th>
                             </tr> 
                             <tr> 
-                              <th width="10%">123</th> 
-                              <th width="10%">13</th> 
-                              <th width="10%">456</th> 
-                              <th width="10%">768</th>
-                              <th width="10%">3154.4</th>
-                            </tr> 
-                            <tr> 
-                              <th width="10%">123</th> 
-                              <th width="10%">13</th> 
-                              <th width="10%">456</th> 
-                              <th width="10%">768</th>
-                              <th width="10%">3154.4</th>
-                            </tr> 
-
+                              <th width="10%">2</th>
+                              <th width="10%">2</th>
+                              <th width="10%">2017/06/21</th>
+                              <th width="10%">中国黑体</th>
+                              <th width="10%">审核中</th>
+                            </tr>
+                            <tr>
+                              <th width="10%">3</th>
+                              <th width="10%">3</th>
+                              <th width="10%">2017/06/30</th>
+                              <th width="10%">行楷</th>
+                              <th width="10%">审核中</th>
+                            </tr>
                         </tbody> 
                         <tfoot> 
                          <tr> 
@@ -336,25 +325,25 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                 </thead> 
                                 <tbody>
                                     <tr> 
-                                      <th width="10%">123</th> 
-                                      <th width="10%">13</th> 
-                                      <th width="10%">456</th> 
-                                      <th width="10%">768</th>
-                                      <th width="10%"></th>
+                                      <th width="10%">1</th>
+                                      <th width="10%">1</th>
+                                      <th width="10%">2017/10/20</th>
+                                      <th width="10%">12533EAAFS1SCA1CS1A6C16SAS</th>
+                                      <th width="10%">华文龙体</th>
                                     </tr> 
                                     <tr> 
-                                      <th width="10%">123</th> 
-                                      <th width="10%">13</th> 
-                                      <th width="10%">456</th> 
-                                      <th width="10%">768</th>
-                                      <th width="10%"></th>
+                                      <th width="10%">2</th>
+                                      <th width="10%">2</th>
+                                      <th width="10%">2017/10/21</th>
+                                      <th width="10%">1255ADA2CSA2C2SAACS02SC0SA</th>
+                                      <th width="10%">中国黑体</th>
                                     </tr> 
                                     <tr> 
-                                      <th width="10%">123</th> 
-                                      <th width="10%">13</th> 
-                                      <th width="10%">456</th> 
-                                      <th width="10%">768</th>
-                                      <th width="10%"></th>
+                                      <th width="10%">3</th>
+                                      <th width="10%">3</th>
+                                      <th width="10%">2017/10/21</th>
+                                      <th width="10%">1ASASFSADC1SA531SA31CSSA2FC</th>
+                                      <th width="10%">行楷</th>
                                     </tr> 
                                 </tbody> 
                                 <tfoot> 
@@ -384,7 +373,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     <div class="row">
                         <p style="margin: 15px;font-size: 20px;">審核中</p>
                         <div class="col-xs-12">
-                            
                             <table id="inAuditTable2" class="table table-striped table-bordered table-control">
                                 <thead> 
                                  <tr> 
@@ -393,27 +381,27 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                   <th width="10%">申請于</th> 
                                   <th width="10%">操作</th>
                                  </tr> 
-                                </thead> 
+                                </thead>
                                 <tbody>
-                                    <tr> 
-                                      <th width="10%">123</th> 
-                                      <th width="10%">13</th> 
-                                      <th width="10%">456</th>
-                                      <th width="10%"></th>
-                                    </tr> 
-                                    <tr> 
-                                      <th width="10%">123</th> 
-                                      <th width="10%">13</th> 
-                                      <th width="10%">456</th>
-                                      <th width="10%"></th>
-                                    </tr> 
-                                    <tr> 
-                                      <th width="10%">123</th> 
-                                      <th width="10%">13</th> 
-                                      <th width="10%">456</th>
-                                      <th width="10%"></th>
-                                    </tr> 
-                                </tbody> 
+                                <tr>
+                                    <th width="10%">幼圆 龙飞凤舞 中国字体</th>
+                                    <th width="10%">2017/10/21</th>
+                                    <th width="10%">字体管理中心</th>
+                                    <th width="10%"></th>
+                                </tr>
+                                <tr>
+                                    <th width="10%">义启悠悠夏日体 龙飞凤舞 中国文字之美</th>
+                                    <th width="10%">2017/10/21</th>
+                                    <th width="10%">字体管理中心</th>
+                                    <th width="10%"></th>
+                                </tr>
+                                <tr>
+                                    <th width="10%">义启紫水晶体 龙飞凤舞 中国文字之美</th>
+                                    <th width="10%">2017/10/21</th>
+                                    <th width="10%">字体管理中心</th>
+                                    <th width="10%"></th>
+                                </tr>
+                                </tbody>
                                 <tfoot> 
                                  <tr> 
                                   <th width="10%">字體名稱</th> 
@@ -443,21 +431,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                 </thead> 
                                 <tbody>
                                     <tr> 
-                                      <th width="10%">123</th> 
-                                      <th width="10%">13</th> 
-                                      <th width="10%">456</th> 
+                                      <th width="10%">幼圆 龙飞凤舞 中国字体</th>
+                                      <th width="10%">2017/10/21</th>
+                                      <th width="10%">字体管理中心</th>
                                       <th width="10%"></th>
                                     </tr> 
                                     <tr> 
-                                      <th width="10%">123</th> 
-                                      <th width="10%">13</th> 
-                                      <th width="10%">3154.4</th>
+                                      <th width="10%">义启悠悠夏日体 龙飞凤舞 中国文字之美</th>
+                                      <th width="10%">2017/10/21</th>
+                                      <th width="10%">字体管理中心</th>
                                       <th width="10%"></th>
                                     </tr> 
                                     <tr> 
-                                      <th width="10%">123</th> 
-                                      <th width="10%">13</th> 
-                                      <th width="10%">3154.4</th>
+                                      <th width="10%">义启紫水晶体 龙飞凤舞 中国文字之美</th>
+                                      <th width="10%">2017/10/21</th>
+                                      <th width="10%">字体管理中心</th>
                                       <th width="10%"></th>
                                     </tr> 
                                 </tbody> 
@@ -487,27 +475,27 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                   <th width="10%">審核于</th> 
                                   <th width="10%">操作</th>
                                  </tr> 
-                                </thead> 
+                                </thead>
                                 <tbody>
-                                    <tr> 
-                                      <th width="10%">123</th> 
-                                      <th width="10%">13</th> 
-                                      <th width="10%">456</th> 
-                                      <th width="10%"></th>
-                                    </tr> 
-                                    <tr> 
-                                      <th width="10%">123</th> 
-                                      <th width="10%">13</th> 
-                                      <th width="10%">3154.4</th>
-                                      <th width="10%"></th>
-                                    </tr> 
-                                    <tr> 
-                                      <th width="10%">123</th> 
-                                      <th width="10%">13</th> 
-                                      <th width="10%">3154.4</th>
-                                      <th width="10%"></th>
-                                    </tr> 
-                                </tbody> 
+                                <tr>
+                                    <th width="10%">幼圆 龙飞凤舞 中国字体</th>
+                                    <th width="10%">2017/10/21</th>
+                                    <th width="10%">字体管理中心</th>
+                                    <th width="10%"></th>
+                                </tr>
+                                <tr>
+                                    <th width="10%">义启悠悠夏日体 龙飞凤舞 中国文字之美</th>
+                                    <th width="10%">2017/10/21</th>
+                                    <th width="10%">字体管理中心</th>
+                                    <th width="10%"></th>
+                                </tr>
+                                <tr>
+                                    <th width="10%">义启紫水晶体 龙飞凤舞 中国文字之美</th>
+                                    <th width="10%">2017/10/21</th>
+                                    <th width="10%">字体管理中心</th>
+                                    <th width="10%"></th>
+                                </tr>
+                                </tbody>
                                 <tfoot> 
                                  <tr> 
                                   <th width="10%">字體名稱</th> 
@@ -540,36 +528,25 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                   <th width="10%">序號</th> 
                                   <th width="10%">字體風格</th> 
                                   <th width="10%">字體類型</th> 
-                                  <th width="10%">英文FontFamily</th>
-                                  <th width="10%">中文FontFamily</th>
+                                  <th width="10%">FontFamily</th>
                                   <th width="10%">操作</th>
                                  </tr> 
                                 </thead> 
                                 <tbody>
                                     <tr> 
-                                      <th>123</th> 
-                                      <th>13</th> 
-                                      <th>456</th> 
-                                      <th>768</th>
-                                      <th>3154.4</th>
+                                      <th>1</th>
+                                      <th>波浪字体</th>
+                                      <th>行楷</th>
+                                      <th>经典中圆简 龙飞凤舞 中国文字之美</th>
                                       <th></th>
                                     </tr> 
                                     <tr> 
-                                      <th>123</th> 
-                                      <th>13</th> 
-                                      <th>456</th> 
-                                      <th>768</th>
-                                      <th>3154.4</th>
+                                      <th>2</th>
+                                      <th>精致综艺</th>
+                                      <th>书法体</th>
+                                      <th>微软雅黑 龙飞凤舞 中国字体</th>
                                       <th></th>
-                                    </tr> 
-                                    <tr> 
-                                      <th>123</th> 
-                                      <th>13</th> 
-                                      <th>456</th> 
-                                      <th>768</th>
-                                      <th>3154.4</th>
-                                      <th></th>
-                                    </tr> 
+                                    </tr>
 
                                 </tbody> 
                                 <tfoot> 
@@ -608,18 +585,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                 </thead> 
                                 <tbody>
                                     <tr> 
-                                      <th>123</th> 
-                                      <th>13</th>
+                                      <th>1</th>
+                                      <th>http://www.font.com/1</th>
                                       <th></th>
                                     </tr> 
                                     <tr> 
-                                      <th>123</th> 
-                                      <th>13</th>
+                                      <th>2</th>
+                                      <th>http://www.font.com/2</th>
                                       <th></th>
                                     </tr> 
                                     <tr> 
-                                      <th>123</th> 
-                                      <th>13</th>
+                                      <th>3</th>
+                                      <th>http://www.font.com/3</th>
                                       <th></th>
                                     </tr> 
 
@@ -658,24 +635,24 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                 </thead> 
                                 <tbody>
                                     <tr> 
-                                      <th>123</th> 
-                                      <th>13</th>
-                                      <th>16</th>
-                                      <th>1985</th>
+                                      <th>1</th>
+                                      <th>12WEWCSQCX15SA1X5ASX16ASA</th>
+                                      <th>黑体Light 龙飞凤舞 中国文字之美</th>
+                                      <th>2016/07/22</th>
                                       <th></th>
                                     </tr> 
                                     <tr> 
-                                      <th>123</th> 
-                                      <th>13</th>
-                                      <th>16</th>
-                                      <th>1985</th>
+                                      <th>2</th>
+                                      <th>12ACSDCEW61A6CA03A9SXCSAC</th>
+                                      <th>经典中圆简 龙飞凤舞 中国文字之美</th>
+                                      <th>2017/07/21</th>
                                       <th></th>
                                     </tr> 
                                     <tr> 
-                                      <th>123</th> 
-                                      <th>13</th>
-                                      <th>16</th>
-                                      <th>1985</th>
+                                      <th>3</th>
+                                      <th>12A4520DAZ61A6CA03A9SXCSAC</th>
+                                      <th>微软雅黑 龙飞凤舞 中国字体</th>
+                                      <th>2017/10/01</th>
                                       <th></th>
                                     </tr> 
 
@@ -777,7 +754,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
         
 
-        $("table").DataTable({
+        $(".table").DataTable({
               language: {  
                   "sProcessing": "处理中...",  
                   "sLengthMenu": "显示 _MENU_ 项结果",  

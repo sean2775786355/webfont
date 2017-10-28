@@ -7,19 +7,25 @@
         <select id="queryCollectionList" parameterType="java.lang.Integer" resultType="com.safewind.webfont.bean.Collection" >
             SELECT id , username , collect_time , font_id , is_del
             FROM t_collection
-            WHERE id=#{id};
+            WHERE id=#{id} AND is_del = 0;
         </select>
         <!--这是通过收藏的编号查询用户个人收藏的信息-->
         <select id="queryCollectionById" parameterType="java.lang.Integer" resultType="com.safewind.webfont.bean.Collection" >
             SELECT id , username  , collect_time  , font_id , is_del
             FROM  t_collection
-            WHERE id=#{id};
+            WHERE id=#{id} AND is_del = 0;
+        </select>
+        <!--用户通过用户名查找所收藏的字体-->
+        <select id="queryCollectionByUsername" parameterType="java.lang.String" resultType="com.safewind.webfont.bean.Collection">
+            SELECT id , username  , collect_time  , font_id , is_del
+            FROM  t_collection
+            WHERE username=#{_parameter}  AND is_del = 0;
         </select>
 
         <select id="countCollectionFontByFontId" parameterType="java.lang.Integer" resultType="java.lang.Long">
             SELECT COUNT(*)
             FROM  t_collection
-            WHERE font_id=#{_parameter};
+            WHERE font_id=#{_parameter} AND is_del = 0;
         </select>
 
 
@@ -45,7 +51,12 @@
 
 
     <!--/////////////////////update start///////////////////////////-->
-
+            <!--执行假删除 用户收藏字体-->
+            <update id=" deleteCollectionFont" parameterType="com.safewind.webfont.bean.Collection">
+                UPDATE t_collection
+                SET is_del = 1
+                WHERE username=#{username} AND font_id=#{fontId};
+             </update>
     <!--/////////////////////update end///////////////////////////-->
 
 

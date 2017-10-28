@@ -28,6 +28,12 @@ public interface CollectionDao {
      */
     public Collection queryCollectionById(int id);
 
+    /**
+     * 供用户名查看用户信息
+     * @param username  用户名
+     * @return      用户收藏字体列表
+     */
+    public List<Collection> queryCollectionByUsername(String username);
 
     /**
      * 添加用户收藏字体
@@ -38,7 +44,12 @@ public interface CollectionDao {
      */
     public void addCollectionFont(Collection collection);
 
-
+    /**
+     * 通过用户名 字体编号 删除字体
+     * @param collection 收藏的对象 含有收藏字体的id 和收藏用户名
+     * @return  影响的记录数
+     */
+    public int deleteCollectionFont(Collection collection);
     /**
      * 判断用户字体是否被收藏 没被收藏返回null
      * collection 含有的属性：
@@ -55,5 +66,7 @@ public interface CollectionDao {
      * @return      收藏字体的数量  long
      */
     public long countCollectionFontByFontId(int fontId);
+
+
 
 }
