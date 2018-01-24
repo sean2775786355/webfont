@@ -186,7 +186,7 @@
         <property name="securityManager" ref="securityManager"/>
         <property name="loginUrl" value="/login"/>
         <!-- 拦截成功地址 -->
-        <property name="successUrl" value="/WEB-INF/index" />
+        <property name="successUrl" value="/user/person" />
         <property name="unauthorizedUrl" value="/anthenticated"/>
         <property name="filters">
             <util:map>

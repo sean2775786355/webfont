@@ -22,10 +22,18 @@
 <jsp:include page="./module/header.jsp"></jsp:include>
 
 <div>
-    <form action="" method="">
-        <input type="text" id="username" name="username" />
-        <input type="password" id="password" name="password" />
-        <input type="submit" value="登陆" />
+    <form action=" ${pageContext.request.contextPath}/user/person" class="form-signin"  method="post" accept-charset="UTF-8" role="form" >
+        <h2 class="form-signin-heading" align="center">sign in</h2>
+        <label for="username" class="sr-only">account</label>
+        <input type="text" id="username" name="username" class="form-control input-lg"  placeholder="account" required="" autofocus="">
+        <label for="password" class="sr-only">password</label>
+        <input type="password" id="password" name="password" class="form-control input-lg" placeholder="password" required="">
+        <div class="checkbox">
+            <label>
+                <input type="checkbox" name="rememberMe" value="true">remember me
+            </label>
+        </div>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">login</button>
     </form>
 </div>
 
